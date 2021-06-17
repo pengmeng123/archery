@@ -7,6 +7,15 @@
     <router-view />
   </div>
 </template>
+<script>
+export default {
+  mounted() {
+    this.$service.user.getAreaList().then((r) => {
+      console.log(r);
+    });
+  },
+};
+</script>
 
 <style lang="less">
 #app {
