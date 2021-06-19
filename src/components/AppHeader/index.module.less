@@ -1,0 +1,36 @@
+.container {
+  padding: 47px 0 28px 0;
+  .header {
+    width: 543px;
+    height: 112px;
+    background: url(./images/header-bg.png) no-repeat center top;
+    background-size: 100% 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .players {
+    ul {
+      display: flex;
+      padding: 7px 12px 0;
+    }
+    li{
+      flex: 1;
+      margin-right: 7px;
+      &:last-child {
+        margin-right: 0;
+      }
+      img {
+        width: 37px;
+        height: 37px;
+      }
+    }
+  }
+  .countDown {
+    font-size: 55px;
+    color: #FD3F2D;
+    font-weight: bold;
+    font-family: 'AlibabaPuHuiTiH';
+  }
+}

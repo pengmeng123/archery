@@ -1,0 +1,66 @@
+.container {
+  padding-bottom: 66px;
+}
+.group {
+  height: 175px;
+  display: flex;
+  justify-content: center;
+  .groupLeft,.groupRight,.groupCenter {
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+    color: #802F00;
+    .text {
+      position: absolute;
+      top: 85px;
+    }
+  }
+  .groupLeft,.groupRight {
+    width: 250px;
+    height: 172px;
+    
+    .stakeAmount {
+      display: inline-block;
+      min-width: 12px;
+      padding:2px 5px;
+      background: #FFE6B9;
+      position: absolute;
+      right: 0;
+      top: 5px;
+      font-size: 18px;
+      color: #FC5A0D;
+    }
+  }
+  .groupLeft {
+    background: url(./images/stake-left.png) center top;
+    background-size: 100% 100%;
+    left: 20px;
+    .stakeAmount {
+      right: 23px;
+    }
+    .text {
+      left: 113px;
+    }
+  }
+  .groupCenter {
+    width: 209px;
+    height: 175px;
+    background: url(./images/stake-center.png) center top;
+    background-size: 100% 100%;
+    .text {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .groupRight {
+    background: url(./images/stake-right.png) center top;
+    background-size: 100% 100%;
+    right: 22px;
+    .stakeAmount {
+      right: 6px;
+    }
+    .text {
+      right: 97px;
+    }
+  }
+}
