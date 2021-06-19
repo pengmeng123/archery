@@ -1,0 +1,99 @@
+.container {
+  height: 144px;
+  background: url(./images//footer-bg.png) no-repeat center top;
+  background-size: 100% 100%;
+}
+.content {
+  height: 144px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 13px 0 21px;
+  .myGold {
+    width: 200px;
+    height: 98px;
+    background: url(./images/my-gold-bg.png) no-repeat center top;
+    background-size: 100% 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .title {
+      font-size: 24px;
+      color: #fff;
+    }
+    .text {
+      font-size: 36px;
+      font-weight: bold;
+      margin-top: 16px;
+      color: #fff;
+    }
+  }
+  .btnGroup {
+    ul {
+      display: flex;
+      justify-content: space-between;
+    }
+    li {
+      width: 133px;
+      height: 100px;
+      background: url(./images/btn.png) no-repeat center top;
+      background-size: 100% 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      i {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        background: #FFC61B;
+        border: none;
+        border-radius: 50%;
+        margin-bottom: 5px;
+      }
+      .amount50 {
+        width: 45px;
+        height: 32px;
+        background: url(./images/amount50.png) no-repeat;
+        background-size: 100% 100%;
+      }
+      .amount100 {
+        width: 66px;
+        height: 32px;
+        background: url(./images/amount100.png) no-repeat;
+        background-size: 100% 100%;
+      }
+      .amount1000 {
+        width: 88px;
+        height: 32px;
+        background: url(./images/amount1000.png) no-repeat;
+        background-size: 100% 100%;
+      }
+      &.active {
+        height: 100px;
+        background: url(./images/btn-active.png) no-repeat center top;
+        background-size: 100% 100%;
+        .amount50 {
+          background: url(./images/amount50-active.png) no-repeat;
+          background-size: 100% 100%;
+        }
+        .amount100 {
+          background: url(./images/amount100-active.png) no-repeat;
+          background-size: 100% 100%;
+        }
+        .amount1000 {
+          background: url(./images/amount1000-active.png) no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+    }
+  }
+  .btnCancel {
+    display: block;
+    width: 78px;
+    height: 100px;
+    background: url(./images/btn-cancel.png) no-repeat center top;
+    background-size: 100% 100%;
+  }
+}

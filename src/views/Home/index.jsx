@@ -3,6 +3,8 @@ import AppMenu from "@/components/AppMenu";
 import AppHeader from "@/components/AppHeader";
 import AppStake from "@/components/AppStake";
 import AppChild from "@/components/AppChild";
+import AppGamePlayer from "@/components/AppGamePlayer";
+import AppFooter from "@/components/AppFooter";
 export default {
   name: "Home",
   components: {
@@ -10,6 +12,8 @@ export default {
     AppHeader,
     AppStake,
     AppChild,
+    AppGamePlayer,
+    AppFooter,
   },
   render() {
     return (
@@ -18,6 +22,8 @@ export default {
         <app-header />
         <app-stake />
         <app-child />
+        <app-game-player />
+        <app-footer />
       </div>
     );
   },

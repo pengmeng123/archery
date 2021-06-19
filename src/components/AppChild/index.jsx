@@ -5,7 +5,7 @@ import TTSignsImg from "./images/tt-signs.png";
 import TongtongImg from "./images/tongtong.png";
 import ChengchengImg from "./images/chengcheng.png";
 export default {
-  name: "AppMenu",
+  name: "AppChild",
   render() {
     return (
       <div class={styles.container}>
