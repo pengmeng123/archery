@@ -10,23 +10,28 @@ export default {
         {
           icon: TxImg,
           name: "张三1",
+          className: "player1",
         },
         {
           icon: TxImg,
           name: "张三2",
+          className: "player2",
         },
         {
           icon: TxImg,
           name: "李四",
           marjor: true,
+          className: "selfPlayer",
         },
         {
           icon: TxImg,
           name: "张三3",
+          className: "player3",
         },
         {
           icon: TxImg,
           name: "张三4",
+          className: "player4",
         },
       ];
     },
@@ -40,6 +45,7 @@ export default {
             <li
               class={{
                 [styles.marjor]: v.marjor,
+                [v.className]: !!v.className,
               }}
             >
               <div class={styles.tx}>
