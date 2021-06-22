@@ -1,7 +1,12 @@
 import styles from "./index.module.less";
+import { mapState } from "vuex";
 export default {
   name: "AppStake",
+  computed: {
+    ...mapState(["startMatch"]),
+  },
   render() {
+    const { startMatch } = this;
     return (
       <div class={styles.container}>
         <div class={styles.group}>
@@ -9,6 +14,7 @@ export default {
             id="btnTTVictory"
             class={{
               [styles.groupLeft]: true,
+              "animate__animated animate__fadeOutLeft": startMatch,
             }}
           >
             <div class={styles.stakeAmount}>7.2w</div>
@@ -17,6 +23,7 @@ export default {
           <div
             class={{
               [styles.groupCenter]: true,
+              "animate__animated animate__fadeOut": startMatch,
             }}
           >
             <div class={styles.text}>X9</div>
@@ -25,6 +32,7 @@ export default {
             id="btnCCVictory"
             class={{
               [styles.groupRight]: true,
+              "animate__animated animate__fadeOutRight": startMatch,
             }}
           >
             <div class={styles.stakeAmount}>7.2w</div>

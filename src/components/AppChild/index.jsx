@@ -4,9 +4,14 @@ import CCSignsImg from "./images/cc-signs.png";
 import TTSignsImg from "./images/tt-signs.png";
 import TongtongImg from "./images/tongtong.png";
 import ChengchengImg from "./images/chengcheng.png";
+import { mapState } from "vuex";
 export default {
   name: "AppChild",
+  computed: {
+    ...mapState(["startMatch"]),
+  },
   render() {
+    const { startMatch } = this;
     return (
       <div class={styles.container}>
         <div class={styles.target}>
@@ -17,6 +22,7 @@ export default {
           class={{
             [styles.member]: true,
             [styles.memberTT]: true,
+            "animate__animated animate__fadeOutLeft": startMatch,
           }}
         >
           <img src={TTSignsImg} class={styles.signs} />
@@ -26,6 +32,7 @@ export default {
           class={{
             [styles.member]: true,
             [styles.memberCC]: true,
+            "animate__animated animate__fadeOutRight": startMatch,
           }}
         >
           <img src={CCSignsImg} class={styles.signs} />

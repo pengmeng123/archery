@@ -6,6 +6,7 @@ import AppChild from "@/components/AppChild";
 import AppGamePlayer from "@/components/AppGamePlayer";
 import AppFooter from "@/components/AppFooter";
 import BetsMixin from "@/mixins/betsMixin";
+
 export default {
   name: "Home",
 
@@ -24,6 +25,8 @@ export default {
     };
   },
   mounted() {},
+
+  methods: {},
   render() {
     return (
       <div
@@ -32,13 +35,23 @@ export default {
           [styles.scaleTransition]: this.isScale,
         }}
       >
-        <div>
-          <app-menu />
-          <app-header />
+        <div class={styles.topPart}>
+          <div
+            class={{
+              "animate__animated animate__fadeOut": this.startMatch,
+            }}
+          >
+            <app-menu />
+            <app-header />
+          </div>
           <app-stake />
           <app-child />
         </div>
-        <div>
+        <div
+          class={{
+            "animate__animated animate__fadeOutDown": this.startMatch,
+          }}
+        >
           <app-game-player />
           <app-footer />
         </div>

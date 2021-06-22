@@ -1,30 +1,49 @@
 import goldImg from "@/assets/images/gold.png";
+import { mapState } from "vuex";
 const $ = window.$;
 
 const BetsMixin = {
+  data() {
+    return {
+      betsTimer: null,
+    };
+  },
   mounted() {
-    const that = this;
     this.$nextTick(() => {
       // 5s请求接口获取玩家投注，播放动画
-      setInterval(() => {
-        that.onStartFly($(".player1"), $("#btnTTVictory"));
-        that.onStartFly($(".player2"), $("#btnCCVictory"));
-        that.onStartFly($(".player4"), $("#btnCCVictory"));
-      }, 5000);
+      this.betsTimer = setInterval(() => {
+        this.onStartFly($(".player1"), $("#btnTTVictory"));
+        this.onStartFly($(".player2"), $("#btnCCVictory"));
+        this.onStartFly($(".player4"), $("#btnCCVictory"));
+      }, 4000);
 
       // 同同获胜
-      $("#btnTTVictory").click(function () {
-        that.onStartFly($(".selfPlayer"), $("#btnTTVictory"));
+      $("#btnTTVictory").click(() => {
+        this.onStartFly($(".selfPlayer"), $("#btnTTVictory"));
       });
       // 平局
       // 程程获胜
-      $("#btnCCVictory").click(function () {
-        that.onStartFly($(".selfPlayer"), $("#btnCCVictory"));
+      $("#btnCCVictory").click(() => {
+        this.onStartFly($(".selfPlayer"), $("#btnCCVictory"));
       });
     });
   },
+  computed: {
+    ...mapState(["startMatch", "count"]),
+  },
+  watch: {
+    count(newVal) {
+      if (newVal < 4) {
+        clearInterval(this.betsTimer);
+      }
+    },
+  },
   methods: {
     onStartFly(startTarget, endTarget) {
+      if (this.count < 4) {
+        console.log("禁止游戏投注时间");
+        return;
+      }
       var flyer = $(
         `<img src=${goldImg} style="width:30px;height:30px;" />`
       ).clone(); //动态创建抛物体对象并克隆
