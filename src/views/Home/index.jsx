@@ -39,7 +39,9 @@ export default {
           <div
             class={{
               "animate__animated animate__fadeOut": this.startMatch,
+              "animate__animated animate__fadeIn": !this.startMatch,
             }}
+            style="position:relative;z-index:2"
           >
             <app-menu />
             <app-header />
@@ -50,6 +52,7 @@ export default {
         <div
           class={{
             "animate__animated animate__fadeOutDown": this.startMatch,
+            "animate__animated animate__fadeInUp": !this.startMatch,
           }}
         >
           <app-game-player />

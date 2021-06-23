@@ -32,10 +32,11 @@ const BetsMixin = {
     ...mapState(["startMatch", "count"]),
   },
   watch: {
-    count(newVal) {
-      if (newVal < 4) {
-        clearInterval(this.betsTimer);
-      }
+    count() {
+      // if (newVal < 4) {
+      //   clearInterval(this.betsTimer);
+      // }
+      clearInterval(this.betsTimer);
     },
   },
   methods: {

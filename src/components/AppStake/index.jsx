@@ -15,6 +15,7 @@ export default {
             class={{
               [styles.groupLeft]: true,
               "animate__animated animate__fadeOutLeft": startMatch,
+              "animate__animated animate__fadeInLeft": !startMatch,
             }}
           >
             <div class={styles.stakeAmount}>7.2w</div>
@@ -24,6 +25,7 @@ export default {
             class={{
               [styles.groupCenter]: true,
               "animate__animated animate__fadeOut": startMatch,
+              "animate__animated animate__fadeIn": !startMatch,
             }}
           >
             <div class={styles.text}>X9</div>
@@ -33,6 +35,7 @@ export default {
             class={{
               [styles.groupRight]: true,
               "animate__animated animate__fadeOutRight": startMatch,
+              "animate__animated animate__fadeInRight": !startMatch,
             }}
           >
             <div class={styles.stakeAmount}>7.2w</div>

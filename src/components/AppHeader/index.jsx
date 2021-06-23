@@ -51,7 +51,7 @@ export default {
         }, 1000);
       } else {
         this.setCount(0);
-        this.setStartMatchStatus(true);
+        // this.setStartMatchStatus(true);
       }
     },
   },
