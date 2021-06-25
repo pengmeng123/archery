@@ -1,9 +1,16 @@
 import IconRule from "@/assets/images/icon-rule.png";
 import IconRecord from "@/assets/images/icon-record.png";
 import IconService from "@/assets/images/icon-service.png";
+import Modal from "@/components/Modal";
+import SupportRecord from "@/components/SupportRecord";
 import styles from "./dropdown-more.module.less";
 export default {
   name: "DropDownMore",
+  data() {
+    return {
+      visible: true,
+    };
+  },
   computed: {
     menus() {
       return [
@@ -11,7 +18,8 @@ export default {
           title: "活动规则",
           icon: IconRule,
           func: () => {
-            this.$emit("visibleChange", false);
+            this.visible = !this.visible;
+            console.log(this.visible);
           },
         },
         {
@@ -33,15 +41,24 @@ export default {
   render() {
     const { menus } = this;
     return (
-      <div class={styles.dropDownMore}>
-        <ul>
-          {menus.map((v) => (
-            <li>
-              <img src={v.icon} />
-              {v.title}
-            </li>
-          ))}
-        </ul>
+      <div class={styles.container}>
+        <div class={styles.dropDownMore}>
+          <ul>
+            {menus.map((v) => (
+              <li
+                onClick={() => {
+                  v.func && v.func();
+                }}
+              >
+                <img src={v.icon} />
+                {v.title}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Modal v-model={this.visible}>
+          <SupportRecord />
+        </Modal>
       </div>
     );
   },
