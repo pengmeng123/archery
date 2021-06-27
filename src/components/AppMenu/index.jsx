@@ -3,12 +3,15 @@ import IconGoldExchange from "./images/gold-exchange.png";
 import IconWelfareTask from "./images/welfare-task.png";
 import IconMore from "./images/more.png";
 import DropDownMore from "./dropdown-more";
+import Modal from "@/components/Modal";
+import FareTask from "../FareTask";
 import styles from "./index.module.less";
 export default {
   name: "AppMenu",
   data() {
     return {
-      isDropDownMore: true,
+      isDropDownMore: false,
+      fareTaskVisible: true,
     };
   },
   computed: {
@@ -31,7 +34,7 @@ export default {
         {
           icon: IconWelfareTask,
           func: () => {
-            console.log("3333");
+            this.fareTaskVisible = true;
           },
           eventName: "exchange",
         },
@@ -80,6 +83,10 @@ export default {
             </div>
           ))}
         </div>
+        {/* 福利任务 */}
+        <Modal className="fareTask" v-model={this.fareTaskVisible}>
+          <FareTask />
+        </Modal>
       </div>
     );
   },

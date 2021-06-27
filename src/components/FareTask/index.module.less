@@ -1,0 +1,51 @@
+.container {
+  width: 535px;
+  height: 550px;
+  position: absolute;
+  left: 59px;
+  bottom: 65px;
+  overflow-y: auto;
+  li {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    padding: 0 24px;
+  }
+  .title {
+    font-size: 30px;
+    color: #444;
+    margin-bottom: 18px;
+  }
+  .btn {
+    display: block;
+    width: 122px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 25px;
+    font-size: 26px;
+    color: #fff;
+    text-align:center;
+    &.btnToFinish {
+      background: #04D5C4;
+    }
+    &.btnToReceive {
+      background: #FF8813;
+    }
+    &.btnComplete {
+      background: #BABABA;
+    }
+  }
+  .award {
+    width: 46px;
+    height: 34px;
+    margin-left: 18px;
+  }
+  .desc {
+    display: flex;
+    align-items: center;
+  }
+}

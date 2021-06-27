@@ -29,15 +29,10 @@ export default {
       <div
         class={{
           [styles.container]: true,
+          [styles[className]]: true,
         }}
       >
-        <div
-          class={{
-            [styles[className]]: true,
-          }}
-        >
-          {this.$slots.default}
-        </div>
+        <div class={styles.box}>{this.$slots.default}</div>
         <a class={styles.close} onClick={this.close}></a>
       </div>
     );
