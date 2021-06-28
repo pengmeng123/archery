@@ -1,5 +1,7 @@
 import AppPercent from "../AppPercent";
 import AwardImg from "@/assets/images/award.png";
+import Modal from "@/components/Modal";
+import Award from "./award";
 import styles from "./index.module.less";
 
 export default {
@@ -32,7 +34,13 @@ export default {
           status: 3,
         },
       ],
+      isVisible: true,
     };
+  },
+  methods: {
+    onReceive() {
+      this.isVisible = true;
+    },
   },
   render() {
     return (
@@ -54,6 +62,7 @@ export default {
                     [styles.btn]: true,
                     [styles.btnToFinish]: true,
                   }}
+                  onClick={this.onReceive}
                 >
                   领取
                 </a>
@@ -83,6 +92,9 @@ export default {
             </li>
           ))}
         </ul>
+        <Modal className="award" v-model={this.isVisible}>
+          <Award />
+        </Modal>
       </div>
     );
   },

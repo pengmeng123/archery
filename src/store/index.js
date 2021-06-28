@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    startMatch: false,
+    startMatch: true,
     count: COUNT,
   },
   mutations: {

@@ -6,6 +6,7 @@ import AppChild from "@/components/AppChild";
 import AppGamePlayer from "@/components/AppGamePlayer";
 import AppFooter from "@/components/AppFooter";
 import BetsMixin from "@/mixins/betsMixin";
+import Archery from "@/components/Archery";
 
 export default {
   name: "Home",
@@ -17,6 +18,7 @@ export default {
     AppChild,
     AppGamePlayer,
     AppFooter,
+    Archery,
   },
   mixins: [BetsMixin],
   data() {
@@ -58,6 +60,7 @@ export default {
           <app-game-player />
           <app-footer />
         </div>
+        <archery />
       </div>
     );
   },

@@ -5,13 +5,15 @@ import IconMore from "./images/more.png";
 import DropDownMore from "./dropdown-more";
 import Modal from "@/components/Modal";
 import FareTask from "../FareTask";
+import DailyReceiveGold from "../DailyReceiveGold";
 import styles from "./index.module.less";
 export default {
   name: "AppMenu",
   data() {
     return {
       isDropDownMore: false,
-      fareTaskVisible: true,
+      fareTaskVisible: false,
+      receiveGoldVisible: false,
     };
   },
   computed: {
@@ -20,7 +22,7 @@ export default {
         {
           icon: IconReciveGold,
           func: () => {
-            console.log("1111");
+            this.receiveGoldVisible = true;
           },
           eventName: "recevieGold",
         },
@@ -83,6 +85,10 @@ export default {
             </div>
           ))}
         </div>
+        {/* 每日领金币 */}
+        <Modal className="dailyReceiveGold" v-model={this.receiveGoldVisible}>
+          <DailyReceiveGold />
+        </Modal>
         {/* 福利任务 */}
         <Modal className="fareTask" v-model={this.fareTaskVisible}>
           <FareTask />

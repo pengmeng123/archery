@@ -2,7 +2,7 @@ import styles from "./index.module.less";
 import IconTongtong from "./images/icon-tongtong.png";
 import IconChengcheng from "./images/icon-chengcheng.png";
 import { mapMutations, mapGetters, mapState } from "vuex";
-import { COUNT } from "@/config/common";
+// import { COUNT } from "@/config/common";
 export default {
   name: "AppHeader",
   data() {
@@ -21,21 +21,21 @@ export default {
     ...mapState(["startMatch"]),
     ...mapGetters(["count"]),
   },
-  watch: {
-    startMatch: {
-      handler(newVal) {
-        if (newVal) {
-          setTimeout(() => {
-            this.setStartMatchStatus(false);
-            this.setCount(COUNT);
-          }, 5000);
-        } else {
-          this.runCount(this.count);
-        }
-      },
-      immediate: true,
-    },
-  },
+  // watch: {
+  //   startMatch: {
+  //     handler(newVal) {
+  //       if (newVal) {
+  //         setTimeout(() => {
+  //           this.setStartMatchStatus(false);
+  //           this.setCount(COUNT);
+  //         }, 5000);
+  //       } else {
+  //         this.runCount(this.count);
+  //       }
+  //     },
+  //     immediate: true,
+  //   },
+  // },
   methods: {
     ...mapMutations({
       setStartMatchStatus: "SET_START_MATCH_STATUS",

@@ -1,0 +1,34 @@
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+  position: relative;
+  .prizeBg {
+    width: 346px;
+    height: 351px;
+    position: absolute;
+    left: -30px;
+    top: -50px;
+    animation: rotate 3s  infinite linear;
+    z-index: -1;
+  }
+}
+.prize {
+  width: 219px;
+  height: 219px;
+}
+.title {
+  font-size: 48px;
+  color: #FFCA28;
+  padding: 42px 0 26px 0;
+}
