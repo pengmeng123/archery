@@ -16,7 +16,7 @@ export default {
         {/* <div class={styles.target}>
           <img src={TargetImg} />
         </div> */}
-        <div class={styles.position}></div>
+        {/* <div class={styles.position}></div> */}
         <div
           class={{
             [styles.member]: true,

@@ -15,7 +15,6 @@ export default {
       const targetBox = document.querySelector(".targetBox");
       const flyBoxEle = document.querySelector(".flyBox");
       targetBox.addEventListener("webkitAnimationEnd", () => {
-        // this.target = false;
         this.setAnimation(false);
         this.fly = true;
         this.setBgAnimation(true);
@@ -33,7 +32,6 @@ export default {
     }),
   },
   render() {
-    console.log("8---");
     return (
       <div class={styles.container}>
         {/* 拉弓 */}
@@ -48,7 +46,6 @@ export default {
         </div>
         <button
           onClick={() => {
-            console.log("fly---");
             this.setAnimation(true);
           }}
         >
