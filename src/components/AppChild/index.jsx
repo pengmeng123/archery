@@ -1,5 +1,4 @@
 import styles from "./index.module.less";
-import TargetImg from "./images/target.png";
 import CCSignsImg from "./images/cc-signs.png";
 import TTSignsImg from "./images/tt-signs.png";
 import TongtongImg from "./images/tongtong.png";
@@ -14,9 +13,9 @@ export default {
     const { startMatch } = this;
     return (
       <div class={styles.container}>
-        <div class={styles.target}>
+        {/* <div class={styles.target}>
           <img src={TargetImg} />
-        </div>
+        </div> */}
         <div class={styles.position}></div>
         <div
           class={{

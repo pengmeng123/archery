@@ -1,14 +1,37 @@
+@keyframes run{
+  0% {
+    left: 0px;
+  }
+  33% {
+    left: -750px;
+  }
+  66.66% {
+    left: -1500px;
+  }
+  100% {
+    left: -2250px;
+  }
+}
 .container {
+  width: 100%;
   height: 100%;
-  background: url(./bg1.jpg) no-repeat center top;
-  background-size: cover;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  &.scaleTransition {
-    transform: scale(8);
-    transform-origin: center center;
-    transition:all 0.1s;
+  position: relative;
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .bg {
+    width: 3000px;
+    height: 1334px;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    background: url(../../../static/bg2.jpg) no-repeat center top;
+    background-size: 100% 100%;
+    &.bgAnimation {
+      animation: run 1.5s steps(1,end) both;
+    }
   }
 }

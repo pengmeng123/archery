@@ -7,6 +7,8 @@ export default new Vuex.Store({
   state: {
     startMatch: true,
     count: COUNT,
+    startAnimation: false,
+    startBgAnimation: false,
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -14,6 +16,12 @@ export default new Vuex.Store({
     },
     SET_COUNT(state, count) {
       state.count = count;
+    },
+    SET_STRRT_ANIMATION(state, status) {
+      state.startAnimation = status;
+    },
+    SET_STRRT_BG_ANIMATION(state, status) {
+      state.startBgAnimation = status;
     },
   },
   actions: {},
