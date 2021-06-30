@@ -45,6 +45,12 @@ export default {
             [styles.bgAnimation]: this.startBgAnimation,
           }}
         ></div>
+        <div
+          class={{
+            [styles.bgFly]: true,
+            [styles.bgAnimation]: this.startBgAnimation,
+          }}
+        ></div>
         {/* 射箭动画 */}
         <archery />
         {/* 主体内容 */}
