@@ -3,6 +3,7 @@ import GoldImg from "@/assets/images/gold.png";
 import AwardImg from "@/assets/images/award.png";
 import Modal from "@/components/Modal";
 import ExchangeModal from "@/components/Exchange/modal";
+import ExchangeRecord from "@/components/Exchange/record";
 
 export default {
   name: "Exchange",
@@ -37,12 +38,15 @@ export default {
       ],
       isExchange: false,
       isGoldNotEnoughVisible: false,
+      isExchangeRecord: false,
     };
   },
   methods: {
     onExchange() {
-      console.log(123);
       this.isExchange = true;
+    },
+    goBack() {
+      this.$router.push("/");
     },
   },
   render() {
@@ -50,13 +54,19 @@ export default {
       <div class={styles.container}>
         <div class={styles.header}>
           <div class={styles.goldInfo}>
-            <a href="javascript:" class={styles.back}></a>
+            <a href="javascript:" class={styles.back} onClick={this.goBack}></a>
             <div class={styles.goldNumber}>
               <img src={GoldImg} alt="" />
               8888
             </div>
           </div>
-          <a href="javascript:" class={styles.record}>
+          <a
+            href="javascript:"
+            class={styles.record}
+            onClick={() => {
+              this.isExchangeRecord = true;
+            }}
+          >
             兑换记录{">"}
           </a>
         </div>
@@ -91,6 +101,10 @@ export default {
         {/* 金币不足 */}
         <Modal className="exchange" v-model={this.isGoldNotEnoughVisible}>
           <ExchangeModal goldNotEnough={true} />
+        </Modal>
+        {/* 兑换记录 */}
+        <Modal className="exchange-record" v-model={this.isExchangeRecord}>
+          <ExchangeRecord />
         </Modal>
       </div>
     );

@@ -7,6 +7,7 @@ import AppGamePlayer from "@/components/AppGamePlayer";
 import AppFooter from "@/components/AppFooter";
 import BetsMixin from "@/mixins/betsMixin";
 import Archery from "@/components/Archery";
+import AppNotStart from "@/components/AppNotStart";
 import { mapState } from "vuex";
 export default {
   name: "Home",
@@ -19,6 +20,7 @@ export default {
     AppGamePlayer,
     AppFooter,
     Archery,
+    AppNotStart,
   },
   mixins: [BetsMixin],
   data() {
@@ -38,6 +40,8 @@ export default {
           [styles.container]: true,
         }}
       >
+        {/*  距离下一局开始时间 */}
+        <app-not-start endSecond={5} />
         {/* 射箭动画,背景图片也在里面 */}
         <archery />
         {/* 主体内容 */}
