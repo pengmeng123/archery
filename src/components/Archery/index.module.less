@@ -72,6 +72,40 @@
     left: -3000px;
   }
 }
+@keyframes run5{
+  0% {
+    left: 0px;
+  }
+  32% {
+    left: -90px;
+  }
+  66% {
+    left: -180px;
+  }
+  99% {
+    left: -270px;
+  }
+  100% {
+    left: -360px;
+  }
+}
+@keyframes run6{
+  0% {
+    left: 0px;
+  }
+  25% {
+    left: -688px;
+  }
+  50% {
+    left: -1376px;
+  }
+  75% {
+    left: -2064px;
+  }
+  100%{
+    left: -2752px;
+  }
+}
 @keyframes fadeInOut {
   0% {
     transform:translate3d(-1000%,0,0);
@@ -101,6 +135,7 @@
   position: absolute;
   left: 0;
   top: 530px;
+  z-index: 2;
   .box {
     width: 3750px;
     height: 804px;
@@ -121,6 +156,7 @@
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 2;
   .box {
     width: 3000px;
     height: 1334px;
@@ -141,6 +177,7 @@
   margin-left: -245px;
   top: 100px;
   transform:translate3d(-1000%,0,0);
+  z-index: 2;
   &.playerAnimation {
     animation: fadeInOut 2.2s;
   }
@@ -148,5 +185,115 @@
   img {
     width: 491px;
     height: 202px;
+  }
+}
+.targetDisk {
+  width: 750px;
+  height: 792px;
+  position: absolute;
+  left: 0;
+  top: 190px;
+  z-index: 103;
+  background: url(../../../static/rings.png) no-repeat center top;
+  background-size: cover;
+  overflow: hidden;
+}
+.rings {
+  width: 688px;
+  height: 688px;
+  overflow: hidden;
+  position: absolute;
+  left: 31px;
+  top: 251px;
+  border-radius: 50%;
+  z-index: 104;
+  .box {
+    width: 2752px;
+    height: 688px;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    background: url(../../../static/wing-rings.png) no-repeat center top;
+    background-size: 100% 100%;
+    &.animation {
+      animation: run6 1s steps(1,end) 0.5s infinite;
+    }
+  }
+}
+.flyArrow {
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+  position: absolute;
+  left: 300px;
+  top: 500px;
+  z-index: 105;
+  .box {
+    width: 360px;
+    height: 90px;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    background: url(../../../static/arrow.png) no-repeat center top;
+    background-size: 100% 100%;
+    &.flyArrowAnimation {
+      animation: run5 0.8s steps(1,end)  infinite;
+    }
+  }
+}
+
+
+@keyframes runBg{
+  0% {
+    left: 0px;
+  }
+  33% {
+    left: -750px;
+  }
+  66.66% {
+    left: -1500px;
+  }
+  100% {
+    left: -2250px;
+  }
+}
+@keyframes runFly{
+  0% {
+    left: 750px;
+  }
+  33% {
+    left: 0;
+  }
+  66.66% {
+    left: -750px;
+  }
+  100% {
+    left: -1500px;
+  }
+}
+.bg {
+  width: 3000px;
+  height: 1334px;
+  position: absolute;
+  left: 0px;
+  top: 0;
+  background: url(../../../static/bg3.jpg) no-repeat center top;
+  background-size: 100% 100%;
+  z-index: 1;
+  &.bgAnimation {
+    animation: runBg 0.3s steps(1,end) 0.8s both;
+  }
+}
+.bgFly {
+  width: 2250px;
+  height: 1334px;
+  position: absolute;
+  left: 750px;
+  top: 0;
+  background: url(../../../static/bg-fly.png) no-repeat center top;
+  background-size: 100% 100%;
+  z-index: 1;
+  &.bgAnimation {
+    animation: runFly 0.3s steps(1,end) 0.8s both;
   }
 }

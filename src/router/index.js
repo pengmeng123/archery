@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home";
+import Exchange from "../views/Exchange";
 
 Vue.use(VueRouter);
 
@@ -10,12 +11,11 @@ const routes = [
     name: "Home",
     component: Home,
   },
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.jsx"),
-  // },
+  {
+    path: "/exchange",
+    name: "Exchange",
+    component: Exchange,
+  },
 ];
 
 const router = new VueRouter({

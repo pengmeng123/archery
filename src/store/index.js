@@ -9,6 +9,7 @@ export default new Vuex.Store({
     count: COUNT,
     startAnimation: false,
     startBgAnimation: false,
+    animationStep: 0,
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     SET_STRRT_BG_ANIMATION(state, status) {
       state.startBgAnimation = status;
+    },
+    SET_ANIMATION_STEP(state, step) {
+      state.animationStep = step;
     },
   },
   actions: {},

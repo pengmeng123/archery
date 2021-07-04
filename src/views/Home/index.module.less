@@ -1,32 +1,3 @@
-@keyframes run{
-  0% {
-    left: 0px;
-  }
-  33% {
-    left: -750px;
-  }
-  66.66% {
-    left: -1500px;
-  }
-  100% {
-    left: -2250px;
-  }
-}
-@keyframes runFly{
-  0% {
-    left: 750px;
-  }
-  33% {
-    left: 0;
-  }
-  66.66% {
-    left: -750px;
-  }
-  100% {
-    left: -1500px;
-  }
-}
-
 .container {
   width: 100%;
   height: 100%;
@@ -37,28 +8,5 @@
     flex-direction: column;
     justify-content: space-between;
   }
-  .bg {
-    width: 3000px;
-    height: 1334px;
-    position: absolute;
-    left: 0px;
-    top: 0;
-    background: url(../../../static/bg2.jpg) no-repeat center top;
-    background-size: 100% 100%;
-    &.bgAnimation {
-      animation: run 0.3s steps(1,end) 0.8s both;
-    }
-  }
-  .bgFly {
-    width: 2250px;
-    height: 1334px;
-    position: absolute;
-    left: 750px;
-    top: 0;
-    background: url(../../../static/bg-fly.png) no-repeat center top;
-    background-size: 100% 100%;
-    &.bgAnimation {
-      animation: runFly 0.3s steps(1,end) 0.8s both;
-    }
-  }
+  
 }

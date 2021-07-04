@@ -38,20 +38,7 @@ export default {
           [styles.container]: true,
         }}
       >
-        {/* 背景图片 */}
-        <div
-          class={{
-            [styles.bg]: true,
-            [styles.bgAnimation]: this.startBgAnimation,
-          }}
-        ></div>
-        <div
-          class={{
-            [styles.bgFly]: true,
-            [styles.bgAnimation]: this.startBgAnimation,
-          }}
-        ></div>
-        {/* 射箭动画 */}
+        {/* 射箭动画,背景图片也在里面 */}
         <archery />
         {/* 主体内容 */}
         <div class={styles.content}>
