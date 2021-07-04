@@ -24,8 +24,8 @@ export default {
           <div
             class={{
               [styles.groupCenter]: true,
-              "animate__animated animate__fadeOut": startMatch,
-              "animate__animated animate__fadeIn": !startMatch,
+              "animate__animated animate__fadeOutDown": startMatch,
+              "animate__animated animate__fadeInDown": !startMatch,
             }}
           >
             <div class={styles.text}>X9</div>

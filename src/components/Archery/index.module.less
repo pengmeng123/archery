@@ -225,9 +225,168 @@
   height: 90px;
   overflow: hidden;
   position: absolute;
-  left: 300px;
-  top: 500px;
+  
   z-index: 105;
+  &.left10 {
+    top: 515px;
+    left: 350px;
+  }
+  &.left9 {
+    top: 515px;
+    left: 300px;
+  }
+  &.left8 {
+    top: 515px;
+    left: 260px;
+  }
+  &.left7 {
+    top: 515px;
+    left: 230px;
+  }
+  &.left6 {
+    top: 515px;
+    left: 195px;
+  }
+  &.left5 {
+    top: 515px;
+    left: 160px;
+  }
+  &.left4 {
+    top: 515px;
+    left: 130px;
+  }
+  &.left3 {
+    top: 515px;
+    left: 90px;
+  }
+  &.left2 {
+    top: 515px;
+    left: 60px;
+  }
+  &.left1 {
+    top: 515px;
+    left: 20px;
+  }
+  &.top10 {
+    left: 350px;
+    top: 515px;
+  }
+  &.top9 {
+    left: 350px;
+    top: 460px;
+  }
+  &.top8 {
+    left: 350px;
+    top: 425px;
+  }
+  &.top7 {
+    left: 350px;
+    top: 390px;
+  }
+  &.top6 {
+    left: 350px;
+    top: 360px;
+  }
+  &.top5 {
+    left: 350px;
+    top: 325px;
+  }
+  &.top4 {
+    left: 350px;
+    top: 290px;
+  }
+  &.top3 {
+    left: 350px;
+    top: 255px;
+  }
+  &.top2 {
+    left: 350px;
+    top: 220px;
+  }
+  &.top1 {
+    left: 350px;
+    top: 180px;
+  }
+  &.bottom10 {
+    left: 350px;
+    bottom: 730px;
+  }
+  &.bottom9 {
+    left: 350px;
+    bottom: 680px;
+  }
+  &.bottom8 {
+    left: 350px;
+    bottom: 645px;
+  }
+  &.bottom7 {
+    left: 350px;
+    bottom: 610px;
+  }
+  &.bottom6 {
+    left: 350px;
+    bottom: 580px;
+  }
+  &.bottom5 {
+    left: 350px;
+    bottom: 545px;
+  }
+  &.bottom4 {
+    left: 350px;
+    bottom: 510px;
+  }
+  &.bottom3 {
+    left: 350px;
+    bottom: 475px;
+  }
+  &.bottom2 {
+    left: 350px;
+    bottom: 440px;
+  }
+  &.bottom1 {
+    left: 350px;
+    bottom: 410px;
+  }
+  &.right10 {
+    top: 515px;
+    right: 310px;
+  }
+  &.right9 {
+    top: 515px;
+    right: 255px;
+  }
+  &.right8 {
+    top: 515px;
+    right: 225px;
+  }
+  &.right7 {
+    top: 515px;
+    right: 190px;
+  }
+  &.right6 {
+    top: 515px;
+    right: 150px;
+  }
+  &.right5 {
+    top: 515px;
+    right: 120px;
+  }
+  &.right4 {
+    top: 515px;
+    right: 85px;
+  }
+  &.right3 {
+    top: 515px;
+    right: 50px;
+  }
+  &.right2 {
+    top: 515px;
+    right: 20px;
+  }
+  &.right1 {
+    top: 515px;
+    right: -15px;
+  }
   .box {
     width: 360px;
     height: 90px;
@@ -279,7 +438,6 @@
   top: 0;
   background: url(../../../static/bg3.jpg) no-repeat center top;
   background-size: 100% 100%;
-  z-index: 1;
   &.bgAnimation {
     animation: runBg 0.3s steps(1,end) 0.8s both;
   }
@@ -295,5 +453,66 @@
   z-index: 1;
   &.bgAnimation {
     animation: runFly 0.3s steps(1,end) 0.8s both;
+  }
+}
+
+@keyframes rotateBg{
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes scaleBg {
+  0%{
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.matchResultContainer {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.76);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  .matchResult {
+    height: 666px;
+    position: relative;
+    top: 20%;
+  }
+  .apertureImg {
+    width: 486px;
+    height: 482px;
+    position: absolute;
+    left: 132px;
+    top: 100px;
+    z-index: 1;
+    animation: rotateBg 2s ease-in infinite;
+  }
+  .cardImg {
+    width: 750px;
+    height: 666px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+  }
+  .text {
+    width: 399px;
+    height: 145px;
+    position: absolute;
+    left: 175px;
+    top: 285px;
+    z-index: 3;
+    transform: scale(1.2);
+    animation: scaleBg  ease 0.7s forwards;
   }
 }

@@ -5,11 +5,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    startMatch: true,
-    count: COUNT,
-    startAnimation: false,
-    startBgAnimation: false,
-    animationStep: 0,
+    startMatch: false, //是否开始动画
+    count: COUNT, //倒计时
+    animationStep: 0, //动画步骤
+    bettingAmount: 50, //选择的投注面值
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -18,14 +17,11 @@ export default new Vuex.Store({
     SET_COUNT(state, count) {
       state.count = count;
     },
-    SET_STRRT_ANIMATION(state, status) {
-      state.startAnimation = status;
-    },
-    SET_STRRT_BG_ANIMATION(state, status) {
-      state.startBgAnimation = status;
-    },
     SET_ANIMATION_STEP(state, step) {
       state.animationStep = step;
+    },
+    SET_BETTING_AMOUNT(state, count) {
+      state.bettingAmount = count;
     },
   },
   actions: {},

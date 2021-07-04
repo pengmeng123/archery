@@ -30,7 +30,7 @@ export default {
   },
   mounted() {},
   computed: {
-    ...mapState(["startBgAnimation"]),
+    ...mapState(["animationStep"]),
   },
   methods: {},
   render() {
@@ -43,14 +43,14 @@ export default {
         {/*  距离下一局开始时间 */}
         <app-not-start endSecond={5} />
         {/* 射箭动画,背景图片也在里面 */}
-        <archery />
+        <archery vShow={this.animationStep > 0} />
         {/* 主体内容 */}
         <div class={styles.content}>
           <div class={styles.topPart}>
             <div
               class={{
-                "animate__animated animate__fadeOut": this.startMatch,
-                "animate__animated animate__fadeIn": !this.startMatch,
+                "animate__animated animate__fadeOutDown": this.startMatch,
+                "animate__animated animate__fadeInDown": !this.startMatch,
               }}
               style="position:relative;z-index:2"
             >

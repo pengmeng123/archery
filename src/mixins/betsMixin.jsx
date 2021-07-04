@@ -32,11 +32,11 @@ const BetsMixin = {
     ...mapState(["startMatch", "count"]),
   },
   watch: {
-    count() {
-      // if (newVal < 4) {
-      //   clearInterval(this.betsTimer);
-      // }
-      clearInterval(this.betsTimer);
+    count(newVal) {
+      if (newVal < 4) {
+        clearInterval(this.betsTimer);
+      }
+      // clearInterval(this.betsTimer);
     },
   },
   methods: {
@@ -46,7 +46,7 @@ const BetsMixin = {
         return;
       }
       var flyer = $(
-        `<img src=${goldImg} style="width:30px;height:30px;" />`
+        `<img src=${goldImg} style="width:30px;height:30px;position:relative;z-index:5" />`
       ).clone(); //动态创建抛物体对象并克隆
       flyer.load(() => {
         flyer.fly({

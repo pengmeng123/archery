@@ -1,16 +1,33 @@
 import styles from "./index.module.less";
 import { mapState, mapMutations } from "vuex";
 import TTPlayerImg from "@/assets/images/tt-player.png";
+import TtVictoryCardImg from "../../../static/tt-victory-card.png";
+import apertureImg from "../../../static/aperture.png";
+import TtVictoryTextImg from "../../../static/tt-victory-text.png";
 export default {
   name: "Archery",
   data() {
     return {
       target: false,
       fly: false,
+      timer1: null,
+      timer2: null,
     };
   },
   computed: {
-    ...mapState(["startAnimation", "animationStep"]),
+    ...mapState(["animationStep"]),
+  },
+  watch: {
+    animationStep(step) {
+      if (step === 0) {
+        if (this.timer1) {
+          clearTimeout(this.timer1);
+        }
+        if (this.timer2) {
+          clearTimeout(this.timer2);
+        }
+      }
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -24,16 +41,17 @@ export default {
         this.setAnimationStep(3);
       });
       homeBg.addEventListener("webkitAnimationEnd", () => {
-        setTimeout(() => {
+        this.timer1 = setTimeout(() => {
           this.setAnimationStep(4);
         }, 100);
+        this.timer2 = setTimeout(() => {
+          this.setAnimationStep(5);
+        }, 1500);
       });
     });
   },
   methods: {
     ...mapMutations({
-      setAnimation: "SET_STRRT_ANIMATION",
-      setBgAnimation: "SET_STRRT_BG_ANIMATION",
       setAnimationStep: "SET_ANIMATION_STEP",
     }),
   },
@@ -41,14 +59,14 @@ export default {
     const { animationStep } = this;
     return (
       <div class={styles.container}>
-        <button
+        {/* <button
           onClick={() => {
             this.setAnimationStep(1);
           }}
           style="position:absolute;z-index:1000"
         >
           click me
-        </button>
+        </button> */}
         <div
           class={{
             playerPhoto: true,
@@ -100,23 +118,83 @@ export default {
           }}
         ></div>
         {/* 靶盘 */}
-        <div class={styles.targetDisk} vShow={animationStep === 4}></div>
+        <div class={styles.targetDisk} vShow={animationStep >= 4}></div>
         {/* 射中在靶盘上的飞箭 */}
-        <div class={styles.flyArrow} vShow={animationStep === 4}>
+        <div
+          class={{
+            [styles.flyArrow]: true,
+            [styles.left10]: false,
+            [styles.left9]: true,
+            [styles.left8]: false,
+            [styles.left7]: false,
+            [styles.left6]: false,
+            [styles.left5]: false,
+            [styles.left4]: false,
+            [styles.left3]: false,
+            [styles.left2]: false,
+            [styles.left1]: false,
+            [styles.top10]: false,
+            [styles.top9]: false,
+            [styles.top8]: false,
+            [styles.top7]: false,
+            [styles.top6]: false,
+            [styles.top5]: false,
+            [styles.top4]: false,
+            [styles.top3]: false,
+            [styles.top2]: false,
+            [styles.top1]: false,
+            [styles.bottom10]: false,
+            [styles.bottom9]: false,
+            [styles.bottom8]: false,
+            [styles.bottom7]: false,
+            [styles.bottom6]: false,
+            [styles.bottom5]: false,
+            [styles.bottom4]: false,
+            [styles.bottom3]: false,
+            [styles.bottom2]: false,
+            [styles.bottom1]: false,
+            [styles.right10]: false,
+            [styles.right9]: false,
+            [styles.right8]: false,
+            [styles.right7]: false,
+            [styles.right6]: false,
+            [styles.right5]: false,
+            [styles.right4]: false,
+            [styles.right3]: false,
+            [styles.right2]: false,
+            [styles.right1]: false,
+          }}
+          vShow={animationStep >= 4}
+        >
           <div
             class={{
               [styles.box]: true,
-              [styles.flyArrowAnimation]: animationStep === 4,
+              [styles.flyArrowAnimation]: animationStep >= 4,
             }}
           ></div>
         </div>
-        <div class={styles.rings} vShow={animationStep === 4}>
+        {/* 靶盘闪动 */}
+        <div
+          class={{
+            [styles.rings]: true,
+            ringsEle: true,
+          }}
+          vShow={animationStep >= 4}
+        >
           <div
             class={{
               [styles.box]: true,
-              [styles.animation]: animationStep === 4,
+              [styles.animation]: animationStep >= 4,
             }}
           ></div>
+        </div>
+        {/* 最后比赛结果 */}
+        <div class={styles.matchResultContainer} vShow={animationStep === 5}>
+          <div class={styles.matchResult}>
+            <img src={apertureImg} alt="" class={styles.apertureImg} />
+            <img src={TtVictoryCardImg} alt="" class={styles.cardImg} />
+            <img src={TtVictoryTextImg} alt="" class={styles.text} />
+          </div>
         </div>
       </div>
     );
