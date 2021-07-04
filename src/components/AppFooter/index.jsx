@@ -32,7 +32,9 @@ export default {
       this.activeIndex = index;
       this.setBettingAmount(v.amount);
     },
-    onCancel() {},
+    onCancel() {
+      this.$toast("center");
+    },
   },
   render() {
     return (
