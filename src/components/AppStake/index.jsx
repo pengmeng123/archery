@@ -18,7 +18,17 @@ export default {
               "animate__animated animate__fadeInLeft": !startMatch,
             }}
           >
-            <div class={styles.stakeAmount}>7.2w</div>
+            <div class={styles.stakeAmountContainer}>
+              <div class={styles.stakeAmount}>72.2w</div>
+              {/* <div
+                class={{
+                  [styles.stakeAmount]: true,
+                  [styles.stakeGrey]: true,
+                }}
+              >
+                7.2w
+              </div> */}
+            </div>
             <div class={styles.text}>X2.1</div>
           </div>
           <div
@@ -28,6 +38,17 @@ export default {
               "animate__animated animate__fadeInDown": !startMatch,
             }}
           >
+            <div class={styles.stakeAmountContainer}>
+              <div class={styles.stakeAmount}>72.2w</div>
+              <div
+                class={{
+                  [styles.stakeAmount]: true,
+                  [styles.stakeGrey]: true,
+                }}
+              >
+                7.2w
+              </div>
+            </div>
             <div class={styles.text}>X9</div>
           </div>
           <div
@@ -38,7 +59,17 @@ export default {
               "animate__animated animate__fadeInRight": !startMatch,
             }}
           >
-            <div class={styles.stakeAmount}>7.2w</div>
+            <div class={styles.stakeAmountContainer}>
+              <div class={styles.stakeAmount}>72.2w</div>
+              <div
+                class={{
+                  [styles.stakeAmount]: true,
+                  [styles.stakeGrey]: true,
+                }}
+              >
+                7.2w
+              </div>
+            </div>
             <div class={styles.text}>X2.1</div>
           </div>
         </div>

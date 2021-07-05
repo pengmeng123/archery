@@ -29,7 +29,9 @@ export default {
         {
           icon: IconGoldExchange,
           func: () => {
-            console.log("2222");
+            this.$router.push({
+              name: "Exchange",
+            });
           },
           eventName: "welfareTask",
         },

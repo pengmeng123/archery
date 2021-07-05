@@ -16,27 +16,38 @@
       top: 75px;
     }
   }
-  .groupLeft,.groupRight {
+  .groupLeft,.groupRight,.groupCenter {
     width: 233px;
     height: 151px;
+    .stakeAmountContainer {
+      position: absolute;
+      right: -5px;
+      bottom: 116px;
+      display: flex;
+      flex-direction: column;
+      z-index: 2;
+    }
     .stakeAmount {
       display: inline-block;
       min-width: 12px;
       padding:2px 5px;
       background: #FFE6B9;
-      position: absolute;
-      right: 0;
-      top: 5px;
-      font-size: 18px;
+      font-size: 16px;
       color: #FC5A0D;
+      margin-bottom: 3px;
+      &.stakeGrey {
+        background: rgb(90, 90, 238);
+        color: #fff;
+      }
     }
   }
   .groupLeft {
     background: url(./images/stake-left.png) center top;
     background-size: 100% 100%;
     left: 17px;
-    .stakeAmount {
-      right: 23px;
+    z-index: 2;
+    .stakeAmountContainer {
+      right: 20px;
     }
     .text {
       left: 100px;

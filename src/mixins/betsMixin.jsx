@@ -26,6 +26,12 @@ const BetsMixin = {
       $("#btnCCVictory").click(() => {
         this.onStartFly($(".selfPlayer"), $("#btnCCVictory"));
       });
+
+      // 中奖后往下撒
+      $(".player1").click(() => {
+        console.log(888);
+        this.onGetResultAnimation();
+      });
     });
   },
   computed: {
@@ -65,6 +71,11 @@ const BetsMixin = {
             $(flyer).remove();
           },
         });
+      });
+    },
+    onGetResultAnimation() {
+      [1, 2, 5].forEach((v) => {
+        this.onStartFly($("#btnTTVictory"), $(`.player` + v));
       });
     },
   },

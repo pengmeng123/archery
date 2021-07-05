@@ -21,17 +21,17 @@ export default {
           icon: TxImg,
           name: "李四",
           marjor: true,
-          className: "selfPlayer",
+          className: "selfPlayer player3",
         },
         {
           icon: TxImg,
           name: "张三3",
-          className: "player3",
+          className: "player4",
         },
         {
           icon: TxImg,
           name: "张三4",
-          className: "player4",
+          className: "player5",
         },
       ];
     },
