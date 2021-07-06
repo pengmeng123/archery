@@ -11,11 +11,11 @@ const BetsMixin = {
   mounted() {
     this.$nextTick(() => {
       // 5s请求接口获取玩家投注，播放动画
-      // this.betsTimer = setInterval(() => {
-      //   this.onStartFly($(".player1"), $("#btnTTVictory"));
-      //   this.onStartFly($(".player2"), $("#btnCCVictory"));
-      //   this.onStartFly($(".player4"), $("#btnCCVictory"));
-      // }, 4000);
+      this.betsTimer = setInterval(() => {
+        this.onStartFly($(".player1"), $("#btnTTVictory"));
+        this.onStartFly($(".player2"), $("#btnCCVictory"));
+        this.onStartFly($(".player4"), $("#btnCCVictory"));
+      }, 4000);
 
       // 同同获胜
       $("#btnTTVictory").click(() => {
@@ -42,7 +42,6 @@ const BetsMixin = {
       if (newVal < 4) {
         clearInterval(this.betsTimer);
       }
-      // clearInterval(this.betsTimer);
     },
   },
   methods: {

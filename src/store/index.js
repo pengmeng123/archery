@@ -8,6 +8,7 @@ export default new Vuex.Store({
     startMatch: false, //是否开始动画
     count: COUNT, //倒计时
     animationStep: 0, //动画步骤
+    times: 0, //是否播放两次
     bettingAmount: 50, //选择的投注面值
   },
   mutations: {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     SET_BETTING_AMOUNT(state, count) {
       state.bettingAmount = count;
+    },
+    SET_TIMES(state, times) {
+      state.times = times;
     },
   },
   actions: {},

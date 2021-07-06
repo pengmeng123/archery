@@ -36,10 +36,14 @@ export default {
   //     immediate: true,
   //   },
   // },
+  mounted() {
+    // this.runCount(5);
+  },
   methods: {
     ...mapMutations({
       setStartMatchStatus: "SET_START_MATCH_STATUS",
       setCount: "SET_COUNT",
+      setAnimationStep: "SET_ANIMATION_STEP",
     }),
     runCount(t) {
       this.timer && clearTimeout(this.timer);
@@ -51,7 +55,10 @@ export default {
         }, 1000);
       } else {
         this.setCount(0);
-        // this.setStartMatchStatus(true);
+        this.setStartMatchStatus(true);
+        setTimeout(() => {
+          this.setAnimationStep(1);
+        }, 500);
       }
     },
   },

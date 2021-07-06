@@ -102,9 +102,12 @@
   75% {
     left: -2064px;
   }
-  100%{
-    left: -2752px;
+  100% {
+    left: -2064px;
   }
+  // 100%{
+  //   left: -2752px;
+  // }
 }
 @keyframes fadeInOut {
   0% {
@@ -216,7 +219,7 @@
     background: url(../../../static/wing-rings.png) no-repeat center top;
     background-size: 100% 100%;
     &.animation {
-      animation: run6 1s steps(1,end) 0.5s infinite;
+      animation: run6 1s steps(1,end) 0.5s 1 forwards;
     }
   }
 }
@@ -495,7 +498,7 @@
     left: 132px;
     top: 100px;
     z-index: 1;
-    animation: rotateBg 2s ease-in infinite;
+    animation: rotateBg 3s infinite linear;
   }
   .cardImg {
     width: 750px;
@@ -513,6 +516,6 @@
     top: 285px;
     z-index: 3;
     transform: scale(1.2);
-    animation: scaleBg  ease 0.7s forwards;
+    animation: scaleBg  linear 0.7s forwards;
   }
 }

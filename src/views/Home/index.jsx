@@ -43,7 +43,7 @@ export default {
         {/*  距离下一局开始时间 */}
         <app-not-start endSecond={5} />
         {/* 射箭动画,背景图片也在里面 */}
-        <archery vShow={this.animationStep > 0} />
+        <archery vShow={this.animationStep > 0 && this.animationStep < 6} />
         {/* 主体内容 */}
         <div class={styles.content}>
           <div class={styles.topPart}>
