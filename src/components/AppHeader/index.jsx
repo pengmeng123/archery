@@ -1,10 +1,11 @@
 import styles from "./index.module.less";
 import IconTongtong from "./images/icon-tongtong.png";
 import IconChengcheng from "./images/icon-chengcheng.png";
-import { mapMutations, mapGetters, mapState } from "vuex";
-// import { COUNT } from "@/config/common";
+import { mapGetters, mapState } from "vuex";
+import CountDownMixin from "@/mixins/countDownMixin";
 export default {
   name: "AppHeader",
+  mixins: [CountDownMixin],
   data() {
     return {
       players1: [IconTongtong, IconTongtong, IconTongtong, IconTongtong],
@@ -36,32 +37,7 @@ export default {
   //     immediate: true,
   //   },
   // },
-  mounted() {
-    // this.runCount(5);
-  },
-  methods: {
-    ...mapMutations({
-      setStartMatchStatus: "SET_START_MATCH_STATUS",
-      setCount: "SET_COUNT",
-      setAnimationStep: "SET_ANIMATION_STEP",
-    }),
-    runCount(t) {
-      this.timer && clearTimeout(this.timer);
-      if (t > 0) {
-        this.setCount(t);
-        t--;
-        this.timer = setTimeout(() => {
-          this.runCount(t);
-        }, 1000);
-      } else {
-        this.setCount(0);
-        this.setStartMatchStatus(true);
-        setTimeout(() => {
-          this.setAnimationStep(1);
-        }, 500);
-      }
-    },
-  },
+
   render() {
     const { players1, players2, count } = this;
     return (

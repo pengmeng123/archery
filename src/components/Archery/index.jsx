@@ -1,11 +1,14 @@
 import styles from "./index.module.less";
-import { mapState, mapMutations } from "vuex";
 import TTPlayerImg from "@/assets/images/tt-player.png";
+import CCPlayerImg from "@/assets/images/cc-player.png";
 import TtVictoryCardImg from "../../../static/tt-victory-card.png";
 import apertureImg from "../../../static/aperture.png";
 import TtVictoryTextImg from "../../../static/tt-victory-text.png";
+import AnimationStepMixin from "@/mixins/animationStepMixin";
+import { mapState } from "vuex";
 export default {
   name: "Archery",
+  mixins: [AnimationStepMixin],
   data() {
     return {
       target: false,
@@ -14,8 +17,11 @@ export default {
       timer2: null,
     };
   },
+  mounted() {
+    this.init();
+  },
   computed: {
-    ...mapState(["animationStep", "times"]),
+    ...mapState(["times"]),
   },
   watch: {
     animationStep(step) {
@@ -29,54 +35,9 @@ export default {
       }
     },
   },
-  mounted() {
-    this.$nextTick(() => {
-      const playerPhoto = document.querySelector(".playerPhoto");
-      const targetBox = document.querySelector(".targetBox");
-      const homeBg = document.querySelector(".homeBg");
-      const ringsEle = document.querySelector(".ringsEle");
-      const matchResultText = document.querySelector(".matchResultText");
-      playerPhoto.addEventListener("webkitAnimationEnd", () => {
-        this.setAnimationStep(2);
-      });
-      targetBox.addEventListener("webkitAnimationEnd", () => {
-        this.setAnimationStep(3);
-      });
-      homeBg.addEventListener("webkitAnimationEnd", () => {
-        this.setAnimationStep(4);
-      });
-      ringsEle.addEventListener("webkitAnimationEnd", () => {
-        console.log("end-----");
-        this.setTimes(this.times + 1);
-        if (this.times === 1) {
-          setTimeout(() => {
-            this.setAnimationStep(1);
-          }, 300);
-        }
-        // 两次动画播放完毕后出中奖结果
-        if (this.times === 2) {
-          this.setAnimationStep(5);
-        }
-      });
-      // 最后比赛结果部分
-      matchResultText.addEventListener("webkitAnimationEnd", () => {
-        setTimeout(() => {
-          this.setAnimationStep(6);
-          this.setStartMatchStatus(false);
-        }, 500);
-      });
-    });
-  },
-  methods: {
-    ...mapMutations({
-      setAnimationStep: "SET_ANIMATION_STEP",
-      setTimes: "SET_TIMES",
-      setStartMatchStatus: "SET_START_MATCH_STATUS",
-      setCount: "SET_COUNT",
-    }),
-  },
+
   render() {
-    const { animationStep } = this;
+    const { animationStep, times } = this;
     return (
       <div class={styles.container}>
         {/* <button
@@ -94,13 +55,16 @@ export default {
             [styles.playerAnimation]: animationStep === 1,
           }}
         >
-          <img src={TTPlayerImg} alt="" />
+          <img src={TTPlayerImg} alt="" vShow={times === 0} />
+          <img src={CCPlayerImg} alt="" vShow={times === 1} />
         </div>
         {/* 拉弓 */}
         <div class={styles.target} vShow={animationStep === 2}>
           <div
             class={{
               [styles.box]: true,
+              [styles.ttTargetImg]: times === 0,
+              [styles.ccTargetImg]: times === 1,
               [styles.targetAnimation]: animationStep === 2,
               targetBox: true,
             }}

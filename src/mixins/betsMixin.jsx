@@ -9,33 +9,10 @@ const BetsMixin = {
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      // 5s请求接口获取玩家投注，播放动画
-      this.betsTimer = setInterval(() => {
-        this.onStartFly($(".player1"), $("#btnTTVictory"));
-        this.onStartFly($(".player2"), $("#btnCCVictory"));
-        this.onStartFly($(".player4"), $("#btnCCVictory"));
-      }, 4000);
-
-      // 同同获胜
-      $("#btnTTVictory").click(() => {
-        this.onStartFly($(".selfPlayer"), $("#btnTTVictory"));
-      });
-      // 平局
-      // 程程获胜
-      $("#btnCCVictory").click(() => {
-        this.onStartFly($(".selfPlayer"), $("#btnCCVictory"));
-      });
-
-      // 中奖后往下撒
-      $(".player1").click(() => {
-        console.log(888);
-        this.onGetResultAnimation();
-      });
-    });
+    this.init();
   },
   computed: {
-    ...mapState(["startMatch", "count"]),
+    ...mapState(["startMatch", "count", "animationStep"]),
   },
   watch: {
     count(newVal) {
@@ -45,9 +22,37 @@ const BetsMixin = {
     },
   },
   methods: {
+    autoBetting() {
+      // 5s请求接口获取玩家投注，播放动画
+      this.betsTimer = setInterval(() => {
+        this.onStartFly($(".player1"), $("#btnTTVictory"));
+        this.onStartFly($(".player2"), $("#btnCCVictory"));
+        this.onStartFly($(".player4"), $("#btnCCVictory"));
+      }, 4000);
+    },
+    init() {
+      this.$nextTick(() => {
+        this.autoBetting();
+        // 同同获胜
+        $("#btnTTVictory").click(() => {
+          this.onStartFly($(".selfPlayer"), $("#btnTTVictory"));
+        });
+        // 平局
+        // 程程获胜
+        $("#btnCCVictory").click(() => {
+          this.onStartFly($(".selfPlayer"), $("#btnCCVictory"));
+        });
+
+        // 监听比赛结果往下撒
+        const groupLeftLightEle = document.querySelector(".groupLeftLight");
+        groupLeftLightEle.addEventListener("webkitAnimationEnd", () => {
+          this.onGetResultAnimation();
+        });
+      });
+    },
     onStartFly(startTarget, endTarget) {
-      if (this.count < 4) {
-        console.log("禁止游戏投注时间");
+      if (this.count < 4 && this.animationStep === 0) {
+        this.$toast("禁止游戏投注时间");
         return;
       }
       var flyer = $(
@@ -76,6 +81,10 @@ const BetsMixin = {
       [1, 2, 5].forEach((v) => {
         this.onStartFly($("#btnTTVictory"), $(`.player` + v));
       });
+      // 重置条件
+      this.setAnimationStep(0);
+      this.autoBetting();
+      this.runCount(10);
     },
   },
 };

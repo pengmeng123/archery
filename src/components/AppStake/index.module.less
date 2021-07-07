@@ -3,6 +3,26 @@
   position: relative;
   z-index: 1;
 }
+@keyframes runFlicker {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .group {
   display: flex;
   justify-content: center;
@@ -42,15 +62,42 @@
     }
   }
   .groupLeft {
-    background: url(./images/stake-left.png) center top;
-    background-size: 100% 100%;
     left: 17px;
     z-index: 2;
+    &::before {
+      content: '';
+      width: 233px;
+      height: 151px;
+      background: url(./images/stake-left.png) center top;
+      background-size: 100% 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+    }
     .stakeAmountContainer {
       right: 20px;
+      z-index: 3;
     }
     .text {
       left: 100px;
+      z-index: 3;
+    }
+  }
+  .groupLeftLight {
+    position: relative;
+    &::after {
+      content: '';
+      width: 263px;
+      height: 197px;
+      background: url(../../../static/left-light.png) no-repeat center top;
+      background-size: 100% 100%;
+      position: absolute;
+      left: 0px;
+      top: -30px;
+      z-index: -1;
+      opacity: 0;
+      animation: runFlicker 0.5s 1s;
     }
   }
   .groupCenter {

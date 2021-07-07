@@ -3,13 +3,20 @@ import { mapState } from "vuex";
 export default {
   name: "AppStake",
   computed: {
-    ...mapState(["startMatch"]),
+    ...mapState(["startMatch", "animationStep"]),
   },
   render() {
-    const { startMatch } = this;
+    const { startMatch, animationStep } = this;
     return (
       <div class={styles.container}>
         <div class={styles.group}>
+          {/* 光部分 */}
+          <div
+            class={{
+              groupLeftLight: true,
+              [styles.groupLeftLight]: animationStep === 6,
+            }}
+          ></div>
           <div
             id="btnTTVictory"
             class={{

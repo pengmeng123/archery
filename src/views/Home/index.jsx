@@ -6,9 +6,10 @@ import AppChild from "@/components/AppChild";
 import AppGamePlayer from "@/components/AppGamePlayer";
 import AppFooter from "@/components/AppFooter";
 import BetsMixin from "@/mixins/betsMixin";
+import CountDownMixin from "@/mixins/countDownMixin";
 import Archery from "@/components/Archery";
 import AppNotStart from "@/components/AppNotStart";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "Home",
 
@@ -22,17 +23,25 @@ export default {
     Archery,
     AppNotStart,
   },
-  mixins: [BetsMixin],
+  mixins: [CountDownMixin, BetsMixin],
   data() {
     return {
       isScale: false,
     };
   },
-  mounted() {},
+  mounted() {
+    this.runCount(10);
+  },
   computed: {
     ...mapState(["animationStep"]),
   },
-  methods: {},
+  methods: {
+    ...mapMutations({
+      setStartMatchStatus: "SET_START_MATCH_STATUS",
+      setCount: "SET_COUNT",
+      setAnimationStep: "SET_ANIMATION_STEP",
+    }),
+  },
   render() {
     return (
       <div
