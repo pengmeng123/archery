@@ -17,6 +17,18 @@ export default {
               [styles.groupLeftLight]: animationStep === 6,
             }}
           ></div>
+          {/* <div
+            class={{
+              groupCenterLight: true,
+              [styles.groupCenterLight]: animationStep === 6,
+            }}
+          ></div>
+          <div
+            class={{
+              groupRightLight: true,
+              [styles.groupRightLight]: animationStep === 6,
+            }}
+          ></div> */}
           <div
             id="btnTTVictory"
             class={{

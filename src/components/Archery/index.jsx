@@ -4,50 +4,27 @@ import CCPlayerImg from "@/assets/images/cc-player.png";
 import TtVictoryCardImg from "../../../static/tt-victory-card.png";
 import apertureImg from "../../../static/aperture.png";
 import TtVictoryTextImg from "../../../static/tt-victory-text.png";
-import AnimationStepMixin from "@/mixins/animationStepMixin";
+
 import { mapState } from "vuex";
 export default {
   name: "Archery",
-  mixins: [AnimationStepMixin],
   data() {
     return {
       target: false,
       fly: false,
-      timer1: null,
-      timer2: null,
     };
   },
   mounted() {
-    this.init();
+    // this.init();
   },
   computed: {
-    ...mapState(["times"]),
-  },
-  watch: {
-    animationStep(step) {
-      if (step === 0) {
-        if (this.timer1) {
-          clearTimeout(this.timer1);
-        }
-        if (this.timer2) {
-          clearTimeout(this.timer2);
-        }
-      }
-    },
+    ...mapState(["times", "animationStep"]),
   },
 
   render() {
     const { animationStep, times } = this;
     return (
       <div class={styles.container}>
-        {/* <button
-          onClick={() => {
-            this.setAnimationStep(1);
-          }}
-          style="position:absolute;z-index:1000"
-        >
-          click me
-        </button> */}
         <div
           class={{
             playerPhoto: true,

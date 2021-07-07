@@ -10,7 +10,7 @@ const animationStepMixin = {
       setStartMatchStatus: "SET_START_MATCH_STATUS",
       setCount: "SET_COUNT",
     }),
-    init() {
+    startMonitorAnimation() {
       this.$nextTick(() => {
         const playerPhoto = document.querySelector(".playerPhoto");
         const targetBox = document.querySelector(".targetBox");

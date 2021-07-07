@@ -7,6 +7,7 @@ import AppGamePlayer from "@/components/AppGamePlayer";
 import AppFooter from "@/components/AppFooter";
 import BetsMixin from "@/mixins/betsMixin";
 import CountDownMixin from "@/mixins/countDownMixin";
+import AnimationStepMixin from "@/mixins/animationStepMixin";
 import Archery from "@/components/Archery";
 import AppNotStart from "@/components/AppNotStart";
 import { mapState, mapMutations } from "vuex";
@@ -23,14 +24,17 @@ export default {
     Archery,
     AppNotStart,
   },
-  mixins: [CountDownMixin, BetsMixin],
+  mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
   data() {
     return {
       isScale: false,
     };
   },
   mounted() {
+    // 倒计时
     this.runCount(10);
+    // 动画监听
+    this.startMonitorAnimation();
   },
   computed: {
     ...mapState(["animationStep"]),
