@@ -4,14 +4,30 @@ import CCPlayerImg from "@/assets/images/cc-player.png";
 import TtVictoryCardImg from "../../../static/tt-victory-card.png";
 import apertureImg from "../../../static/aperture.png";
 import TtVictoryTextImg from "../../../static/tt-victory-text.png";
-
+// tt-fly的四个方向
+import TTFlyLeftImg from "@/assets/images/tt/fly-left.png";
+import TTFlyRightImg from "@/assets/images/tt/fly-right.png";
+// cc-fly的四个方向
+import CCFlyLeftImg from "@/assets/images/cc/fly-left.png";
+import CCFlyRightImg from "@/assets/images/cc/fly-right.png";
+import { DIRECTION_STR } from "@/config/common";
 import { mapState } from "vuex";
+
+const flyObj = {
+  tt: {
+    left: TTFlyLeftImg,
+    right: TTFlyRightImg,
+  },
+  cc: {
+    left: CCFlyLeftImg,
+    right: CCFlyRightImg,
+  },
+};
 export default {
   name: "Archery",
   data() {
     return {
-      target: false,
-      fly: false,
+      direction: 1,
     };
   },
   mounted() {
@@ -19,10 +35,16 @@ export default {
   },
   computed: {
     ...mapState(["times", "animationStep"]),
+    flySrc() {
+      const d = DIRECTION_STR[this.direction]; //选用哪个方向的图片
+      const { times } = this;
+      return times === 1 ? flyObj.tt[d] : flyObj.cc[d];
+    },
   },
 
   render() {
-    const { animationStep, times } = this;
+    const { animationStep, times, direction, flySrc } = this;
+    console.log(DIRECTION_STR, direction);
     return (
       <div class={styles.container}>
         <div
@@ -48,7 +70,10 @@ export default {
           ></div>
         </div>
 
-        {/* 箭飞出去 */}
+        {/* 
+          箭飞出去
+          两人分别都有四个方向上下左右
+        */}
         <div
           class={{
             [styles.fly]: true,
@@ -61,6 +86,10 @@ export default {
               [styles.box]: true,
               [styles.flyAnimation]: animationStep === 3,
               flyBox: true,
+            }}
+            style={{
+              background: `url(${flySrc}) no-repeat center top`,
+              backgroundSize: "100% 100%",
             }}
           ></div>
         </div>

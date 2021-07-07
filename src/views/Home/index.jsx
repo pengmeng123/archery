@@ -32,9 +32,9 @@ export default {
   },
   mounted() {
     // 倒计时
-    this.runCount(10);
+    // this.runCount(10);
     // 动画监听
-    this.startMonitorAnimation();
+    // this.startMonitorAnimation();
   },
   computed: {
     ...mapState(["animationStep"]),
