@@ -1,4 +1,4 @@
-import Empty from "@/components/empty";
+import Empty from "@/components/Empty";
 import styles from "./record.module.less";
 export default {
   name: "ExchangeRecord",

@@ -8,9 +8,6 @@ const BetsMixin = {
       betsTimer: null,
     };
   },
-  mounted() {
-    this.init();
-  },
   computed: {
     ...mapState(["startMatch", "count", "animationStep"]),
   },
@@ -30,7 +27,7 @@ const BetsMixin = {
         this.onStartFly($(".player4"), $("#btnCCVictory"));
       }, 4000);
     },
-    init() {
+    startBetting() {
       this.$nextTick(() => {
         this.autoBetting();
         // 同同获胜

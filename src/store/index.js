@@ -10,6 +10,7 @@ export default new Vuex.Store({
     animationStep: 0, //动画步骤
     times: 0, //是否播放两次
     bettingAmount: 50, //选择的投注面值
+    isGameBettingTime: true, //15s前投注时间，超过就为false
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -27,11 +28,17 @@ export default new Vuex.Store({
     SET_TIMES(state, times) {
       state.times = times;
     },
+    SET_GAME_BETTING_STATUS(state, status) {
+      state.isGameBettingTime = status;
+    },
   },
   actions: {},
   getters: {
     count(state) {
       return state.count;
+    },
+    isGameBettingTime(state) {
+      return state.isGameBettingTime;
     },
   },
 });

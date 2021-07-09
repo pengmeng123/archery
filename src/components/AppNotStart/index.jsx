@@ -1,4 +1,5 @@
 import styles from "./index.module.less";
+import { mapGetters } from "vuex";
 export default {
   name: "AppNotStart",
   props: {
@@ -12,8 +13,21 @@ export default {
       second: 0,
     };
   },
-  mounted() {
-    this.runCount(this.second);
+  mounted() {},
+  computed: {
+    ...mapGetters(["isGameBettingTime"]),
+  },
+  watch: {
+    endSecond: {
+      handler(newVal) {
+        console.log("n---", newVal);
+        console.log(this.isGameBettingTime);
+        if (!this.isGameBettingTime) {
+          this.runCount(newVal);
+        }
+      },
+      immediate: true,
+    },
   },
   methods: {
     runCount(t) {
@@ -25,6 +39,7 @@ export default {
           this.runCount(t);
         }, 1000);
       } else {
+        this.$emit("close");
         this.second = 0;
       }
     },

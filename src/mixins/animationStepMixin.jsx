@@ -30,6 +30,7 @@ const animationStepMixin = {
           console.log("end-----");
           this.setTimes(this.times + 1);
           if (this.times === 1) {
+            // 程程开始射箭
             setTimeout(() => {
               this.setAnimationStep(1);
             }, 300);

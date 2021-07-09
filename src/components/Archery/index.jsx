@@ -4,27 +4,36 @@ import CCPlayerImg from "@/assets/images/cc-player.png";
 import TtVictoryCardImg from "../../../static/tt-victory-card.png";
 import apertureImg from "../../../static/aperture.png";
 import TtVictoryTextImg from "../../../static/tt-victory-text.png";
-
 import { mapState } from "vuex";
+import { DIRECTION_STR } from "@/config/common";
+import _ from "lodash";
 export default {
   name: "Archery",
   data() {
     return {
-      target: false,
-      fly: false,
+      direction: 1,
+      ringNumber: 3,
     };
-  },
-  mounted() {
-    // this.init();
   },
   computed: {
     ...mapState(["times", "animationStep"]),
+    flyClassName() {
+      const d = DIRECTION_STR[this.direction]; //选用哪个方向的图片
+      const { times } = this;
+      return times === 0
+        ? `ttFly${_.capitalize(d)}`
+        : `ccFly${_.capitalize(d)}`;
+    },
+    ringNumberClassName() {
+      const d = DIRECTION_STR[this.direction]; //选用哪个方向的图片
+      return `${d}${this.ringNumber}`;
+    },
   },
-
   render() {
-    const { animationStep, times } = this;
+    const { animationStep, times, flyClassName, ringNumberClassName } = this;
     return (
       <div class={styles.container}>
+        {/* 开始发放图片 */}
         <div
           class={{
             playerPhoto: true,
@@ -58,9 +67,10 @@ export default {
           <div
             ref="flyBoxEle"
             class={{
+              flyBox: true,
               [styles.box]: true,
               [styles.flyAnimation]: animationStep === 3,
-              flyBox: true,
+              [styles[flyClassName]]: true,
             }}
           ></div>
         </div>
@@ -73,9 +83,11 @@ export default {
           }}
         ></div>
         <div
+          vShow={animationStep >= 3 && animationStep < 6}
           class={{
             [styles.bgFly]: true,
             [styles.bgAnimation]: animationStep >= 3 && animationStep < 6,
+            [styles[flyClassName]]: true,
           }}
         ></div>
         {/* 靶盘 */}
@@ -87,46 +99,7 @@ export default {
         <div
           class={{
             [styles.flyArrow]: true,
-            [styles.left10]: false,
-            [styles.left9]: true,
-            [styles.left8]: false,
-            [styles.left7]: false,
-            [styles.left6]: false,
-            [styles.left5]: false,
-            [styles.left4]: false,
-            [styles.left3]: false,
-            [styles.left2]: false,
-            [styles.left1]: false,
-            [styles.top10]: false,
-            [styles.top9]: false,
-            [styles.top8]: false,
-            [styles.top7]: false,
-            [styles.top6]: false,
-            [styles.top5]: false,
-            [styles.top4]: false,
-            [styles.top3]: false,
-            [styles.top2]: false,
-            [styles.top1]: false,
-            [styles.bottom10]: false,
-            [styles.bottom9]: false,
-            [styles.bottom8]: false,
-            [styles.bottom7]: false,
-            [styles.bottom6]: false,
-            [styles.bottom5]: false,
-            [styles.bottom4]: false,
-            [styles.bottom3]: false,
-            [styles.bottom2]: false,
-            [styles.bottom1]: false,
-            [styles.right10]: false,
-            [styles.right9]: false,
-            [styles.right8]: false,
-            [styles.right7]: false,
-            [styles.right6]: false,
-            [styles.right5]: false,
-            [styles.right4]: false,
-            [styles.right3]: false,
-            [styles.right2]: false,
-            [styles.right1]: false,
+            [styles[ringNumberClassName]]: true,
           }}
           vShow={animationStep >= 4 && animationStep < 6}
         >

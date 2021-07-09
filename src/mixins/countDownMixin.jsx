@@ -1,11 +1,16 @@
 const CountDownMixin = {
+  data() {
+    return {
+      timerCount: null,
+    };
+  },
   methods: {
     runCount(t) {
-      this.timer && clearTimeout(this.timer);
+      this.timerCount && clearTimeout(this.timerCount);
       if (t > 0) {
         this.setCount(t);
         t--;
-        this.timer = setTimeout(() => {
+        this.timerCount = setTimeout(() => {
           this.runCount(t);
         }, 1000);
       } else {

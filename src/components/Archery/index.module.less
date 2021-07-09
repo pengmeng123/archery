@@ -173,9 +173,30 @@
     position: absolute;
     left: 0px;
     top: 0;
-    background: url(../../../static/fly2.png) no-repeat center top;
-    background-size: 100% 100%;
-    
+    &.ttFlyTop {
+      background: url(../../assets/images/tt/fly-top.png) no-repeat center top;
+      background-size: 100% 100%;
+    }
+    &.ttFlyLeft {
+      background: url(../../assets/images/tt/fly-left.png) no-repeat center top;
+      background-size: 100% 100%;
+    }
+    &.ttFlyRight {
+      background: url(../../assets/images/tt/fly-right.png) no-repeat center top;
+      background-size: 100% 100%;
+    }
+    &.ccFlyTop {
+      background: url(../../assets/images/cc/fly-top.png) no-repeat center top;
+      background-size: 100% 100%;
+    }
+    &.ccFlyLeft {
+      background: url(../../assets/images/cc/fly-left.png) no-repeat center top;
+      background-size: 100% 100%;
+    }
+    &.ccFlyRight {
+      background: url(../../assets/images/cc/fly-right.png) no-repeat center top;
+      background-size: 100% 100%;
+    }
     &.flyAnimation {
       animation: run4 0.8s steps(1,end) both;
     }
@@ -458,9 +479,31 @@
   position: absolute;
   left: 750px;
   top: 0;
-  background: url(../../../static/bg-fly.png) no-repeat center top;
-  background-size: 100% 100%;
   z-index: 1;
+  &.ttBgFlyLeft {
+    background: url(../../assets/images/tt/bg-fly-left.png) no-repeat center top;
+    background-size: 100% 100%;
+  }
+  &.ttFlyRight {
+    background: url(../../assets/images/tt/bg-fly-right.png) no-repeat center top;
+    background-size: 100% 100%;
+  }
+  &.ttFlyTop {
+    background: url(../../assets/images/tt/bg-fly-top.png) no-repeat center top;
+    background-size: 100% 100%;
+  }
+  &.ccFlyLeft {
+    background: url(../../assets/images/cc/bg-fly-left.png) no-repeat center top;
+    background-size: 100% 100%;
+  }
+  &.ccFlyRight {
+    background: url(../../assets/images/cc/bg-fly-right.png) no-repeat center top;
+    background-size: 100% 100%;
+  }
+  &.ccFlyTop {
+    background: url(../../assets/images/cc/bg-fly-top.png) no-repeat center top;
+    background-size: 100% 100%;
+  }
   &.bgAnimation {
     animation: runFly 0.3s steps(1,end) 0.8s both;
   }

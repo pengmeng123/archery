@@ -10,7 +10,7 @@ import CountDownMixin from "@/mixins/countDownMixin";
 import AnimationStepMixin from "@/mixins/animationStepMixin";
 import Archery from "@/components/Archery";
 import AppNotStart from "@/components/AppNotStart";
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapGetters } from "vuex";
 export default {
   name: "Home",
 
@@ -26,25 +26,35 @@ export default {
   },
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
   data() {
-    return {
-      isScale: false,
-    };
+    return {};
   },
   mounted() {
-    // 倒计时
-    this.runCount(10);
-    // 动画监听
-    this.startMonitorAnimation();
+    // this.start();
   },
   computed: {
     ...mapState(["animationStep"]),
+    ...mapGetters(["isGameBettingTime"]),
   },
   methods: {
     ...mapMutations({
       setStartMatchStatus: "SET_START_MATCH_STATUS",
       setCount: "SET_COUNT",
       setAnimationStep: "SET_ANIMATION_STEP",
+      setGameBettingStatus: "SET_GAME_BETTING_STATUS",
     }),
+    start() {
+      if (this.isGameBettingTime) {
+        // 倒计时
+        this.runCount(5);
+        // 动画监听
+        this.startMonitorAnimation();
+        this.startBetting();
+      }
+    },
+    handleHasStartTime() {
+      this.setGameBettingStatus(true);
+      this.start();
+    },
   },
   render() {
     return (
@@ -54,7 +64,7 @@ export default {
         }}
       >
         {/*  距离下一局开始时间 */}
-        <app-not-start endSecond={5} />
+        <app-not-start endSecond={5} onClose={this.handleHasStartTime} />
         {/* 射箭动画,背景图片也在里面 */}
         <archery vShow={this.animationStep > 0 && this.animationStep < 6} />
         {/* 主体内容 */}
