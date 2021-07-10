@@ -11,25 +11,40 @@ export default {
   name: "Archery",
   data() {
     return {
-      direction: 1,
-      ringNumber: 3,
+      // ttDirection: 1,
+      // ringNumber: 3,
     };
   },
   computed: {
-    ...mapState(["times", "animationStep"]),
+    ...mapState([
+      "times",
+      "animationStep",
+      "ttDirection",
+      "ttRingNumber",
+      "ccDirection",
+      "ccRingNumber",
+    ]),
     flyClassName() {
-      const d = DIRECTION_STR[this.direction]; //选用哪个方向的图片
+      const direction = this.times === 0 ? this.ttDirection : this.ccDirection;
+      const d = DIRECTION_STR[direction]; //选用哪个方向的图片
       const { times } = this;
       return times === 0
         ? `ttFly${_.capitalize(d)}`
         : `ccFly${_.capitalize(d)}`;
     },
-    ringNumberClassName() {
-      const d = DIRECTION_STR[this.direction]; //选用哪个方向的图片
-      return `${d}${this.ringNumber}`;
+    ttRingNumberClassName() {
+      const d = DIRECTION_STR[this.ttDirection]; //选用哪个方向的图片
+      return `${d}${this.ttRingNumber}`;
+    },
+    ccRingNumberClassName() {
+      const d = DIRECTION_STR[this.ccDirection]; //选用哪个方向的图片
+      return `${d}${this.ccRingNumber}`;
     },
     ringFlickerClassName() {
-      return `ring${this.ringNumber}`;
+      return `ring${this.times === 0 ? this.ttRingNumber : this.ccRingNumber}`;
+    },
+    awaitResultRingNumber() {
+      return this.times === 0 ? this.ttRingNumber : this.ccRingNumber;
     },
   },
   render() {
@@ -37,9 +52,12 @@ export default {
       animationStep,
       times,
       flyClassName,
-      ringNumberClassName,
       ringFlickerClassName,
+      ttRingNumberClassName,
+      ccRingNumberClassName,
+      awaitResultRingNumber,
     } = this;
+    console.log("ri-", ringFlickerClassName);
     return (
       <div class={styles.container}>
         {/* 开始发放图片 */}
@@ -105,12 +123,20 @@ export default {
           vShow={animationStep >= 4 && animationStep < 6}
         ></div>
         {/* 中了几环的提示图片 */}
-        <div class={styles.ringsCount}>10</div>
+        <div
+          vShow={animationStep === 4}
+          class={{
+            [styles.ringsCount]: true,
+            "animate__animated animate__fadeIn": animationStep === 4,
+          }}
+        >
+          <span>{awaitResultRingNumber}</span>
+        </div>
         {/* 射中在靶盘上的飞箭 */}
         <div
           class={{
             [styles.flyArrow]: true,
-            [styles[ringNumberClassName]]: true,
+            [styles[ttRingNumberClassName]]: true,
           }}
           vShow={animationStep >= 4 && animationStep < 6}
         >
@@ -118,10 +144,27 @@ export default {
             class={{
               [styles.box]: true,
               [styles.flyArrowAnimation]:
-                animationStep >= 4 && animationStep < 6,
+                animationStep >= 4 && animationStep < 6 && times === 0,
             }}
           ></div>
         </div>
+        {times >= 1 ? (
+          <div
+            class={{
+              [styles.flyArrow]: true,
+              [styles[ccRingNumberClassName]]: true,
+            }}
+            vShow={animationStep >= 4 && animationStep < 6}
+          >
+            <div
+              class={{
+                [styles.box]: true,
+                [styles.flyArrowAnimation]:
+                  animationStep >= 4 && animationStep < 6,
+              }}
+            ></div>
+          </div>
+        ) : null}
         {/* 靶盘闪动 */}
         <div
           class={{
@@ -147,6 +190,16 @@ export default {
               src={TtVictoryTextImg}
               class={{
                 [styles.text]: true,
+                [styles.text1]: true,
+                [styles.scaleAnimation1]: true,
+              }}
+            />
+            <img
+              src={TtVictoryTextImg}
+              class={{
+                [styles.text]: true,
+                [styles.text2]: true,
+                [styles.scaleAnimation2]: true,
                 matchResultText: true,
               }}
             />

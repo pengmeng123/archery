@@ -24,10 +24,13 @@ const animationStepMixin = {
           this.setAnimationStep(3);
         });
         homeBg.addEventListener("webkitAnimationEnd", () => {
-          this.setAnimationStep(4);
+          // 延迟一点是为了让靶盘曝光出现
+          setTimeout(() => {
+            this.setAnimationStep(4);
+          }, 150);
         });
         ringsEle.addEventListener("webkitAnimationEnd", () => {
-          console.log("end-----");
+          // 准备开始下一局
           this.setTimes(this.times + 1);
           if (this.times === 1) {
             // 程程开始射箭
@@ -42,6 +45,7 @@ const animationStepMixin = {
         });
         // 最后比赛结果部分
         matchResultText.addEventListener("webkitAnimationEnd", () => {
+          console.log("9---");
           setTimeout(() => {
             this.setAnimationStep(6);
             this.setStartMatchStatus(false);

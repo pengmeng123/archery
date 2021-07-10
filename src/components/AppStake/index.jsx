@@ -7,6 +7,7 @@ export default {
   },
   render() {
     const { startMatch, animationStep } = this;
+    console.log(animationStep);
     return (
       <div class={styles.container}>
         <div class={styles.group}>
@@ -15,6 +16,7 @@ export default {
             class={{
               groupLeftLight: true,
               [styles.groupLeftLight]: animationStep === 6,
+              // [styles.groupLeftLight]: true,
             }}
           ></div>
           {/* <div

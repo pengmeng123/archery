@@ -82,12 +82,10 @@
   66% {
     left: -180px;
   }
-  99% {
+  100% {
     left: -270px;
   }
-  100% {
-    left: -360px;
-  }
+  
 }
 @keyframes run6{
   0% {
@@ -235,11 +233,18 @@
   background: url(../../assets/images/award-rings-bg.png) no-repeat;
   background-size: 100% 100%;
   position: absolute;
-  left: 0;
-  top: 100px;
+  left: 50%;
+  top: 60px;
   font-size: 100px;
   font-family: 'customBold';
   color: #fff;
+  margin-left: -193px;
+  display: flex;
+  align-items: center;
+  z-index: 104;
+  span {
+    margin-left: 30px;
+  }
 }
 .rings {
   width: 688px;
@@ -297,7 +302,7 @@
       background-size: 100% 100%;
     }
     &.animation {
-      animation: run6 0.7s steps(1,end) 0.5s 1 forwards;
+      animation: run6 0.7s steps(1,end) 0.6s 1 forwards;
     }
   }
 }
@@ -477,7 +482,7 @@
     background: url(../../../static/arrow.png) no-repeat center top;
     background-size: 100% 100%;
     &.flyArrowAnimation {
-      animation: run5 0.8s steps(1,end)  infinite;
+      animation: run5 0.6s steps(1,end)  1 forwards;
     }
   }
 }
@@ -569,13 +574,27 @@
 }
 @keyframes scaleBg {
   0%{
-    transform: scale(1.2);
+    transform: scale(1.4);
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
   100% {
     transform: scale(1);
+  }
+}
+@keyframes enlargeBg {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
   }
 }
 .matchResultContainer {
@@ -609,13 +628,24 @@
     z-index: 2;
   }
   .text {
-    width: 399px;
-    height: 145px;
+    width: 276px;
+    height: 103px;
     position: absolute;
-    left: 175px;
-    top: 285px;
+    left: 254px;
+    top: 290px;
     z-index: 3;
-    transform: scale(1.2);
-    animation: scaleBg  linear 0.7s forwards;
+    &.text1 {
+      transform: scale(1.4);
+    }
+    &.text2 {
+      opacity: 0;
+    }
+    &.scaleAnimation1 {
+      animation: scaleBg 0.5s linear  forwards;
+    }
+    &.scaleAnimation2 {
+      animation: enlargeBg 0.5s linear 0.5s forwards;
+    }
+    
   }
 }

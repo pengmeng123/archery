@@ -11,6 +11,10 @@ export default new Vuex.Store({
     times: 0, //是否播放两次
     bettingAmount: 50, //选择的投注面值
     isGameBettingTime: true, //15s前投注时间，超过就为false
+    ttDirection: 1, //方向
+    ttRingNumber: 3, //中了几环
+    ccDirection: 3, //方向
+    ccRingNumber: 8, //中了几环
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
