@@ -51,6 +51,7 @@ export default {
             <div class={styles.text}>X2.1</div>
           </div>
           <div
+            id="btnCenterDrawer"
             class={{
               [styles.groupCenter]: true,
               "animate__animated animate__fadeOutDown": startMatch,

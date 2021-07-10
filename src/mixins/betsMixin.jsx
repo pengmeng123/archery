@@ -35,6 +35,9 @@ const BetsMixin = {
           this.onStartFly($(".selfPlayer"), $("#btnTTVictory"));
         });
         // 平局
+        $("#btnCenterDrawer").click(() => {
+          this.onStartFly($(".selfPlayer"), $("#btnCenterDrawer"));
+        });
         // 程程获胜
         $("#btnCCVictory").click(() => {
           this.onStartFly($(".selfPlayer"), $("#btnCCVictory"));

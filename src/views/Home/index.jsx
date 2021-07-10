@@ -29,7 +29,7 @@ export default {
     return {};
   },
   mounted() {
-    // this.start();
+    this.start();
   },
   computed: {
     ...mapState(["animationStep"]),
