@@ -28,9 +28,18 @@ export default {
       const d = DIRECTION_STR[this.direction]; //选用哪个方向的图片
       return `${d}${this.ringNumber}`;
     },
+    ringFlickerClassName() {
+      return `ring${this.ringNumber}`;
+    },
   },
   render() {
-    const { animationStep, times, flyClassName, ringNumberClassName } = this;
+    const {
+      animationStep,
+      times,
+      flyClassName,
+      ringNumberClassName,
+      ringFlickerClassName,
+    } = this;
     return (
       <div class={styles.container}>
         {/* 开始发放图片 */}
@@ -95,6 +104,8 @@ export default {
           class={styles.targetDisk}
           vShow={animationStep >= 4 && animationStep < 6}
         ></div>
+        {/* 中了几环的提示图片 */}
+        <div class={styles.ringsCount}>10</div>
         {/* 射中在靶盘上的飞箭 */}
         <div
           class={{
@@ -114,8 +125,8 @@ export default {
         {/* 靶盘闪动 */}
         <div
           class={{
-            [styles.rings]: true,
             ringsEle: true,
+            [styles.rings]: true,
           }}
           vShow={animationStep >= 4 && animationStep < 6}
         >
@@ -123,6 +134,7 @@ export default {
             class={{
               [styles.box]: true,
               [styles.animation]: animationStep >= 4 && animationStep < 6,
+              [styles[ringFlickerClassName]]: true,
             }}
           ></div>
         </div>

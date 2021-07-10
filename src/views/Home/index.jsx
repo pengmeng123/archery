@@ -25,9 +25,6 @@ export default {
     AppNotStart,
   },
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
-  data() {
-    return {};
-  },
   mounted() {
     this.start();
   },
