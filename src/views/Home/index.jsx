@@ -42,7 +42,7 @@ export default {
     start() {
       if (this.isGameBettingTime) {
         // 倒计时
-        this.runCount(5);
+        this.runCount(10);
         // 动画监听
         this.startMonitorAnimation();
         this.startBetting();

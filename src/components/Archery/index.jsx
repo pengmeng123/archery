@@ -145,26 +145,26 @@ export default {
               [styles.box]: true,
               [styles.flyArrowAnimation]:
                 animationStep >= 4 && animationStep < 6 && times === 0,
+              [styles.boxTT]: true,
             }}
           ></div>
         </div>
-        {times >= 1 ? (
+        <div
+          class={{
+            [styles.flyArrow]: true,
+            [styles[ccRingNumberClassName]]: true,
+          }}
+          vShow={animationStep >= 4 && animationStep < 6 && times === 1}
+        >
           <div
             class={{
-              [styles.flyArrow]: true,
-              [styles[ccRingNumberClassName]]: true,
+              [styles.box]: true,
+              [styles.flyArrowAnimation]:
+                animationStep >= 4 && animationStep < 6,
+              [styles.boxCC]: true,
             }}
-            vShow={animationStep >= 4 && animationStep < 6}
-          >
-            <div
-              class={{
-                [styles.box]: true,
-                [styles.flyArrowAnimation]:
-                  animationStep >= 4 && animationStep < 6,
-              }}
-            ></div>
-          </div>
-        ) : null}
+          ></div>
+        </div>
         {/* 靶盘闪动 */}
         <div
           class={{

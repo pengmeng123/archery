@@ -31,15 +31,16 @@ const animationStepMixin = {
         });
         ringsEle.addEventListener("webkitAnimationEnd", () => {
           // 准备开始下一局
-          this.setTimes(this.times + 1);
-          if (this.times === 1) {
+
+          if (this.times === 0) {
             // 程程开始射箭
             setTimeout(() => {
               this.setAnimationStep(1);
+              this.setTimes(this.times + 1);
             }, 300);
           }
           // 两次动画播放完毕后出中奖结果
-          if (this.times === 2) {
+          if (this.times === 1) {
             this.setAnimationStep(5);
           }
         });
