@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { COUNT } from "@/config/common";
+import services from "@/services";
+import _ from "lodash";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -15,6 +17,8 @@ export default new Vuex.Store({
     ttRingNumber: 6, //中了几环
     ccDirection: 1, //方向
     ccRingNumber: 8, //中了几环
+    appLoading: true,
+    gameInfo: {},
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -35,8 +39,31 @@ export default new Vuex.Store({
     SET_GAME_BETTING_STATUS(state, status) {
       state.isGameBettingTime = status;
     },
+    SET_GAME_INFO(state, payload) {
+      state.gameInfo = payload;
+    },
+    SET_APP_LOADING(state, payload) {
+      state.appLoading = payload;
+    },
   },
-  actions: {},
+  actions: {
+    getGameInfo({ commit }) {
+      return services.user
+        .getExcute()
+        .then((r) => {
+          if (_.get(r, "status") === 200) {
+            console.log(_.get(r, "data"));
+            commit("SET_GAME_INFO", _.get(r, "data.result"));
+          }
+        })
+        .catch(() => {
+          commit("SET_GAME_INFO", {});
+        })
+        .finally(() => {
+          commit("SET_APP_LOADING", false);
+        });
+    },
+  },
   getters: {
     count(state) {
       return state.count;

@@ -1,10 +1,12 @@
 import axios from "axios";
 const BASE_URL = "/";
 const TIMEOUT = 1000 * 15;
+
 const http = axios.create({
   headers: {
     "x-requested-with": "XMLHttpRequest",
     "content-type": "application/json",
+    // ...testParams,
   },
   baseURL: BASE_URL,
   timeout: TIMEOUT,
@@ -14,6 +16,7 @@ const http = axios.create({
 http.interceptors.request.use(
   (config) => {
     // config.header.token = "001";
+    // config.pid = 501;
     return config;
   },
   (error) => {

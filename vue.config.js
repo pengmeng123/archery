@@ -3,8 +3,8 @@ module.exports = {
   devServer: {
     disableHostCheck: true,
     proxy: {
-      "^/qcc": {
-        target: "https://www.kezhaozhao.com",
+      "^/wxgame": {
+        target: "http://192.168.0.102",
         changeOrigin: true,
       },
     },

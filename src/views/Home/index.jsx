@@ -26,7 +26,7 @@ export default {
   },
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
   mounted() {
-    this.start();
+    // this.start();
   },
   computed: {
     ...mapState(["animationStep"]),

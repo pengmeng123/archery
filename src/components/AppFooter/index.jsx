@@ -1,5 +1,6 @@
 import styles from "./index.module.less";
-import { mapMutations } from "vuex";
+import { mapState, mapMutations } from "vuex";
+import _ from "lodash";
 export default {
   name: "AppFooter",
   data() {
@@ -24,6 +25,9 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapState(["gameInfo"]),
+  },
   methods: {
     ...mapMutations({
       setBettingAmount: "SET_BETTING_AMOUNT",
@@ -37,12 +41,14 @@ export default {
     },
   },
   render() {
+    const { gameInfo } = this;
+
     return (
       <div class={styles.container}>
         <div class={styles.content}>
           <div class={styles.myGold}>
             <div class={styles.title}>我的金币</div>
-            <div class={styles.text}>100000</div>
+            <div class={styles.text}>{_.get(gameInfo, "account") || 0}</div>
           </div>
           <div class={styles.btnGroup}>
             <ul>

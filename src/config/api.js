@@ -1,1 +1,1 @@
-export const AREA_LIST = "/qcc/user/agent/areaList";
+export const WXGAME_EXECUTE = "/wxgame/execute";

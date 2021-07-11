@@ -1,13 +1,13 @@
 import styles from "./index.module.less";
 import { mapState } from "vuex";
+import _ from "lodash";
 export default {
   name: "AppStake",
   computed: {
-    ...mapState(["startMatch", "animationStep"]),
+    ...mapState(["startMatch", "animationStep", "gameInfo"]),
   },
   render() {
-    const { startMatch, animationStep } = this;
-    console.log(animationStep);
+    const { startMatch, animationStep, gameInfo } = this;
     return (
       <div class={styles.container}>
         <div class={styles.group}>
@@ -50,7 +50,9 @@ export default {
                 7.2w
               </div> */}
             </div>
-            <div class={styles.text}>X2.1</div>
+            <div class={styles.text}>
+              X{_.get(gameInfo, "currentGame.fish.odds")}
+            </div>
           </div>
           <div
             id="btnCenterDrawer"
@@ -71,7 +73,9 @@ export default {
                 7.2w
               </div>
             </div>
-            <div class={styles.text}>X9</div>
+            <div class={styles.text}>
+              X{_.get(gameInfo, "currentGame.draw.odds")}
+            </div>
           </div>
           <div
             id="btnCCVictory"
@@ -92,7 +96,9 @@ export default {
                 7.2w
               </div>
             </div>
-            <div class={styles.text}>X2.1</div>
+            <div class={styles.text}>
+              X{_.get(gameInfo, "currentGame.draw.odds")}
+            </div>
           </div>
         </div>
       </div>

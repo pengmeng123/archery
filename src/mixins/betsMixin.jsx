@@ -1,5 +1,6 @@
 import goldImg from "@/assets/images/gold.png";
 import { mapState } from "vuex";
+import _ from "lodash";
 const $ = window.$;
 
 const BetsMixin = {
@@ -9,7 +10,13 @@ const BetsMixin = {
     };
   },
   computed: {
-    ...mapState(["startMatch", "count", "animationStep"]),
+    ...mapState([
+      "startMatch",
+      "count",
+      "animationStep",
+      "bettingAmount",
+      "gameInfo",
+    ]),
   },
   watch: {
     count(newVal) {
@@ -17,6 +24,9 @@ const BetsMixin = {
         clearInterval(this.betsTimer);
       }
     },
+  },
+  mounted() {
+    this.startBetting();
   },
   methods: {
     autoBetting() {
@@ -27,11 +37,29 @@ const BetsMixin = {
         this.onStartFly($(".player4"), $("#btnCCVictory"));
       }, 4000);
     },
+    onGamePlay(support) {
+      const params = {
+        support,
+        gold: this.bettingAmount,
+        uuid: _.get(this.gameInfo, "currentGame.uuid"),
+        type: 1,
+      };
+      this.$service.user.gamePlay(params).then((r) => {
+        const code = _.get(r, "code");
+        if (code === 200) {
+          console.log("99");
+        } else {
+          this.$toast(_.get(r, "data.message"));
+        }
+      });
+    },
     startBetting() {
       this.$nextTick(() => {
-        this.autoBetting();
+        // this.autoBetting();
         // 同同获胜
         $("#btnTTVictory").click(() => {
+          console.log(333);
+          this.onGamePlay(1);
           this.onStartFly($(".selfPlayer"), $("#btnTTVictory"));
         });
         // 平局
