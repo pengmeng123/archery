@@ -67,17 +67,15 @@ const BetsMixin = {
         this.onStartFly($(".player4"), $("#btnCCVictory"));
       }, 4000);
     },
-    onGamePlay(support) {
+    onGamePlay(support = 1, type = 1) {
       const params = {
         support,
         gold: this.bettingAmount,
         uuid: _.get(this.gameInfo, "currentGame.uuid"),
-        type: 1,
+        type,
       };
       this.$service.user.gamePlay(params).then((r) => {
         const code = _.get(r, "status");
-        console.log(r, "code-", code);
-
         this.$_getGameInfo && this.$_getGameInfo();
         if (code === 200) {
           this.manualBettingAnimation();

@@ -22,7 +22,7 @@ export default {
             [styles.member]: true,
             [styles.memberTT]: true,
             "animate__animated animate__fadeOutLeft": startMatch,
-            "animate__animated animate__fadeInLeft": !startMatch,
+            // "animate__animated animate__fadeInLeft": !startMatch,
           }}
         >
           <img src={TTSignsImg} class={styles.signs} />
@@ -33,7 +33,7 @@ export default {
             [styles.member]: true,
             [styles.memberCC]: true,
             "animate__animated animate__fadeOutRight": startMatch,
-            "animate__animated animate__fadeInRight": !startMatch,
+            // "animate__animated animate__fadeInRight": !startMatch,
           }}
         >
           <img src={CCSignsImg} class={styles.signs} />

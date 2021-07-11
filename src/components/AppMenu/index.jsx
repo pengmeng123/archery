@@ -6,6 +6,8 @@ import DropDownMore from "./dropdown-more";
 import Modal from "@/components/Modal";
 import FareTask from "../FareTask";
 import DailyReceiveGold from "../DailyReceiveGold";
+import { mapState } from "vuex";
+import _ from "lodash";
 import styles from "./index.module.less";
 export default {
   name: "AppMenu",
@@ -17,12 +19,14 @@ export default {
     };
   },
   computed: {
+    ...mapState(["mainInfo"]),
     menus() {
       return [
         {
           icon: IconReciveGold,
           func: () => {
-            this.receiveGoldVisible = true;
+            // this.receiveGoldVisible = true;
+            this.gameSign();
           },
           eventName: "recevieGold",
         },
@@ -61,6 +65,17 @@ export default {
           },
         },
       ];
+    },
+  },
+  methods: {
+    gameSign() {
+      this.$service.user.gameSign().then((r) => {
+        if (_.get(r, "data.code") === 1000) {
+          this.receiveGoldVisible = true;
+        } else {
+          this.$toast(_.get(r, "data.message"));
+        }
+      });
     },
   },
   render() {

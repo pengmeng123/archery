@@ -37,7 +37,7 @@ export default {
       this.setBettingAmount(v.amount);
     },
     onCancel() {
-      this.$toast("center");
+      this.$emit("cancel");
     },
   },
   render() {

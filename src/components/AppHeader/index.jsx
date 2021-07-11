@@ -38,7 +38,6 @@ export default {
     const { count } = this;
     const players1 = this.getHistoryGameList.slice(0, 4);
     const players2 = this.getHistoryGameList.slice(4, 8);
-    console.log(players1, players2);
     return (
       <div class={styles.container}>
         <div class={styles.header}>

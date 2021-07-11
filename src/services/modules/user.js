@@ -26,3 +26,13 @@ export const gamePlay = (data) => {
     .post(WXGAME_EXECUTE, { ...testParams, action: "play", ...data })
     .then((r) => _.get(r, "data"));
 };
+export const gameMainInfo = (data) => {
+  return http
+    .post(WXGAME_EXECUTE, { ...testParams, action: "mainInfo", ...data })
+    .then((r) => _.get(r, "data"));
+};
+export const gameSign = (data) => {
+  return http
+    .post(WXGAME_EXECUTE, { ...testParams, action: "sign", ...data })
+    .then((r) => _.get(r, "data"));
+};

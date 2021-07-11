@@ -18,6 +18,7 @@ export default new Vuex.Store({
     ccRingNumber: 8, //中了几环
     appLoading: true,
     gameInfo: {},
+    mainInfo: {},
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -43,6 +44,9 @@ export default new Vuex.Store({
     },
     SET_APP_LOADING(state, payload) {
       state.appLoading = payload;
+    },
+    SET_MAIN_INFO(state, payload) {
+      state.mainInfo = payload;
     },
   },
   actions: {

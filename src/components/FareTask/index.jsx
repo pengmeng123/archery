@@ -1,41 +1,23 @@
 import AppPercent from "../AppPercent";
-import AwardImg from "@/assets/images/award.png";
+// import AwardImg from "@/assets/images/award.png";
 import Modal from "@/components/Modal";
 import Award from "./award";
+import { mapState } from "vuex";
+import _ from "lodash";
 import styles from "./index.module.less";
 
 export default {
   name: "FareTask",
   data() {
     return {
-      data: [
-        {
-          title: "累计参与10局游戏",
-          total: 10,
-          receive: 2,
-          status: 1,
-        },
-        {
-          title: "累计参与10局游戏",
-          total: 10,
-          receive: 8,
-          status: 1,
-        },
-        {
-          title: "累计参与10局游戏",
-          total: 10,
-          receive: 2,
-          status: 2,
-        },
-        {
-          title: "累计参与10局游戏",
-          total: 10,
-          receive: 2,
-          status: 3,
-        },
-      ],
       isVisible: true,
     };
+  },
+  computed: {
+    ...mapState(["mainInfo"]),
+    data() {
+      return _.get(this.mainInfo, "tasklist") || [];
+    },
   },
   methods: {
     onReceive() {
@@ -52,11 +34,11 @@ export default {
                 <div class={styles.itemContent}>
                   <div class={styles.title}>{v.title}</div>
                   <div class={styles.desc}>
-                    <AppPercent receive={v.receive} total={v.total} />
-                    <img src={AwardImg} class={styles.award} />
+                    <AppPercent receive={v.finish} total={v.target} />
+                    <img src={v.awardIcon} class={styles.award} />
                   </div>
                 </div>
-                {v.status === 1 ? (
+                {v.status === -1 ? (
                   <a
                     href="javascript:"
                     class={{
@@ -68,7 +50,7 @@ export default {
                     领取
                   </a>
                 ) : null}
-                {v.status === 2 ? (
+                {v.status === 0 ? (
                   <a
                     href="javascript:"
                     class={{
@@ -76,10 +58,10 @@ export default {
                       [styles.btnToReceive]: true,
                     }}
                   >
-                    去完成
+                    已领取
                   </a>
                 ) : null}
-                {v.status === 3 ? (
+                {v.status === 1 ? (
                   <a
                     href="javascript:"
                     class={{

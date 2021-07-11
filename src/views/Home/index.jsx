@@ -11,6 +11,7 @@ import AnimationStepMixin from "@/mixins/animationStepMixin";
 import Archery from "@/components/Archery";
 import AppNotStart from "@/components/AppNotStart";
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
+import _ from "lodash";
 export default {
   name: "Home",
 
@@ -27,6 +28,8 @@ export default {
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
   mounted() {
     this.init();
+    // 主页接口信息
+    this.getGameMainInfo();
   },
   computed: {
     ...mapState(["animationStep", "gameInfo"]),
@@ -41,6 +44,7 @@ export default {
       setCount: "SET_COUNT",
       setAnimationStep: "SET_ANIMATION_STEP",
       setGameBettingStatus: "SET_GAME_BETTING_STATUS",
+      setMainInfo: "SET_MAIN_INFO",
     }),
     init() {
       // 判断时间是否在可投注范围内
@@ -63,6 +67,15 @@ export default {
     async handleHasStartTime() {
       await this.getGameInfo();
       this.init();
+    },
+    handleBettingCancel() {
+      this.onGamePlay(1, 2);
+    },
+    getGameMainInfo() {
+      this.$service.user.gameMainInfo().then((r) => {
+        const o = _.get(r, "data.result") || {};
+        this.setMainInfo(o);
+      });
     },
   },
   render() {
@@ -87,7 +100,7 @@ export default {
             <div
               class={{
                 "animate__animated animate__fadeOutDown": this.startMatch,
-                "animate__animated animate__fadeInDown": !this.startMatch,
+                // "animate__animated animate__fadeInDown": !this.startMatch,
               }}
               style="position:relative;z-index:2"
             >
@@ -100,11 +113,11 @@ export default {
           <div
             class={{
               "animate__animated animate__fadeOutDown": this.startMatch,
-              "animate__animated animate__fadeInUp": !this.startMatch,
+              // "animate__animated animate__fadeInUp": !this.startMatch,
             }}
           >
             <app-game-player />
-            <app-footer />
+            <app-footer onCancel={this.handleBettingCancel} />
           </div>
         </div>
       </div>
