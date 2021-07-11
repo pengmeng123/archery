@@ -1,5 +1,10 @@
 import { mapState, mapMutations } from "vuex";
 const animationStepMixin = {
+  data() {
+    return {
+      animationFlag: false,
+    };
+  },
   computed: {
     ...mapState(["animationStep", "times"]),
   },
@@ -11,6 +16,9 @@ const animationStepMixin = {
       setCount: "SET_COUNT",
     }),
     startMonitorAnimation() {
+      if (this.animationFlag) {
+        return;
+      }
       this.$nextTick(() => {
         const playerPhoto = document.querySelector(".playerPhoto");
         const targetBox = document.querySelector(".targetBox");
@@ -46,13 +54,13 @@ const animationStepMixin = {
         });
         // 最后比赛结果部分
         matchResultText.addEventListener("webkitAnimationEnd", () => {
-          console.log("9---");
           setTimeout(() => {
             this.setAnimationStep(6);
             this.setStartMatchStatus(false);
             this.setTimes(0);
           }, 500);
         });
+        this.animationFlag = true;
       });
     },
   },

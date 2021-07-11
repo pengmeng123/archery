@@ -10,7 +10,7 @@ import CountDownMixin from "@/mixins/countDownMixin";
 import AnimationStepMixin from "@/mixins/animationStepMixin";
 import Archery from "@/components/Archery";
 import AppNotStart from "@/components/AppNotStart";
-import { mapState, mapMutations, mapGetters } from "vuex";
+import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
 export default {
   name: "Home",
 
@@ -26,31 +26,43 @@ export default {
   },
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
   mounted() {
-    // this.start();
+    this.init();
   },
   computed: {
-    ...mapState(["animationStep"]),
+    ...mapState(["animationStep", "gameInfo"]),
     ...mapGetters(["isGameBettingTime"]),
   },
   methods: {
+    ...mapActions({
+      getGameInfo: "getGameInfo",
+    }),
     ...mapMutations({
       setStartMatchStatus: "SET_START_MATCH_STATUS",
       setCount: "SET_COUNT",
       setAnimationStep: "SET_ANIMATION_STEP",
       setGameBettingStatus: "SET_GAME_BETTING_STATUS",
     }),
+    init() {
+      // 判断时间是否在可投注范围内
+      if (this.currentCountDown > 0) {
+        this.setGameBettingStatus(true);
+        this.start();
+      } else {
+        this.setGameBettingStatus(false);
+      }
+    },
     start() {
       if (this.isGameBettingTime) {
         // 倒计时
-        this.runCount(10);
+        this.runCount(this.currentCountDown);
         // 动画监听
         this.startMonitorAnimation();
         this.startBetting();
       }
     },
-    handleHasStartTime() {
-      this.setGameBettingStatus(true);
-      this.start();
+    async handleHasStartTime() {
+      await this.getGameInfo();
+      this.init();
     },
   },
   render() {
@@ -61,7 +73,12 @@ export default {
         }}
       >
         {/*  距离下一局开始时间 */}
-        <app-not-start endSecond={5} onClose={this.handleHasStartTime} />
+        {!this.isGameBettingTime ? (
+          <app-not-start
+            endSecond={Math.abs(this.gameCountDown)}
+            onClose={this.handleHasStartTime}
+          />
+        ) : null}
         {/* 射箭动画,背景图片也在里面 */}
         <archery vShow={this.animationStep > 0 && this.animationStep < 6} />
         {/* 主体内容 */}

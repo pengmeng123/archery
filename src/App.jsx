@@ -1,5 +1,6 @@
 import Loading from "@/components/Loading";
 import { mapActions, mapState } from "vuex";
+// import _ from "lodash";
 export default {
   name: "App",
   data() {

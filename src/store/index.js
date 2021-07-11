@@ -1,6 +1,5 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { COUNT } from "@/config/common";
 import services from "@/services";
 import _ from "lodash";
 Vue.use(Vuex);
@@ -8,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     startMatch: false, //是否开始动画
-    count: COUNT, //倒计时
+    count: 0, //倒计时
     animationStep: 0, //动画步骤
     times: 0, //是否播放两次
     bettingAmount: 50, //选择的投注面值
@@ -52,7 +51,6 @@ export default new Vuex.Store({
         .getExcute()
         .then((r) => {
           if (_.get(r, "status") === 200) {
-            console.log(_.get(r, "data"));
             commit("SET_GAME_INFO", _.get(r, "data.result"));
           }
         })

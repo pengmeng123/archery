@@ -1,5 +1,5 @@
 import goldImg from "@/assets/images/gold.png";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import _ from "lodash";
 const $ = window.$;
 
@@ -17,6 +17,12 @@ const BetsMixin = {
       "bettingAmount",
       "gameInfo",
     ]),
+    currentCountDown() {
+      return this.gameCountDown - 15;
+    },
+    gameCountDown() {
+      return _.get(this.gameInfo, "currentGame.countDown") || 0;
+    },
   },
   watch: {
     count(newVal) {
@@ -25,11 +31,35 @@ const BetsMixin = {
       }
     },
   },
+  created() {
+    this.$_getGameInfo = _.debounce(this.getGameInfo, 300);
+  },
   mounted() {
-    this.startBetting();
+    this.$nextTick(() => {
+      $("#btnTTVictory").click(() => {
+        this.onGamePlay(1);
+      });
+      // 平局
+      $("#btnCenterDrawer").click(() => {
+        this.onGamePlay(3);
+      });
+      // 程程获胜
+      $("#btnCCVictory").click(() => {
+        this.onGamePlay(2);
+      });
+      // 监听比赛结果往下撒
+      const groupLeftLightEle = document.querySelector(".groupLeftLight");
+      groupLeftLightEle.addEventListener("webkitAnimationEnd", () => {
+        this.onGetResultAnimation();
+      });
+    });
   },
   methods: {
+    ...mapActions({
+      getGameInfo: "getGameInfo",
+    }),
     autoBetting() {
+      this.betsTimer && clearInterval(this.betsTimer);
       // 5s请求接口获取玩家投注，播放动画
       this.betsTimer = setInterval(() => {
         this.onStartFly($(".player1"), $("#btnTTVictory"));
@@ -45,37 +75,36 @@ const BetsMixin = {
         type: 1,
       };
       this.$service.user.gamePlay(params).then((r) => {
-        const code = _.get(r, "code");
+        const code = _.get(r, "status");
+        console.log(r, "code-", code);
+
+        this.$_getGameInfo && this.$_getGameInfo();
         if (code === 200) {
-          console.log("99");
+          this.manualBettingAnimation();
         } else {
           this.$toast(_.get(r, "data.message"));
         }
       });
     },
+    manualBettingAnimation(support) {
+      switch (support) {
+        case 1:
+          this.onStartFly($(".selfPlayer"), $("#btnTTVictory"));
+          break;
+        case 2:
+          this.onStartFly($(".selfPlayer"), $("#btnCCVictory"));
+          break;
+        case 3:
+          this.onStartFly($(".selfPlayer"), $("#btnCenterDrawer"));
+          break;
+        default:
+          break;
+      }
+    },
     startBetting() {
       this.$nextTick(() => {
-        // this.autoBetting();
+        this.autoBetting();
         // 同同获胜
-        $("#btnTTVictory").click(() => {
-          console.log(333);
-          this.onGamePlay(1);
-          this.onStartFly($(".selfPlayer"), $("#btnTTVictory"));
-        });
-        // 平局
-        $("#btnCenterDrawer").click(() => {
-          this.onStartFly($(".selfPlayer"), $("#btnCenterDrawer"));
-        });
-        // 程程获胜
-        $("#btnCCVictory").click(() => {
-          this.onStartFly($(".selfPlayer"), $("#btnCCVictory"));
-        });
-
-        // 监听比赛结果往下撒
-        const groupLeftLightEle = document.querySelector(".groupLeftLight");
-        groupLeftLightEle.addEventListener("webkitAnimationEnd", () => {
-          this.onGetResultAnimation();
-        });
       });
     },
     onStartFly(startTarget, endTarget) {
@@ -105,14 +134,17 @@ const BetsMixin = {
         });
       });
     },
-    onGetResultAnimation() {
+    async onGetResultAnimation() {
       [1, 2, 5].forEach((v) => {
         this.onStartFly($("#btnTTVictory"), $(`.player` + v));
       });
-      // 重置条件
-      this.setAnimationStep(0);
-      this.autoBetting();
-      this.runCount(10);
+      try {
+        await this.getGameInfo();
+        // 重置条件
+        this.setAnimationStep(0);
+        this.init && this.init();
+        // eslint-disable-next-line no-empty
+      } catch {}
     },
   },
 };

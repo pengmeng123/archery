@@ -57,7 +57,6 @@ export default {
       ccRingNumberClassName,
       awaitResultRingNumber,
     } = this;
-    console.log("ri-", ringFlickerClassName);
     return (
       <div class={styles.container}>
         {/* 开始发放图片 */}

@@ -22,7 +22,6 @@ export const getExcute = (data) =>
     .then((r) => _.get(r, "data"));
 
 export const gamePlay = (data) => {
-  console.log("data--", data);
   return http
     .post(WXGAME_EXECUTE, { ...testParams, action: "play", ...data })
     .then((r) => _.get(r, "data"));
