@@ -99,7 +99,7 @@ export default {
           <div class={styles.topPart}>
             <div
               class={{
-                "animate__animated animate__fadeOutDown": this.startMatch,
+                "animate__animated animate__fadeOutUp": this.startMatch,
                 // "animate__animated animate__fadeInDown": !this.startMatch,
               }}
               style="position:relative;z-index:2"

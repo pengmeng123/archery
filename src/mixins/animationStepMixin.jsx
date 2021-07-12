@@ -49,7 +49,9 @@ const animationStepMixin = {
           }
           // 两次动画播放完毕后出中奖结果
           if (this.times === 1) {
-            this.setAnimationStep(5);
+            setTimeout(() => {
+              this.setAnimationStep(5);
+            }, 300);
           }
         });
         // 最后比赛结果部分
@@ -58,7 +60,7 @@ const animationStepMixin = {
             this.setAnimationStep(6);
             this.setStartMatchStatus(false);
             this.setTimes(0);
-          }, 500);
+          }, 800);
         });
         this.animationFlag = true;
       });

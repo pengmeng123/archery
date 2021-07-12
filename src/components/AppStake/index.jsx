@@ -115,7 +115,7 @@ export default {
             id="btnCenterDrawer"
             class={{
               [styles.groupCenter]: true,
-              "animate__animated animate__fadeOutDown": startMatch,
+              "animate__animated animate__fadeOut": startMatch,
             }}
           >
             <div class={styles.stakeAmountContainer}>
