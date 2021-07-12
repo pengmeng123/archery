@@ -57,6 +57,7 @@ export default new Vuex.Store({
           if (_.get(r, "status") === 200) {
             commit("SET_GAME_INFO", _.get(r, "data.result"));
           }
+          return r;
         })
         .catch(() => {
           commit("SET_GAME_INFO", {});

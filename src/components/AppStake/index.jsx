@@ -60,6 +60,11 @@ export default {
         : 0;
     },
   },
+  methods: {
+    handleBetting(direct) {
+      this.$emit(direct);
+    },
+  },
   render() {
     const { startMatch, animationStep, gameInfo } = this;
     return (
@@ -91,6 +96,9 @@ export default {
               [styles.groupLeft]: true,
               "animate__animated animate__fadeOutLeft": startMatch,
             }}
+            onClick={() => {
+              this.handleBetting("ttClick");
+            }}
           >
             <div class={styles.stakeAmountContainer}>
               {this.fishTotal ? (
@@ -117,6 +125,9 @@ export default {
               [styles.groupCenter]: true,
               "animate__animated animate__fadeOut": startMatch,
             }}
+            onClick={() => {
+              this.handleBetting("drawerClick");
+            }}
           >
             <div class={styles.stakeAmountContainer}>
               {this.drawTotal ? (
@@ -142,6 +153,9 @@ export default {
             class={{
               [styles.groupRight]: true,
               "animate__animated animate__fadeOutRight": startMatch,
+            }}
+            onClick={() => {
+              this.handleBetting("ccClick");
             }}
           >
             <div class={styles.stakeAmountContainer}>

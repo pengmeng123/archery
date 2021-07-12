@@ -28,8 +28,6 @@ export default {
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
   mounted() {
     this.init();
-    // 主页接口信息
-    this.getGameMainInfo();
   },
   computed: {
     ...mapState(["animationStep", "gameInfo"]),
@@ -54,6 +52,8 @@ export default {
       } else {
         this.setGameBettingStatus(false);
       }
+      // 主页接口信息
+      this.getGameMainInfo();
     },
     start() {
       if (this.isGameBettingTime) {
@@ -100,20 +100,21 @@ export default {
             <div
               class={{
                 "animate__animated animate__fadeOutUp": this.startMatch,
-                // "animate__animated animate__fadeInDown": !this.startMatch,
               }}
               style="position:relative;z-index:2"
             >
               <app-menu />
               <app-header />
             </div>
-            <app-stake />
+            <app-stake
+              onDrawerClick={this.onDrawerClick}
+              onCcClick={this.onCcClick}
+            />
             <app-child />
           </div>
           <div
             class={{
               "animate__animated animate__fadeOutDown": this.startMatch,
-              // "animate__animated animate__fadeInUp": !this.startMatch,
             }}
           >
             <app-game-player />

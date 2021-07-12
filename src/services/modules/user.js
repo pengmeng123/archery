@@ -13,6 +13,7 @@ const testParams = {
   icon: "https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKcthg7CBtDdID2MQOjdnlgLaInSrW9gLykhia5WahlGDJB3TLFficTHRycX5EopfyhzMMxTuY3G1pg/132",
   action: "gameInfo",
   idenid: "oOCyauG-UILHMYW-yW313lCaI0LQ",
+  // idenid: "oOCyauHKr5KUAu6hXWRXg_xKpzZA",
   pid: 501,
 };
 

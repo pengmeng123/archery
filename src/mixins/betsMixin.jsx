@@ -36,17 +36,6 @@ const BetsMixin = {
   },
   mounted() {
     this.$nextTick(() => {
-      $("#btnTTVictory").click(() => {
-        this.onGamePlay(1);
-      });
-      // 平局
-      $("#btnCenterDrawer").click(() => {
-        this.onGamePlay(3);
-      });
-      // 程程获胜
-      $("#btnCCVictory").click(() => {
-        this.onGamePlay(2);
-      });
       // 监听比赛结果往下撒
       const groupLeftLightEle = document.querySelector(".groupLeftLight");
       groupLeftLightEle.addEventListener("webkitAnimationEnd", () => {
@@ -75,10 +64,10 @@ const BetsMixin = {
         type,
       };
       this.$service.user.gamePlay(params).then((r) => {
-        const code = _.get(r, "status");
+        const code = _.get(r, "data.code");
         this.$_getGameInfo && this.$_getGameInfo();
-        if (code === 200) {
-          this.manualBettingAnimation();
+        if (code === 1000) {
+          this.manualBettingAnimation(support);
         } else {
           this.$toast(_.get(r, "data.message"));
         }
@@ -125,6 +114,7 @@ const BetsMixin = {
             width: 10, //结束时高度
             height: 10, //结束时高度
           },
+          vertex_Rtop: 150,
           speed: 2, //越大越快，默认1.2
           onEnd: function () {
             $(flyer).remove();
@@ -143,6 +133,15 @@ const BetsMixin = {
         this.init && this.init();
         // eslint-disable-next-line no-empty
       } catch {}
+    },
+    onTtClick() {
+      this.onGamePlay(1);
+    },
+    onDrawerClick() {
+      this.onGamePlay(3);
+    },
+    onCcClick() {
+      this.onGamePlay(2);
     },
   },
 };
