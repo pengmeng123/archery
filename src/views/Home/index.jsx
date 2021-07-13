@@ -30,8 +30,21 @@ export default {
     this.init();
   },
   computed: {
-    ...mapState(["animationStep", "gameInfo"]),
+    ...mapState(["animationStep", "gameInfo", "count"]),
     ...mapGetters(["isGameBettingTime"]),
+  },
+  watch: {
+    count: {
+      handler(newVal) {
+        if (newVal === 0) {
+          console.log(99);
+          setTimeout(() => {
+            this.getResult();
+          }, 2000);
+        }
+      },
+      // immediate: true,
+    },
   },
   methods: {
     ...mapActions({
@@ -43,6 +56,9 @@ export default {
       setAnimationStep: "SET_ANIMATION_STEP",
       setGameBettingStatus: "SET_GAME_BETTING_STATUS",
       setMainInfo: "SET_MAIN_INFO",
+      setGameResultBettingRings: "SET_GAMERESULT_BETTING_RINGS",
+      setMyBet: "SET_MY_BET",
+      setGameResult: "SET_GAME_RESULT",
     }),
     init() {
       // 判断时间是否在可投注范围内
@@ -76,6 +92,20 @@ export default {
         const o = _.get(r, "data.result") || {};
         this.setMainInfo(o);
       });
+    },
+    async getResult() {
+      try {
+        const r = await this.$service.user.getExcute();
+        const o = _.get(r, "data.result") || {};
+        const result = _.keyBy(_.get(o, "currentGame.result"), "result");
+        this.setGameResultBettingRings(result);
+        this.setMyBet(_.get(o, "mybet"));
+        this.setGameResult(_.get(o, "currentGame.gameResult"));
+        console.log("9---");
+        this.setStartMatchStatus(true);
+        this.setAnimationStep(1);
+        // eslint-disable-next-line no-empty
+      } catch {}
     },
   },
   render() {

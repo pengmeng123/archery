@@ -1,29 +1,56 @@
 import styles from "./index.module.less";
 import TTPlayerImg from "@/assets/images/tt-player.png";
 import CCPlayerImg from "@/assets/images/cc-player.png";
-import TtVictoryCardImg from "../../../static/tt-victory-card.png";
+import TtVictoryCardImg from "@/assets/images/tt/victory-card.png";
+import CcVictoryCardImg from "@/assets/images/cc/victory-card.png";
+import DrawerVictoryCardImg from "@/assets/images/drawer/victory-card.png";
 import apertureImg from "../../../static/aperture.png";
-import TtVictoryTextImg from "../../../static/tt-victory-text.png";
-import { mapState } from "vuex";
+import TtVictoryTextImg from "@/assets/images/tt/victory-text.png";
+import CcVictoryTextImg from "@/assets/images/cc/victory-text.png";
+import DrawerVictoryTextImg from "@/assets/images/drawer/victory-text.png";
+import { mapState, mapGetters } from "vuex";
 import { DIRECTION_STR } from "@/config/common";
 import _ from "lodash";
 export default {
   name: "Archery",
   data() {
-    return {
-      // ttDirection: 1,
-      // ringNumber: 3,
-    };
+    return {};
   },
   computed: {
-    ...mapState([
-      "times",
-      "animationStep",
-      "ttDirection",
-      "ttRingNumber",
-      "ccDirection",
-      "ccRingNumber",
-    ]),
+    ...mapState(["times", "animationStep"]),
+    ...mapGetters(["gameResult"]),
+    ttDirection() {
+      return _.get(this.gameResult, "ttDirection");
+    },
+    ttRingNumber() {
+      return _.get(this.gameResult, "ttRingNumber");
+    },
+    ccDirection() {
+      return _.get(this.gameResult, "ccDirection");
+    },
+    ccRingNumber() {
+      return _.get(this.gameResult, "ccRingNumber");
+    },
+    gameResultImg() {
+      const result = _.get(this.gameResult, "result");
+      switch (result) {
+        case 2:
+          return {
+            victoryImg: CcVictoryCardImg,
+            victoryTextImg: CcVictoryTextImg,
+          };
+        case 3:
+          return {
+            victoryImg: DrawerVictoryCardImg,
+            victoryTextImg: DrawerVictoryTextImg,
+          };
+        default:
+          return {
+            victoryImg: TtVictoryCardImg,
+            victoryTextImg: TtVictoryTextImg,
+          };
+      }
+    },
     flyClassName() {
       const direction = this.times === 0 ? this.ttDirection : this.ccDirection;
       const d = DIRECTION_STR[direction]; //选用哪个方向的图片
@@ -56,6 +83,7 @@ export default {
       ttRingNumberClassName,
       ccRingNumberClassName,
       awaitResultRingNumber,
+      gameResultImg,
     } = this;
     return (
       <div class={styles.container}>
@@ -184,9 +212,9 @@ export default {
         <div class={styles.matchResultContainer} vShow={animationStep === 5}>
           <div class={styles.matchResult}>
             <img src={apertureImg} alt="" class={styles.apertureImg} />
-            <img src={TtVictoryCardImg} alt="" class={styles.cardImg} />
+            <img src={gameResultImg.victoryImg} alt="" class={styles.cardImg} />
             <img
-              src={TtVictoryTextImg}
+              src={gameResultImg.victoryTextImg}
               class={{
                 [styles.text]: true,
                 [styles.text1]: true,
@@ -194,7 +222,7 @@ export default {
               }}
             />
             <img
-              src={TtVictoryTextImg}
+              src={gameResultImg.victoryTextImg}
               class={{
                 [styles.text]: true,
                 [styles.text2]: true,

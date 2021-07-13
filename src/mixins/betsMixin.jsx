@@ -2,7 +2,7 @@ import goldImg from "@/assets/images/gold.png";
 import { mapState, mapActions } from "vuex";
 import _ from "lodash";
 const $ = window.$;
-
+const BEETING_COUNT = 15;
 const BetsMixin = {
   data() {
     return {
@@ -18,7 +18,7 @@ const BetsMixin = {
       "gameInfo",
     ]),
     currentCountDown() {
-      return this.gameCountDown - 15;
+      return this.gameCountDown - BEETING_COUNT;
     },
     gameCountDown() {
       return _.get(this.gameInfo, "currentGame.countDown") || 0;
@@ -95,7 +95,7 @@ const BetsMixin = {
       });
     },
     onStartFly(startTarget, endTarget) {
-      if (this.count < 4 && this.animationStep === 0) {
+      if (this.count < 1 && this.animationStep === 0) {
         this.$toast("禁止游戏投注时间");
         return;
       }

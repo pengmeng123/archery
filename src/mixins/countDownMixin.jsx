@@ -15,10 +15,10 @@ const CountDownMixin = {
         }, 1000);
       } else {
         this.setCount(0);
-        this.setStartMatchStatus(true);
-        setTimeout(() => {
-          this.setAnimationStep(1);
-        }, 500);
+        // this.setStartMatchStatus(true);
+        // setTimeout(() => {
+        //   this.setAnimationStep(1);
+        // }, 500);
       }
     },
   },

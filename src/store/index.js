@@ -12,13 +12,12 @@ export default new Vuex.Store({
     times: 0, //是否播放两次
     bettingAmount: 50, //选择的投注面值
     isGameBettingTime: true, //15s前投注时间，超过就为false
-    ttDirection: 3, //方向
-    ttRingNumber: 6, //中了几环
-    ccDirection: 1, //方向
-    ccRingNumber: 8, //中了几环
     appLoading: true,
-    gameInfo: {},
-    mainInfo: {},
+    gameInfo: {}, //主流程接口信息
+    mainInfo: {}, //menu接口信息
+    gameResult: 0, //最终是睡胜利了，0平局，1-tt，2-cc
+    mybet: {}, //自己账号的中奖情况[{result:1,account:0},{result:2,account:-50},{result:3,account:100}]
+    gameResultBettingRings: {},
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -48,6 +47,15 @@ export default new Vuex.Store({
     SET_MAIN_INFO(state, payload) {
       state.mainInfo = payload;
     },
+    SET_GAME_RESULT(state, payload) {
+      state.gameResult = payload;
+    },
+    SET_MY_BET(state, payload) {
+      state.mybet = payload;
+    },
+    SET_GAMERESULT_BETTING_RINGS(state, payload) {
+      state.gameResultBettingRings = payload;
+    },
   },
   actions: {
     getGameInfo({ commit }) {
@@ -73,6 +81,23 @@ export default new Vuex.Store({
     },
     isGameBettingTime(state) {
       return state.isGameBettingTime;
+    },
+    gameResult(state) {
+      return !_.isNil(state.gameResult)
+        ? {
+            // result: state.gameResult,
+            result: 3,
+            ttRingNumber:
+              _.get(state.gameResultBettingRings, "[1].numberOfRings") || 1,
+            ttDirection:
+              _.get(state.gameResultBettingRings, "[1].direction") || 1,
+            ccRingNumber:
+              _.get(state.gameResultBettingRings, "[2].numberOfRings") || 1,
+            ccDirection:
+              _.get(state.gameResultBettingRings, "[2].direction") || 1,
+            mybet: state.mybet || {},
+          }
+        : {};
     },
   },
 });
