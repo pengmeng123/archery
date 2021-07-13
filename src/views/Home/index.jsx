@@ -38,9 +38,7 @@ export default {
       handler(newVal) {
         if (newVal === 0) {
           console.log(99);
-          setTimeout(() => {
-            this.getResult();
-          }, 2000);
+          this.getResult();
         }
       },
       // immediate: true,

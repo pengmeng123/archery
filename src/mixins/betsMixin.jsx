@@ -1,8 +1,8 @@
 import goldImg from "@/assets/images/gold.png";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import _ from "lodash";
 const $ = window.$;
-const BEETING_COUNT = 15;
+const BEETING_COUNT = 13;
 const BetsMixin = {
   data() {
     return {
@@ -17,11 +17,16 @@ const BetsMixin = {
       "bettingAmount",
       "gameInfo",
     ]),
+    ...mapGetters(["gameResult"]),
     currentCountDown() {
       return this.gameCountDown - BEETING_COUNT;
     },
     gameCountDown() {
       return _.get(this.gameInfo, "currentGame.countDown") || 0;
+    },
+    myBetResult() {
+      const mybet = _.get(this.gameResult, "mybet") || [];
+      return mybet.filter((v) => v.account > 0);
     },
   },
   watch: {
@@ -32,14 +37,22 @@ const BetsMixin = {
     },
   },
   created() {
-    this.$_getGameInfo = _.debounce(this.getGameInfo, 300);
+    this.$_getGameInfo = _.debounce(this.getGameInfo, 200);
   },
   mounted() {
     this.$nextTick(() => {
       // 监听比赛结果往下撒
       const groupLeftLightEle = document.querySelector(".groupLeftLight");
+      const groupCenterLightEle = document.querySelector(".groupCenterLight");
+      const groupRightLightEle = document.querySelector(".groupRightLight");
       groupLeftLightEle.addEventListener("webkitAnimationEnd", () => {
-        this.onGetResultAnimation();
+        this.onGetResultAnimation($("#btnTTVictory"));
+      });
+      groupCenterLightEle.addEventListener("webkitAnimationEnd", () => {
+        this.onGetResultAnimation($("#btnCenterDrawer"));
+      });
+      groupRightLightEle.addEventListener("webkitAnimationEnd", () => {
+        this.onGetResultAnimation($("#btnCCVictory"));
       });
     });
   },
@@ -122,9 +135,17 @@ const BetsMixin = {
         });
       });
     },
-    async onGetResultAnimation() {
-      [1, 2, 5].forEach((v) => {
-        this.onStartFly($("#btnTTVictory"), $(`.player` + v));
+    async onGetResultAnimation(ele) {
+      if (!ele) {
+        return Promise.resolve();
+      }
+      let arr = [1, 5];
+      if (this.myBetResult.length) {
+        arr.push(3);
+      }
+      console.log(arr);
+      arr.forEach((v) => {
+        this.onStartFly(ele, $(`.player` + v));
       });
       try {
         await this.getGameInfo();

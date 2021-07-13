@@ -213,23 +213,25 @@ export default {
           <div class={styles.matchResult}>
             <img src={apertureImg} alt="" class={styles.apertureImg} />
             <img src={gameResultImg.victoryImg} alt="" class={styles.cardImg} />
-            <img
-              src={gameResultImg.victoryTextImg}
+            <div
               class={{
                 [styles.text]: true,
                 [styles.text1]: true,
                 [styles.scaleAnimation1]: true,
               }}
-            />
-            <img
-              src={gameResultImg.victoryTextImg}
+            >
+              <img src={gameResultImg.victoryTextImg} />
+            </div>
+            <div
               class={{
                 [styles.text]: true,
                 [styles.text2]: true,
                 [styles.scaleAnimation2]: true,
                 matchResultText: true,
               }}
-            />
+            >
+              <img src={gameResultImg.victoryTextImg} />
+            </div>
           </div>
         </div>
       </div>

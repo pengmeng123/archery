@@ -85,8 +85,7 @@ export default new Vuex.Store({
     gameResult(state) {
       return !_.isNil(state.gameResult)
         ? {
-            // result: state.gameResult,
-            result: 3,
+            result: state.gameResult,
             ttRingNumber:
               _.get(state.gameResultBettingRings, "[1].numberOfRings") || 1,
             ttDirection:
@@ -95,7 +94,7 @@ export default new Vuex.Store({
               _.get(state.gameResultBettingRings, "[2].numberOfRings") || 1,
             ccDirection:
               _.get(state.gameResultBettingRings, "[2].direction") || 1,
-            mybet: state.mybet || {},
+            mybet: state.mybet || [],
           }
         : {};
     },

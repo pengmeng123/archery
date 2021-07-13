@@ -1,10 +1,11 @@
 import styles from "./index.module.less";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import _ from "lodash";
 export default {
   name: "AppStake",
   computed: {
     ...mapState(["startMatch", "animationStep", "gameInfo"]),
+    ...mapGetters(["gameResult"]),
     fishTotal() {
       const { gameInfo } = this;
       return (
@@ -67,29 +68,33 @@ export default {
   },
   render() {
     const { startMatch, animationStep, gameInfo } = this;
+    const result = _.get(this.gameResult, "result");
+    console.log("result---", result);
     return (
       <div class={styles.container}>
         <div class={styles.group}>
           {/* 光部分 */}
           <div
+            vShow={result === 1}
             class={{
               groupLeftLight: true,
               [styles.groupLeftLight]: animationStep === 6,
-              // [styles.groupLeftLight]: true,
             }}
           ></div>
-          {/* <div
+          <div
+            vShow={result === 3}
             class={{
               groupCenterLight: true,
               [styles.groupCenterLight]: animationStep === 6,
             }}
           ></div>
           <div
+            vShow={result === 2}
             class={{
               groupRightLight: true,
               [styles.groupRightLight]: animationStep === 6,
             }}
-          ></div> */}
+          ></div>
           <div
             id="btnTTVictory"
             class={{
