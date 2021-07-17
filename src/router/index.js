@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home";
 import Exchange from "../views/Exchange";
 import Disconnection from "@/components/Disconnection";
+import Maintenance from "@/components/Maintenance";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
     path: "/disconnection",
     name: "Disconnection",
     component: Disconnection,
+  },
+  {
+    path: "/maintenance",
+    name: "Maintenance",
+    component: Maintenance,
   },
 ];
 
