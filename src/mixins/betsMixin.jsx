@@ -2,7 +2,7 @@ import goldImg from "@/assets/images/gold.png";
 import { mapState, mapActions, mapGetters } from "vuex";
 import _ from "lodash";
 const $ = window.$;
-const BEETING_COUNT = 13;
+const BEETING_COUNT = 14;
 const BetsMixin = {
   data() {
     return {
@@ -31,7 +31,7 @@ const BetsMixin = {
   },
   watch: {
     count(newVal) {
-      if (newVal < 4) {
+      if (newVal < 2) {
         clearInterval(this.betsTimer);
       }
     },
@@ -119,6 +119,7 @@ const BetsMixin = {
       var flyer = $(
         `<img src=${goldImg} style="width:30px;height:30px;position:relative;z-index:5" />`
       ).clone(); //动态创建抛物体对象并克隆
+      const endTargetOffset = endTarget.offset();
       flyer.load(() => {
         flyer.fly({
           start: {
@@ -126,8 +127,12 @@ const BetsMixin = {
             top: startTarget.offset().top, //开始位置（必填）
           },
           end: {
-            left: endTarget.offset().left + endTarget.outerWidth() / 2, //结束位置（必填）
-            top: endTarget.offset().top + endTarget.outerHeight() / 2, //结束位置（必填）
+            left:
+              ((endTargetOffset && endTargetOffset.left) || 0) +
+              endTarget.outerWidth() / 2, //结束位置（必填）
+            top:
+              ((endTargetOffset && endTargetOffset.top) || 0) +
+              endTarget.outerHeight() / 2, //结束位置（必填）
             width: 10, //结束时高度
             height: 10, //结束时高度
           },
@@ -143,11 +148,10 @@ const BetsMixin = {
       if (!ele) {
         return Promise.resolve();
       }
-      let arr = [1, 5];
+      let arr = [1, 4];
       if (this.myBetResult.length) {
         arr.push(3);
       }
-      console.log(arr);
       arr.forEach((v) => {
         this.onStartFly(ele, $(`.player` + v));
       });

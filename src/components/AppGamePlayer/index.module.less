@@ -1,9 +1,9 @@
-.container {
-  padding: 0px 30px 0;
-}
+
 .group {
+  height: 182px;
   display: flex;
   justify-content: space-between;
+  position: relative;
   li {
     display: inline-block;
     text-align: center;
@@ -26,7 +26,34 @@
       color: #283440;
       margin-top: 20px;
     }
+
+    &.player1 {
+      position: absolute;
+      left: 170px;
+      bottom: 0;
+    }
+    &.player2 {
+      position: absolute;
+      right: 170px;
+      bottom: 0;
+    }
+    &.player3 {
+      position: absolute;
+      left: 34px;
+      bottom: 0;
+    }
+    &.player4 {
+      position: absolute;
+      right: 34px;
+      bottom: 0;
+    }
+    &.selfPlayer {
+      position: absolute;
+      left: 307px;
+      bottom: 0;
+    }
   }
+  
   .marjor {
     width: 140px;
     .tx {

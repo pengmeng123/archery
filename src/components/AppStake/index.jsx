@@ -69,11 +69,7 @@ export default {
   render() {
     const { startMatch, animationStep, gameInfo } = this;
     const result = _.get(this.gameResult, "result");
-    console.log(
-      "longPersonTotal--",
-      this.longPersonTotal,
-      this.longPlayListMount
-    );
+    
 
     return (
       <div class={styles.container}>

@@ -1,10 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import services from "@/services";
-// import Toast from "./plugins/toast";
 import _ from "lodash";
 Vue.use(Vuex);
-// this.$toast("00");
+
 export default new Vuex.Store({
   state: {
     startMatch: false, //是否开始动画
@@ -13,13 +12,13 @@ export default new Vuex.Store({
     times: 0, //是否播放两次
     bettingAmount: 50, //选择的投注面值
     isGameBettingTime: true, //15s前投注时间，超过就为false
-    appLoading: true,
+    appLoading: true, //带有进度条loading
     gameInfo: {}, //主流程接口信息
     mainInfo: {}, //menu接口信息
     gameResult: 0, //最终是睡胜利了，0平局，1-tt，2-cc
     mybet: {}, //自己账号的中奖情况[{result:1,account:0},{result:2,account:-50},{result:3,account:100}]
-    gameResultBettingRings: {},
-    networkSuccess: true,
+    gameResultBettingRings: {}, //tt和cc分别中靶的环数
+    networkSuccess: true, //断网的情况，默认是true
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -71,7 +70,6 @@ export default new Vuex.Store({
             commit("SET_GAME_INFO", _.get(r, "data.result"));
             return r;
           } else {
-            // Toast(_.get(r, "data.error"));
             commit("SET_GAME_INFO", {});
             return Promise.reject();
           }

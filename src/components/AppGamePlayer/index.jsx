@@ -19,19 +19,19 @@ export default {
         },
         {
           icon: TxImg,
-          name: "李四",
-          marjor: true,
-          className: "selfPlayer player3",
-        },
-        {
-          icon: TxImg,
           name: "张三3",
-          className: "player4",
+          className: "player3",
         },
         {
           icon: TxImg,
           name: "张三4",
-          className: "player5",
+          className: "player4",
+        },
+        {
+          icon: TxImg,
+          name: "李四",
+          marjor: true,
+          className: "selfPlayer",
         },
       ];
     },
@@ -46,6 +46,7 @@ export default {
               class={{
                 [styles.marjor]: v.marjor,
                 [v.className]: !!v.className,
+                [styles[v.className]]: !!v.className,
               }}
             >
               <div class={styles.tx}>

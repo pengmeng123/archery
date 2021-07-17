@@ -18,7 +18,6 @@ export default {
         this.$toast("手机号码有误，请重填");
         return;
       }
-      console.log(this.phone);
     },
   },
   render() {

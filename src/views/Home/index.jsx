@@ -38,7 +38,6 @@ export default {
     count: {
       handler(newVal) {
         if (newVal === 0) {
-          console.log(99);
           this.getResult();
         }
       },
@@ -60,7 +59,7 @@ export default {
     }),
     init() {
       // 判断时间是否在可投注范围内
-      if (this.currentCountDown > 0) {
+      if (this.currentCountDown > 1) {
         this.setGameBettingStatus(true);
         this.start();
       } else {
@@ -102,7 +101,6 @@ export default {
           ? _.keyBy(_.get(o, "currentGame.result"), "result")
           : null;
         if (!_.isNil(result)) {
-          console.log("result-8-", result);
           this.setGameResultBettingRings(result);
           this.setMyBet(_.get(o, "mybet"));
           this.setGameResult(_.get(o, "currentGame.gameResult"));

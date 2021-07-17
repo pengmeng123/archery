@@ -22,7 +22,6 @@ export default {
   },
   async mounted() {
     await imgsPreloader(animationList);
-    console.log("8---");
   },
   computed: {
     ...mapState(["mainInfo"]),
