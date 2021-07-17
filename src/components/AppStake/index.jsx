@@ -125,9 +125,11 @@ export default {
                 </div>
               ) : null}
             </div>
-            <div class={styles.text}>
-              X{_.get(gameInfo, "currentGame.fish.odds")}
-            </div>
+            {_.get(gameInfo, "currentGame.fish.odds") ? (
+              <div class={styles.text}>
+                X{_.get(gameInfo, "currentGame.fish.odds")}
+              </div>
+            ) : null}
           </div>
           <div
             id="btnCenterDrawer"
@@ -154,9 +156,11 @@ export default {
                 </div>
               ) : null}
             </div>
-            <div class={styles.text}>
-              X{_.get(gameInfo, "currentGame.draw.odds")}
-            </div>
+            {_.get(gameInfo, "currentGame.draw.odds") ? (
+              <div class={styles.text}>
+                X{_.get(gameInfo, "currentGame.draw.odds")}
+              </div>
+            ) : null}
           </div>
           <div
             id="btnCCVictory"
@@ -183,9 +187,11 @@ export default {
                 </div>
               ) : null}
             </div>
-            <div class={styles.text}>
-              X{_.get(gameInfo, "currentGame.draw.odds")}
-            </div>
+            {_.get(gameInfo, "currentGame.draw.odds") ? (
+              <div class={styles.text}>
+                X{_.get(gameInfo, "currentGame.draw.odds")}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
