@@ -4,6 +4,8 @@ import IconChengcheng from "./images/icon-chengcheng.png";
 import IconDrawer from "./images/icon-drawer.png";
 import { mapGetters, mapState } from "vuex";
 import CountDownMixin from "@/mixins/countDownMixin";
+import Modal from "@/components/Modal";
+import ResultRecord from "../ResultRecord";
 import _ from "lodash";
 const PhotoObj = {
   1: IconTongtong,
@@ -23,6 +25,7 @@ export default {
         IconChengcheng,
       ],
       timer: null,
+      isResultRecord: false,
     };
   },
   computed: {
@@ -34,13 +37,18 @@ export default {
         .slice(0.8);
     },
   },
+  methods: {
+    onCheckRecord() {
+      this.isResultRecord = !this.isResultRecord;
+    },
+  },
   render() {
     const { count } = this;
     const players1 = this.getHistoryGameList.slice(0, 4);
     const players2 = this.getHistoryGameList.slice(4, 8);
     return (
       <div class={styles.container}>
-        <div class={styles.header}>
+        <div class={styles.header} onClick={this.onCheckRecord}>
           <div class={styles.players}>
             <ul>
               {players1.map((v) => (
@@ -61,6 +69,9 @@ export default {
             </ul>
           </div>
         </div>
+        <Modal v-model={this.isResultRecord}>
+          <ResultRecord />
+        </Modal>
       </div>
     );
   },
