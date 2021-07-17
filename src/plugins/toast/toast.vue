@@ -19,6 +19,7 @@
   transform: translate(-50%, -50%);
   color: #fff;
   font-size: 18px;
+  z-index: 9999;
 }
 .fadein {
   animation: animate_in 0.25s;

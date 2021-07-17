@@ -4,6 +4,7 @@ import AwardImg from "@/assets/images/award.png";
 import Modal from "@/components/Modal";
 import ExchangeModal from "@/components/Exchange/modal";
 import ExchangeRecord from "@/components/Exchange/record";
+import PhoneBill from "@/components/PhoneBill";
 
 export default {
   name: "Exchange",
@@ -39,6 +40,7 @@ export default {
       isExchange: false,
       isGoldNotEnoughVisible: false,
       isExchangeRecord: false,
+      isExchangePhoneBill: true,
     };
   },
   methods: {
@@ -105,6 +107,13 @@ export default {
         {/* 兑换记录 */}
         <Modal className="exchange-record" v-model={this.isExchangeRecord}>
           <ExchangeRecord />
+        </Modal>
+        {/* 话费兑换 */}
+        <Modal
+          className="exchange-phone-bill"
+          v-model={this.isExchangePhoneBill}
+        >
+          <PhoneBill />
         </Modal>
       </div>
     );
