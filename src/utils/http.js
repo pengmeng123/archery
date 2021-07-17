@@ -1,4 +1,6 @@
 import axios from "axios";
+import store from "@/store";
+// import router from "../router";
 const BASE_URL = "/";
 const TIMEOUT = 1000 * 15;
 
@@ -32,10 +34,20 @@ http.interceptors.response.use(
     // } else {
     //   alert(res.msg); //提示后台返回的错误值
     // }
+    if (res.status === 200) {
+      store.commit("SET_NET_WORK_SUCCESS", true);
+    }
     return res;
   },
   (error) => {
-    return Promise.reject(error);
+    const { response } = error;
+    if (response) {
+      return Promise.reject(response);
+    } else {
+      // 处理断网的情况
+      store.commit("SET_NET_WORK_SUCCESS", false);
+      // router.push({ name: "Disconnection" });
+    }
   }
 );
 

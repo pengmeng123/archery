@@ -1,6 +1,8 @@
 export const preLoadingList = [require("../../static/loading.jpg")];
 export const animationList = [
   require("../assets/images/rule-bg.png"),
+  require("../assets/images/support-record-bg.png"),
+
   require("../assets/images/tt/target.png"),
   require("../assets/images/tt/fly-top.png"),
   require("../assets/images/tt/fly-left.png"),
