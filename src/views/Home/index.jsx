@@ -11,6 +11,7 @@ import AnimationStepMixin from "@/mixins/animationStepMixin";
 import Archery from "@/components/Archery";
 import AppNotStart from "@/components/AppNotStart";
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
+
 import _ from "lodash";
 export default {
   name: "Home",

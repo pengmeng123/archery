@@ -8,6 +8,8 @@ import FareTask from "../FareTask";
 import DailyReceiveGold from "../DailyReceiveGold";
 import { mapState } from "vuex";
 import _ from "lodash";
+import { imgsPreloader } from "@/utils/img-preloader";
+import { animationList } from "@/config/img-preloader-list";
 import styles from "./index.module.less";
 export default {
   name: "AppMenu",
@@ -17,6 +19,10 @@ export default {
       fareTaskVisible: false,
       receiveGoldVisible: false,
     };
+  },
+  async mounted() {
+    await imgsPreloader(animationList);
+    console.log("8---");
   },
   computed: {
     ...mapState(["mainInfo"]),

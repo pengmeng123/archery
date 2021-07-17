@@ -1,6 +1,5 @@
-import Loading from "@/components/Loading";
 import { mapActions, mapState } from "vuex";
-// import _ from "lodash";
+import AppLoading from "@/components/AppLoading";
 export default {
   name: "App",
   data() {
@@ -17,14 +16,11 @@ export default {
       getGameInfo: "getGameInfo",
     }),
     renderLoading() {
-      return (
-        <div>
-          <Loading />
-        </div>
-      );
+      return <AppLoading />;
     },
   },
   render() {
+    // eslint-disable-next-line no-constant-condition
     if (this.appLoading) {
       return this.renderLoading();
     }
