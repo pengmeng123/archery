@@ -23,4 +23,5 @@ export const animationList = [
   require("../assets/images/cc/bg-fly-right.png"),
   require("../assets/images/cc/victory-card.png"),
   require("../assets/images/drawer/victory-card.png"),
+  require("../assets/images/award-rings-bg.png"),
 ];
