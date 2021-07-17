@@ -64,11 +64,15 @@ const BetsMixin = {
       this.betsTimer && clearInterval(this.betsTimer);
       // 5s请求接口获取玩家投注，播放动画
       this.betsTimer = setInterval(() => {
+        this.getGameInfo().then(() => {
+          this.updateContDown && this.updateContDown();
+        });
         this.onStartFly($(".player1"), $("#btnTTVictory"));
         this.onStartFly($(".player2"), $("#btnCCVictory"));
         this.onStartFly($(".player4"), $("#btnCCVictory"));
-      }, 4000);
+      }, 3000);
     },
+    refreshGameInfo() {},
     onGamePlay(support = 1, type = 1) {
       const params = {
         support,

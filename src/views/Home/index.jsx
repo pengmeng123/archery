@@ -41,7 +41,6 @@ export default {
           this.getResult();
         }
       },
-      // immediate: true,
     },
   },
   methods: {
@@ -71,12 +70,15 @@ export default {
     },
     start() {
       if (this.isGameBettingTime) {
-        // 倒计时
-        this.runCount(this.currentCountDown);
+        this.updateContDown();
         // 动画监听
         this.startMonitorAnimation();
         this.startBetting();
       }
+    },
+    updateContDown() {
+      // 倒计时
+      this.runCount(this.currentCountDown);
     },
     async handleHasStartTime() {
       await this.getGameInfo();
@@ -95,13 +97,21 @@ export default {
       try {
         const r = await this.$service.user.getExcute();
         const o = _.get(r, "data.result") || {};
-        const result = _.keyBy(_.get(o, "currentGame.result"), "result");
-        this.setGameResultBettingRings(result);
-        this.setMyBet(_.get(o, "mybet"));
-        this.setGameResult(_.get(o, "currentGame.gameResult"));
-        console.log("9---");
-        this.setStartMatchStatus(true);
-        this.setAnimationStep(1);
+        const result = !_.isEmpty(o)
+          ? _.keyBy(_.get(o, "currentGame.result"), "result")
+          : null;
+        if (!_.isNil(result)) {
+          console.log("result-8-", result);
+          this.setGameResultBettingRings(result);
+          this.setMyBet(_.get(o, "mybet"));
+          this.setGameResult(_.get(o, "currentGame.gameResult"));
+          this.setStartMatchStatus(true);
+          this.setAnimationStep(1);
+        } else {
+          // this.init();
+          this.getGameInfo();
+        }
+
         // eslint-disable-next-line no-empty
       } catch {}
     },
@@ -135,6 +145,7 @@ export default {
               <app-header />
             </div>
             <app-stake
+              onTtClick={this.onTtClick}
               onDrawerClick={this.onDrawerClick}
               onCcClick={this.onCcClick}
             />

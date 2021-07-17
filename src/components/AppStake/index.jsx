@@ -15,8 +15,8 @@ export default {
     },
     fishPlayListMount() {
       const { gameInfo } = this;
-      const arr = (_.get(gameInfo, "currentGame.playerList") || []).filter(
-        (v) => v.bet === 1
+      const arr = (_.get(gameInfo, "mybet") || []).filter(
+        (v) => v.result === 1
       );
       return arr.length
         ? arr.reduce((sum, v) => {
@@ -33,8 +33,8 @@ export default {
     },
     longPlayListMount() {
       const { gameInfo } = this;
-      const arr = (_.get(gameInfo, "currentGame.playerList") || []).filter(
-        (v) => v.bet === 2
+      const arr = (_.get(gameInfo, "mybet") || []).filter(
+        (v) => v.result === 2
       );
       return arr.length
         ? arr.reduce((sum, v) => {
@@ -51,8 +51,8 @@ export default {
     },
     drawPlayListMount() {
       const { gameInfo } = this;
-      const arr = (_.get(gameInfo, "currentGame.playerList") || []).filter(
-        (v) => v.bet === 3
+      const arr = (_.get(gameInfo, "mybet") || []).filter(
+        (v) => v.result === 3
       );
       return arr.length
         ? arr.reduce((sum, v) => {
@@ -69,7 +69,12 @@ export default {
   render() {
     const { startMatch, animationStep, gameInfo } = this;
     const result = _.get(this.gameResult, "result");
-    console.log("result---", result);
+    console.log(
+      "longPersonTotal--",
+      this.longPersonTotal,
+      this.longPlayListMount
+    );
+
     return (
       <div class={styles.container}>
         <div class={styles.group}>
@@ -116,7 +121,7 @@ export default {
                     [styles.stakeGrey]: true,
                   }}
                 >
-                  {this.fishPlayListMount}
+                  {Math.abs(this.fishPlayListMount)}
                 </div>
               ) : null}
             </div>
@@ -145,7 +150,7 @@ export default {
                     [styles.stakeGrey]: true,
                   }}
                 >
-                  {this.drawPlayListMount}
+                  {Math.abs(this.drawPlayListMount)}
                 </div>
               ) : null}
             </div>
@@ -174,7 +179,7 @@ export default {
                     [styles.stakeGrey]: true,
                   }}
                 >
-                  {this.longPlayListMount}
+                  {Math.abs(this.longPlayListMount)}
                 </div>
               ) : null}
             </div>

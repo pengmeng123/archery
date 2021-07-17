@@ -1,9 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import services from "@/services";
+// import Toast from "./plugins/toast";
 import _ from "lodash";
 Vue.use(Vuex);
-
+// this.$toast("00");
 export default new Vuex.Store({
   state: {
     startMatch: false, //是否开始动画
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     gameResult: 0, //最终是睡胜利了，0平局，1-tt，2-cc
     mybet: {}, //自己账号的中奖情况[{result:1,account:0},{result:2,account:-50},{result:3,account:100}]
     gameResultBettingRings: {},
+    networkSuccess: true,
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -56,16 +58,23 @@ export default new Vuex.Store({
     SET_GAMERESULT_BETTING_RINGS(state, payload) {
       state.gameResultBettingRings = payload;
     },
+    SET_NET_WORK_SUCCESS(state, payload) {
+      state.networkSuccess = payload;
+    },
   },
   actions: {
     getGameInfo({ commit }) {
       return services.user
         .getExcute()
         .then((r) => {
-          if (_.get(r, "status") === 200) {
+          if (_.get(r, "data.code") === 1000) {
             commit("SET_GAME_INFO", _.get(r, "data.result"));
+            return r;
+          } else {
+            // Toast(_.get(r, "data.error"));
+            commit("SET_GAME_INFO", {});
+            return Promise.reject();
           }
-          return r;
         })
         .catch(() => {
           commit("SET_GAME_INFO", {});
