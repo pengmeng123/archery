@@ -34,3 +34,14 @@ export const gameSign = (data) => {
     .post(WXGAME_EXECUTE, { ...testParams, action: "sign", ...data })
     .then((r) => _.get(r, "data"));
 };
+export const gameExchange = (data) => {
+  return http
+    .post(WXGAME_EXECUTE, { ...testParams, action: "mainMallInfo", ...data })
+    .then((r) => _.get(r, "data"));
+};
+
+export const goldExchange = (data) => {
+  return http
+    .post(WXGAME_EXECUTE, { ...testParams, action: "goldExchange", ...data })
+    .then((r) => _.get(r, "data"));
+};

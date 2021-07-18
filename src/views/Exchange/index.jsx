@@ -6,11 +6,15 @@ import ExchangeModal from "@/components/Exchange/modal";
 import ExchangeRecord from "@/components/Exchange/record";
 import PhoneBill from "@/components/PhoneBill";
 import CreditCard from "../../components/CreditCard";
+import _ from "lodash";
+import { mapState } from "vuex";
 
 export default {
   name: "Exchange",
   data() {
     return {
+      data: [],
+      currentRecord: {},
       awardList: [
         {
           awardName: "火车票立减券",
@@ -44,8 +48,27 @@ export default {
       isExchangePhoneBill: false,
     };
   },
+  mounted() {
+    this.fetchGameExchange();
+  },
+  computed: {
+    ...mapState(["gameInfo"]),
+    account() {
+      return _.get(this.gameInfo, "account") || 0;
+    },
+  },
   methods: {
-    onExchange() {
+    fetchGameExchange() {
+      this.$service.user.gameExchange().then((r) => {
+        this.data = _.get(r, "data.result") || [];
+      });
+    },
+    onExchange(v) {
+      if (v.cost > this.account) {
+        this.isGoldNotEnoughVisible = true;
+        return;
+      }
+      this.currentRecord = v;
       this.isExchange = true;
     },
     goBack() {
@@ -53,6 +76,7 @@ export default {
     },
   },
   render() {
+    const awardList = _.get(this.data, "awardList") || [];
     return (
       <div class={styles.container}>
         <div class={styles.header}>
@@ -60,7 +84,7 @@ export default {
             <a href="javascript:" class={styles.back} onClick={this.goBack}></a>
             <div class={styles.goldNumber}>
               <img src={GoldImg} alt="" />
-              8888
+              {_.get(this.gameInfo, "account") || 0}
             </div>
           </div>
           <a
@@ -78,20 +102,22 @@ export default {
         </div>
         <div class={styles.list}>
           <ul>
-            {this.awardList.map((v) => (
+            {awardList.map((v) => (
               <li>
                 <div class={styles.pic}>
                   <CreditCard type={4} amount={10} />
                 </div>
-                <div class={styles.awardName}>{v.awardName}</div>
+                <div class={styles.awardName}>{v.title}</div>
                 <div class={styles.amount}>
                   <img src={GoldImg} alt="" />
-                  200
+                  {v.cost}
                 </div>
                 <a
                   href="javascript:"
                   class={styles.btn}
-                  onClick={this.onExchange}
+                  onClick={() => {
+                    this.onExchange(v);
+                  }}
                 >
                   兑换
                 </a>
@@ -101,15 +127,25 @@ export default {
         </div>
         {/* 确认兑换 */}
         <Modal className="exchange" v-model={this.isExchange}>
-          <ExchangeModal />
+          <ExchangeModal
+            record={this.currentRecord}
+            onClose={() => {
+              this.isExchange = false;
+            }}
+          />
         </Modal>
         {/* 金币不足 */}
         <Modal className="exchange" v-model={this.isGoldNotEnoughVisible}>
-          <ExchangeModal goldNotEnough={true} />
+          <ExchangeModal
+            goldNotEnough={true}
+            onClose={() => {
+              this.isGoldNotEnoughVisible = false;
+            }}
+          />
         </Modal>
         {/* 兑换记录 */}
         <Modal className="exchange-record" v-model={this.isExchangeRecord}>
-          <ExchangeRecord />
+          <ExchangeRecord data={_.get(this.data, "awardRecordList")} />
         </Modal>
         {/* 话费兑换 */}
         <Modal

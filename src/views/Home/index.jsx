@@ -28,7 +28,7 @@ export default {
   },
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
   mounted() {
-    this.init();
+    // this.init();
     // 主页接口信息
     this.getGameMainInfo();
   },

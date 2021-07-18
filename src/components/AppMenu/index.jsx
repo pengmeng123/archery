@@ -18,6 +18,7 @@ export default {
       isDropDownMore: false,
       fareTaskVisible: false,
       receiveGoldVisible: false,
+      awardGoldNumber: 0,
     };
   },
   async mounted() {
@@ -76,6 +77,7 @@ export default {
     gameSign() {
       this.$service.user.gameSign().then((r) => {
         if (_.get(r, "data.code") === 1000) {
+          this.awardGoldNumber = _.get(r, "data.result");
           this.receiveGoldVisible = true;
         } else {
           this.$toast(_.get(r, "data.message"));
@@ -109,7 +111,7 @@ export default {
         </div>
         {/* 每日领金币 */}
         <Modal className="dailyReceiveGold" v-model={this.receiveGoldVisible}>
-          <DailyReceiveGold />
+          <DailyReceiveGold awardGoldNumber={this.awardGoldNumber} />
         </Modal>
         {/* 福利任务 */}
         <Modal className="fareTask" v-model={this.fareTaskVisible}>
