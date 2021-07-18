@@ -28,7 +28,7 @@ export default {
   },
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
   mounted() {
-    // this.init();
+    this.init();
     // 主页接口信息
     this.getGameMainInfo();
   },
@@ -64,7 +64,11 @@ export default {
         this.setGameBettingStatus(true);
         this.start();
       } else {
-        this.setGameBettingStatus(false);
+        if (this.gameCountDown === 0) {
+          this.handleHasStartTime();
+        } else {
+          this.setGameBettingStatus(false);
+        }
       }
     },
     start() {
