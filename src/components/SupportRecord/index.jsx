@@ -3,6 +3,7 @@ import { mapState } from "vuex";
 import _ from "lodash";
 import { GAME_NAME } from "@/config/common";
 import styles from "./index.module.less";
+import SupportTextImg from "@/assets/images/support-text.png";
 
 export default {
   name: "SupportRecord",
@@ -28,6 +29,7 @@ export default {
     const { data } = this;
     return (
       <div class={styles.container}>
+        <img src={SupportTextImg} alt="" class={styles.title} />
         <ul class={styles.nav}>
           <li>时间</li>
           <li>支持</li>

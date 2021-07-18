@@ -10,7 +10,7 @@ export default {
   name: "FareTask",
   data() {
     return {
-      isVisible: true,
+      isVisible: false,
     };
   },
   computed: {
@@ -22,6 +22,10 @@ export default {
   methods: {
     onReceive() {
       this.isVisible = true;
+    },
+    onOpenTask() {},
+    onClose() {
+      this.$emit("close");
     },
   },
   render() {
@@ -45,9 +49,9 @@ export default {
                       [styles.btn]: true,
                       [styles.btnToFinish]: true,
                     }}
-                    onClick={this.onReceive}
+                    onClick={this.onOpenTask}
                   >
-                    领取
+                    开启
                   </a>
                 ) : null}
                 {v.status === 0 ? (
@@ -55,13 +59,26 @@ export default {
                     href="javascript:"
                     class={{
                       [styles.btn]: true,
-                      [styles.btnToReceive]: true,
+                      [styles.btnToFinish]: true,
                     }}
+                    onClick={this.onClose}
                   >
-                    已领取
+                    去完成
                   </a>
                 ) : null}
                 {v.status === 1 ? (
+                  <a
+                    href="javascript:"
+                    class={{
+                      [styles.btn]: true,
+                      [styles.btnToFinish]: true,
+                    }}
+                    onClick={this.onReceive}
+                  >
+                    领取
+                  </a>
+                ) : null}
+                {v.status === 2 ? (
                   <a
                     href="javascript:"
                     class={{

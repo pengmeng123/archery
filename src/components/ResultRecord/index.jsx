@@ -1,5 +1,6 @@
 import styles from "./index.module.less";
 import iconTagging from "@/assets/images/icon-tagging.png";
+import FareTaskText from "@/assets/images/fare-task-text.png";
 export default {
   name: "ResultRecord",
   data() {
@@ -48,6 +49,7 @@ export default {
     const { data } = this;
     return (
       <div class={styles.container}>
+        <img src={FareTaskText} alt="" class={styles.title} />
         <ul class={styles.nav}>
           <li>期数</li>
           <li>同同胜</li>
