@@ -35,12 +35,12 @@ const BetsMixin = {
   watch: {
     count(newVal) {
       if (newVal < 2) {
-        clearInterval(this.betsTimer);
+        this.clearTimer();
       }
     },
   },
   created() {
-    this.$_getGameInfo = _.debounce(this.getGameInfo, 200);
+    this.$_getGameInfo = _.debounce(this.getGameInfo, 300);
   },
   mounted() {
     this.$nextTick(() => {
@@ -63,19 +63,18 @@ const BetsMixin = {
     ...mapActions({
       getGameInfo: "getGameInfo",
     }),
-    autoBetting() {
+    clearTimer() {
       this.betsTimer && clearInterval(this.betsTimer);
+    },
+    autoBetting() {
+      this.clearTimer();
       // 5s请求接口获取玩家投注，播放动画
       this.betsTimer = setInterval(() => {
         this.getGameInfo().then(() => {
           this.updateContDown && this.updateContDown();
           this.autoPayListBetting();
         });
-
-        // this.onStartFly($(".player1"), $("#btnTTVictory"));
-        // this.onStartFly($(".player2"), $("#btnCCVictory"));
-        // this.onStartFly($(".player4"), $("#btnCCVictory"));
-      }, 2000);
+      }, 3000);
     },
     autoPayListBetting() {
       // 定时获取其它玩家列表的投注情况
@@ -154,6 +153,7 @@ const BetsMixin = {
       });
     },
     onGamePlay(support = 1, type = 1) {
+      this.startBetting();
       const params = {
         support,
         gold: this.bettingAmount,
@@ -250,7 +250,6 @@ const BetsMixin = {
         this.playerListResult.forEach((v) => {
           const bets = _.get(v, "bet") || [];
           const ele = `.player-${v.nick}`;
-          console.log("f---", $(ele));
           if (!($(ele) && $(ele).length)) {
             return;
           }
@@ -290,9 +289,11 @@ const BetsMixin = {
           // 重置条件
           this.setAnimationStep(0);
           this.init && this.init();
+          this.getGameMainInfo && this.getGameMainInfo();
         }, 500);
       } catch {
         this.init && this.init();
+        this.getGameMainInfo && this.getGameMainInfo();
       }
     },
     onTtClick() {

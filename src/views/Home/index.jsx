@@ -29,6 +29,8 @@ export default {
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
   mounted() {
     this.init();
+    // 主页接口信息
+    this.getGameMainInfo();
   },
   computed: {
     ...mapState(["animationStep", "gameInfo", "count"]),
@@ -64,8 +66,6 @@ export default {
       } else {
         this.setGameBettingStatus(false);
       }
-      // 主页接口信息
-      this.getGameMainInfo();
     },
     start() {
       if (this.isGameBettingTime) {
@@ -76,6 +76,7 @@ export default {
       }
     },
     updateContDown() {
+      console.log("countdow--", this.currentCountDown);
       // 倒计时
       this.runCount(this.currentCountDown);
     },

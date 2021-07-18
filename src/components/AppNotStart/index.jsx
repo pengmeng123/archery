@@ -17,6 +17,8 @@ export default {
       handler(newVal) {
         if (newVal) {
           this.runCount(newVal + 1);
+        } else {
+          this.$emit("close");
         }
       },
       immediate: true,
