@@ -15,9 +15,6 @@ export default new Vuex.Store({
     appLoading: true, //带有进度条loading
     gameInfo: {}, //主流程接口信息
     mainInfo: {}, //menu接口信息
-    gameResult: 0, //最终是睡胜利了，0平局，1-tt，2-cc
-    mybet: {}, //自己账号的中奖情况[{result:1,account:0},{result:2,account:-50},{result:3,account:100}]
-    gameResultBettingRings: {}, //tt和cc分别中靶的环数
     networkSuccess: true, //断网的情况，默认是true
   },
   mutations: {
@@ -47,15 +44,6 @@ export default new Vuex.Store({
     },
     SET_MAIN_INFO(state, payload) {
       state.mainInfo = payload;
-    },
-    SET_GAME_RESULT(state, payload) {
-      state.gameResult = payload;
-    },
-    SET_MY_BET(state, payload) {
-      state.mybet = payload;
-    },
-    SET_GAMERESULT_BETTING_RINGS(state, payload) {
-      state.gameResultBettingRings = payload;
     },
     SET_NET_WORK_SUCCESS(state, payload) {
       state.networkSuccess = payload;
@@ -90,18 +78,22 @@ export default new Vuex.Store({
       return state.isGameBettingTime;
     },
     gameResult(state) {
-      return !_.isNil(state.gameResult)
+      //tt和cc分别中靶的环数
+      const gameResultBettingRings = !_.isEmpty(state.gameInfo)
+        ? _.keyBy(_.get(state.gameInfo, "currentGame.result"), "result")
+        : null;
+      // 中了几环 0平局，1-tt，2-cc
+      const result = _.get(state.gameInfo, "currentGame.gameResult");
+      return !_.isNil(result)
         ? {
-            result: state.gameResult,
+            result: result,
             ttRingNumber:
-              _.get(state.gameResultBettingRings, "[1].numberOfRings") || 1,
-            ttDirection:
-              _.get(state.gameResultBettingRings, "[1].direction") || 1,
+              _.get(gameResultBettingRings, "[1].numberOfRings") || 1,
+            ttDirection: _.get(gameResultBettingRings, "[1].direction") || 1,
             ccRingNumber:
-              _.get(state.gameResultBettingRings, "[2].numberOfRings") || 1,
-            ccDirection:
-              _.get(state.gameResultBettingRings, "[2].direction") || 1,
-            mybet: state.mybet || [],
+              _.get(gameResultBettingRings, "[2].numberOfRings") || 1,
+            ccDirection: _.get(gameResultBettingRings, "[2].direction") || 1,
+            mybet: _.get(state.gameInfo, "mybet") || [], //自己账号的中奖情况[{result:1,account:0},{result:2,account:-50},{result:3,account:100}]
           }
         : {};
     },

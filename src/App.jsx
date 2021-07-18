@@ -21,9 +21,9 @@ export default {
   },
   render() {
     // eslint-disable-next-line no-constant-condition
-    if (this.appLoading) {
-      return this.renderLoading();
-    }
+    // if (this.appLoading) {
+    //   return this.renderLoading();
+    // }
     return (
       <div id="app" style="height:100%">
         <router-view />

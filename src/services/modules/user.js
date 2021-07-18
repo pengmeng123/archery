@@ -8,7 +8,7 @@ const testParams = {
   actCode: "27dcf2fdbe3668bb2b44930d20b9ed0d",
   refId: "1675627881",
   rid: "1675627881",
-  nickName: "%E4%BF%A1%E5%BF%B5%E3%80%8215145387569",
+  nick: "001",
   icon: "https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKcthg7CBtDdID2MQOjdnlgLaInSrW9gLykhia5WahlGDJB3TLFficTHRycX5EopfyhzMMxTuY3G1pg/132",
   action: "gameInfo",
   idenid:

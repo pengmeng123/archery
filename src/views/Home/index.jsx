@@ -37,6 +37,7 @@ export default {
   watch: {
     count: {
       handler(newVal) {
+        // 倒计时结束去拿这一局的中奖信息
         if (newVal === 0) {
           this.getResult();
         }
@@ -53,9 +54,6 @@ export default {
       setAnimationStep: "SET_ANIMATION_STEP",
       setGameBettingStatus: "SET_GAME_BETTING_STATUS",
       setMainInfo: "SET_MAIN_INFO",
-      setGameResultBettingRings: "SET_GAMERESULT_BETTING_RINGS",
-      setMyBet: "SET_MY_BET",
-      setGameResult: "SET_GAME_RESULT",
     }),
     init() {
       // 判断时间是否在可投注范围内
@@ -95,20 +93,21 @@ export default {
     },
     async getResult() {
       try {
-        const r = await this.$service.user.getExcute();
+        const r = await this.getGameInfo();
         const o = _.get(r, "data.result") || {};
         const result = !_.isEmpty(o)
           ? _.keyBy(_.get(o, "currentGame.result"), "result")
           : null;
         if (!_.isNil(result)) {
-          this.setGameResultBettingRings(result);
-          this.setMyBet(_.get(o, "mybet"));
-          this.setGameResult(_.get(o, "currentGame.gameResult"));
           this.setStartMatchStatus(true);
           this.setAnimationStep(1);
+          // 这里延迟2s再次请求，是因为可能第一次拿到的结果不准
+          setTimeout(() => {
+            this.getGameInfo();
+          }, 2000);
         } else {
-          // this.init();
-          this.getGameInfo();
+          // 如果结果没有拿到就重置页面，防止页面不动了
+          this.init();
         }
 
         // eslint-disable-next-line no-empty

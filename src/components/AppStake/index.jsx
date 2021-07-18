@@ -69,7 +69,6 @@ export default {
   render() {
     const { startMatch, animationStep, gameInfo } = this;
     const result = _.get(this.gameResult, "result");
-    
 
     return (
       <div class={styles.container}>

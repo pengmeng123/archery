@@ -1,12 +1,11 @@
 .container {
   position: relative;
   .title {
-    width: 191px;
     height: 50px;
     position: absolute;
     left: 50%;
     top: 21px;
-    margin-left: -95px;
+    transform: translateX(-50%);
   }
 }
 .inputContainer {
@@ -48,5 +47,28 @@
   text-align: center;
   &.btnLight {
     background: rgba(255, 136, 19, 1);
+  }
+}
+.recharged {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 170px;
+  color: #AC4D07;
+  .iconCharged {
+    width: 123px;
+    height: 123px;
+    
+  }
+  .label {
+    font-size: 36px;
+    margin: 38px auto 24px;
+    position: relative;
+    left: 7px;
+  }
+  .text {
+    font-size: 48px;
   }
 }

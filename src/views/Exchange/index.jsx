@@ -5,12 +5,13 @@ import Modal from "@/components/Modal";
 import ExchangeModal from "@/components/Exchange/modal";
 import ExchangeRecord from "@/components/Exchange/record";
 import PhoneBill from "@/components/PhoneBill";
+import CreditCard from "../../components/CreditCard";
 
 export default {
   name: "Exchange",
   data() {
     return {
-      data: [
+      awardList: [
         {
           awardName: "火车票立减券",
           pic: AwardImg,
@@ -77,9 +78,11 @@ export default {
         </div>
         <div class={styles.list}>
           <ul>
-            {this.data.map((v) => (
+            {this.awardList.map((v) => (
               <li>
-                <img src={AwardImg} alt="" class={styles.pic} />
+                <div class={styles.pic}>
+                  <CreditCard type={4} amount={10} />
+                </div>
                 <div class={styles.awardName}>{v.awardName}</div>
                 <div class={styles.amount}>
                   <img src={GoldImg} alt="" />
@@ -113,7 +116,7 @@ export default {
           className="exchange-phone-bill"
           v-model={this.isExchangePhoneBill}
         >
-          <PhoneBill />
+          <PhoneBill visible={this.isExchangePhoneBill} />
         </Modal>
       </div>
     );

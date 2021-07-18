@@ -7,6 +7,7 @@ const BetsMixin = {
   data() {
     return {
       betsTimer: null,
+      oldPlayList: [],
     };
   },
   computed: {
@@ -66,13 +67,63 @@ const BetsMixin = {
       this.betsTimer = setInterval(() => {
         this.getGameInfo().then(() => {
           this.updateContDown && this.updateContDown();
+          this.autoPayListBetting();
         });
-        this.onStartFly($(".player1"), $("#btnTTVictory"));
-        this.onStartFly($(".player2"), $("#btnCCVictory"));
-        this.onStartFly($(".player4"), $("#btnCCVictory"));
+
+        // this.onStartFly($(".player1"), $("#btnTTVictory"));
+        // this.onStartFly($(".player2"), $("#btnCCVictory"));
+        // this.onStartFly($(".player4"), $("#btnCCVictory"));
       }, 3000);
     },
-    refreshGameInfo() {},
+    autoPayListBetting() {
+      // 定时获取其它玩家列表的投注情况
+      const newPlayList = _.get(this.gameInfo, "currentGame.playerList") || [];
+      const oldPlayList = [...this.oldPlayList];
+      const oldIds = oldPlayList.map((v) => v.nick);
+      newPlayList.forEach((r) => {
+        if (oldIds.includes(r.nick)) {
+          const o = _.find(oldPlayList, { nick: r.nick }) || {};
+          this.runOldPlayListAnimation(o, r);
+        }
+      });
+      this.oldPlayList = _.uniqBy(
+        [...newPlayList, ...this.oldPlayList],
+        "nick"
+      );
+    },
+    runOldPlayListAnimation(oldObj, newObj) {
+      const result = _.get(newObj, "bet") || [];
+      const ele = `.player-${newObj.nick}`;
+      const oldBet = _.get(oldObj, "bet") || [];
+      console.log(oldBet, _.get(newObj, "bet"));
+      result.forEach((v) => {
+        switch (v.result) {
+          case 1:
+            // eslint-disable-next-line no-case-declarations
+            let o1 = _.find(oldBet, { result: 1 });
+            if (_.get(o1, "account") > _.get(v, "account")) {
+              this.onStartFly($(ele), $("#btnTTVictory"));
+            }
+            break;
+          case 2:
+            // eslint-disable-next-line no-case-declarations
+            let o2 = _.find(oldBet, { result: 2 });
+            if (_.get(o2, "account") > _.get(v, "account")) {
+              this.onStartFly($(ele), $("#btnCCVictory"));
+            }
+            break;
+          case 3:
+            // eslint-disable-next-line no-case-declarations
+            let o3 = _.find(oldBet, { result: 3 });
+            if (_.get(o3, "account") > _.get(v, "account")) {
+              this.onStartFly($(ele), $("#btnCenterDrawer"));
+            }
+            break;
+          default:
+            break;
+        }
+      });
+    },
     onGamePlay(support = 1, type = 1) {
       const params = {
         support,
