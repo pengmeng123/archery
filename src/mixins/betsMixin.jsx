@@ -26,8 +26,10 @@ const BetsMixin = {
       return _.get(this.gameInfo, "currentGame.countDown") || 0;
     },
     myBetResult() {
-      const mybet = _.get(this.gameResult, "mybet") || [];
-      return mybet.filter((v) => v.account > 0);
+      return _.get(this.gameResult, "mybet") || [];
+    },
+    playerListResult() {
+      return _.get(this.gameResult, "playerList") || [];
     },
   },
   watch: {
@@ -81,9 +83,12 @@ const BetsMixin = {
       const oldPlayList = [...this.oldPlayList];
       const oldIds = oldPlayList.map((v) => v.nick);
       newPlayList.forEach((r) => {
+        // 当前玩家非首次投注
         if (oldIds.includes(r.nick)) {
           const o = _.find(oldPlayList, { nick: r.nick }) || {};
           this.runOldPlayListAnimation(o, r);
+        } else {
+          this.runNewPlayListAnimation(r);
         }
       });
       this.oldPlayList = _.uniqBy(
@@ -91,11 +96,35 @@ const BetsMixin = {
         "nick"
       );
     },
+    runNewPlayListAnimation(r) {
+      const result = _.get(r, "bet") || [];
+      const ele = `.player-${r.nick}`;
+      result.forEach((v) => {
+        switch (v.result) {
+          case 1:
+            if (_.get(v, "account") < 0) {
+              this.onStartFly($(ele), $("#btnTTVictory"));
+            }
+            break;
+          case 2:
+            if (_.get(v, "account") < 0) {
+              this.onStartFly($(ele), $("#btnCCVictory"));
+            }
+            break;
+          case 3:
+            if (_.get(v, "account") < 0) {
+              this.onStartFly($(ele), $("#btnCenterDrawer"));
+            }
+            break;
+          default:
+            break;
+        }
+      });
+    },
     runOldPlayListAnimation(oldObj, newObj) {
       const result = _.get(newObj, "bet") || [];
       const ele = `.player-${newObj.nick}`;
       const oldBet = _.get(oldObj, "bet") || [];
-      console.log(oldBet, _.get(newObj, "bet"));
       result.forEach((v) => {
         switch (v.result) {
           case 1:
@@ -195,24 +224,70 @@ const BetsMixin = {
         });
       });
     },
+    runResultAnimation(element) {
+      return new Promise((resolve) => {
+        this.myBetResult.forEach((r) => {
+          switch (r.result) {
+            case 1:
+              if (_.get(r, "account") > 0) {
+                this.onStartFly($(".selfPlayer"), $("#btnTTVictory"));
+              }
+              break;
+            case 2:
+              if (_.get(r, "account") > 0) {
+                this.onStartFly($(".selfPlayer"), $("#btnCCVictory"));
+              }
+              break;
+            case 3:
+              if (_.get(r, "account") > 0) {
+                this.onStartFly($(".selfPlayer"), $("#btnCenterDrawer"));
+              }
+              break;
+            default:
+              break;
+          }
+        });
+        this.playerListResult.forEach((v) => {
+          const bets = _.get(v, "bet") || [];
+          const ele = `.player-${v.nick}`;
+          bets.forEach((r) => {
+            switch (r.result) {
+              case 1:
+                if (_.get(r, "account") > 0) {
+                  this.onStartFly($(ele), element);
+                }
+                break;
+              case 2:
+                if (_.get(r, "account") > 0) {
+                  this.onStartFly($(ele), element);
+                }
+                break;
+              case 3:
+                if (_.get(r, "account") > 0) {
+                  this.onStartFly($(ele), element);
+                }
+                break;
+              default:
+                break;
+            }
+          });
+        });
+        resolve();
+      });
+    },
     async onGetResultAnimation(ele) {
       if (!ele) {
         return Promise.resolve();
       }
-      let arr = [1, 4];
-      if (this.myBetResult.length) {
-        arr.push(3);
-      }
-      arr.forEach((v) => {
-        this.onStartFly(ele, $(`.player` + v));
-      });
       try {
+        await this.runResultAnimation(ele);
         await this.getGameInfo();
         // 重置条件
         this.setAnimationStep(0);
         this.init && this.init();
-        // eslint-disable-next-line no-empty
-      } catch {}
+      } catch {
+        this.init && this.init();
+      }
     },
     onTtClick() {
       this.onGamePlay(1);

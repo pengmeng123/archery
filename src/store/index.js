@@ -94,6 +94,7 @@ export default new Vuex.Store({
               _.get(gameResultBettingRings, "[2].numberOfRings") || 1,
             ccDirection: _.get(gameResultBettingRings, "[2].direction") || 1,
             mybet: _.get(state.gameInfo, "mybet") || [], //自己账号的中奖情况[{result:1,account:0},{result:2,account:-50},{result:3,account:100}]
+            playerList: _.get(state.gameInfo, "playerList") || [],
           }
         : {};
     },

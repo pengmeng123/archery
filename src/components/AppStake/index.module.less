@@ -75,6 +75,12 @@
       top: 0;
       z-index: 2;
     }
+    &:active {
+      &::before {
+        background: url(./images/stake-left-active.png) center top;
+        background-size: 100% 100%;
+      }
+    }
     .stakeAmountContainer {
       right: 20px;
       z-index: 3;
@@ -106,6 +112,10 @@
     height: 151px;
     background: url(./images/stake-center.png) center top;
     background-size: 100% 100%;
+    &:active {
+      background: url(./images/stake-center-active.png) center top;
+      background-size: 100% 100%;
+    }
     .text {
       width: 100%;
       text-align: center;
@@ -131,6 +141,10 @@
     background: url(./images/stake-right.png) center top;
     background-size: 100% 100%;
     right: 24px;
+    &:active {
+      background: url(./images/stake-right-active.png) center top;
+      background-size: 100% 100%;
+    }
     .stakeAmount {
       right: 8px;
     }
