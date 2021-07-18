@@ -42,27 +42,68 @@ const BetsMixin = {
   created() {
     this.$_getGameInfo = _.debounce(this.getGameInfo, 300);
   },
-  mounted() {
-    this.$nextTick(() => {
-      // 监听比赛结果往下撒
-      const groupLeftLightEle = document.querySelector(".groupLeftLight");
-      const groupCenterLightEle = document.querySelector(".groupCenterLight");
-      const groupRightLightEle = document.querySelector(".groupRightLight");
-      groupLeftLightEle.addEventListener("webkitAnimationEnd", () => {
-        this.onGetResultAnimation($("#btnTTVictory"));
-      });
-      groupCenterLightEle.addEventListener("webkitAnimationEnd", () => {
-        this.onGetResultAnimation($("#btnCenterDrawer"));
-      });
-      groupRightLightEle.addEventListener("webkitAnimationEnd", () => {
-        this.onGetResultAnimation($("#btnCCVictory"));
-      });
-    });
-  },
   methods: {
     ...mapActions({
       getGameInfo: "getGameInfo",
     }),
+    monitorResultAnimation() {
+      this.$nextTick(() => {
+        // 监听比赛结果往下撒
+        const groupLeftLightEle = document.querySelector(".groupLeftLight");
+        const groupCenterLightEle = document.querySelector(".groupCenterLight");
+        const groupRightLightEle = document.querySelector(".groupRightLight");
+        groupLeftLightEle.addEventListener(
+          "webkitAnimationEnd",
+          () => {
+            this.onGetResultAnimation($("#btnTTVictory"));
+          },
+          false
+        );
+        groupCenterLightEle.addEventListener(
+          "webkitAnimationEnd",
+          () => {
+            this.onGetResultAnimation($("#btnCenterDrawer"));
+          },
+          false
+        );
+        groupRightLightEle.addEventListener(
+          "webkitAnimationEnd",
+          () => {
+            this.onGetResultAnimation($("#btnCCVictory"));
+          },
+          false
+        );
+      });
+    },
+    removeAddEventListenerFun() {
+      const groupLeftLightEle = document.querySelector(".groupLeftLight");
+      const groupCenterLightEle = document.querySelector(".groupCenterLight");
+      const groupRightLightEle = document.querySelector(".groupRightLight");
+      groupLeftLightEle &&
+        groupLeftLightEle.removeEventListener(
+          "webkitAnimationEnd",
+          function (event) {
+            event.preventDefault();
+          },
+          false
+        );
+      groupCenterLightEle &&
+        groupCenterLightEle.removeEventListener(
+          "webkitAnimationEnd",
+          function (event) {
+            event.preventDefault();
+          },
+          false
+        );
+      groupRightLightEle &&
+        groupRightLightEle.removeEventListener(
+          "webkitAnimationEnd",
+          function (event) {
+            event.preventDefault();
+          },
+          false
+        );
+    },
     clearTimer() {
       this.betsTimer && clearInterval(this.betsTimer);
     },
@@ -192,7 +233,8 @@ const BetsMixin = {
       });
     },
     onStartFly(startTarget, endTarget) {
-      if (this.count < 1 && this.animationStep === 0) {
+      if (this.count < 2 && this.animationStep === 0) {
+        this.clearTimer();
         this.$toast("禁止游戏投注时间");
         return;
       }

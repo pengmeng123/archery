@@ -11,7 +11,7 @@ import AnimationStepMixin from "@/mixins/animationStepMixin";
 import Archery from "@/components/Archery";
 import AppNotStart from "@/components/AppNotStart";
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
-
+import AppLoading from "@/components/AppLoading";
 import _ from "lodash";
 export default {
   name: "Home",
@@ -27,13 +27,16 @@ export default {
     AppNotStart,
   },
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
-  mounted() {
+  async mounted() {
+    this.onReset();
+    await this.getGameInfo();
     this.init();
     // 主页接口信息
     this.getGameMainInfo();
+    this.monitorResultAnimation();
   },
   computed: {
-    ...mapState(["animationStep", "gameInfo", "count"]),
+    ...mapState(["animationStep", "gameInfo", "count", "appLoading"]),
     ...mapGetters(["isGameBettingTime"]),
   },
   watch: {
@@ -57,6 +60,7 @@ export default {
       setGameBettingStatus: "SET_GAME_BETTING_STATUS",
       setMainInfo: "SET_MAIN_INFO",
       setResultGameInfo: "SET_RESULT_GAME_INFO",
+      setTimes: "SET_TIMES",
     }),
     init() {
       // 判断时间是否在可投注范围内
@@ -125,8 +129,27 @@ export default {
         // eslint-disable-next-line no-empty
       } catch {}
     },
+    renderLoading() {
+      return <AppLoading />;
+    },
+    onReset() {
+      this.setCount(0);
+      this.setAnimationStep(0);
+      this.setStartMatchStatus(false);
+      this.setTimes(0);
+      this.setGameBettingStatus(true);
+      this.clearTimer && this.clearTimer();
+      this.timerCount && clearTimeout(this.timerCount);
+      this.removeAddEventListenerFun();
+    },
+  },
+  destroyed() {
+    this.onReset();
   },
   render() {
+    if (this.appLoading) {
+      return this.renderLoading();
+    }
     return (
       <div
         class={{

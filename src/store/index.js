@@ -62,7 +62,7 @@ export default new Vuex.Store({
             const count = _.get(r, "data.result.currentGame.countDown");
             if (count > 15 || _.isEmpty(rootState.gameInfo)) {
               commit("SET_GAME_INFO", _.get(r, "data.result"));
-            } else if (count === 15) {
+            } else {
               commit("SET_GAME_INFO", {
                 ...rootState.gameInfo,
                 currentGame: {
