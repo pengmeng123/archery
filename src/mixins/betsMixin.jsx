@@ -75,7 +75,7 @@ const BetsMixin = {
         // this.onStartFly($(".player1"), $("#btnTTVictory"));
         // this.onStartFly($(".player2"), $("#btnCCVictory"));
         // this.onStartFly($(".player4"), $("#btnCCVictory"));
-      }, 3000);
+      }, 2000);
     },
     autoPayListBetting() {
       // 定时获取其它玩家列表的投注情况
@@ -164,7 +164,7 @@ const BetsMixin = {
         const code = _.get(r, "data.code");
         this.$_getGameInfo && this.$_getGameInfo();
         if (code === 1000) {
-          this.manualBettingAnimation(support);
+          type == 1 && this.manualBettingAnimation(support);
         } else {
           this.$toast(_.get(r, "data.message"));
         }
@@ -230,17 +230,17 @@ const BetsMixin = {
           switch (r.result) {
             case 1:
               if (_.get(r, "account") > 0) {
-                this.onStartFly($(".selfPlayer"), $("#btnTTVictory"));
+                this.onStartFly($("#btnTTVictory"), $(".selfPlayer"));
               }
               break;
             case 2:
               if (_.get(r, "account") > 0) {
-                this.onStartFly($(".selfPlayer"), $("#btnCCVictory"));
+                this.onStartFly($("#btnCCVictory"), $(".selfPlayer"));
               }
               break;
             case 3:
               if (_.get(r, "account") > 0) {
-                this.onStartFly($(".selfPlayer"), $("#btnCenterDrawer"));
+                this.onStartFly($("#btnCenterDrawer"), $(".selfPlayer"));
               }
               break;
             default:
@@ -250,21 +250,25 @@ const BetsMixin = {
         this.playerListResult.forEach((v) => {
           const bets = _.get(v, "bet") || [];
           const ele = `.player-${v.nick}`;
+          console.log("f---", $(ele));
+          if (!($(ele) && $(ele).length)) {
+            return;
+          }
           bets.forEach((r) => {
             switch (r.result) {
               case 1:
                 if (_.get(r, "account") > 0) {
-                  this.onStartFly($(ele), element);
+                  this.onStartFly(element, $(ele));
                 }
                 break;
               case 2:
                 if (_.get(r, "account") > 0) {
-                  this.onStartFly($(ele), element);
+                  this.onStartFly(element, $(ele));
                 }
                 break;
               case 3:
                 if (_.get(r, "account") > 0) {
-                  this.onStartFly($(ele), element);
+                  this.onStartFly(element, $(ele));
                 }
                 break;
               default:
@@ -281,10 +285,12 @@ const BetsMixin = {
       }
       try {
         await this.runResultAnimation(ele);
-        await this.getGameInfo();
-        // 重置条件
-        this.setAnimationStep(0);
-        this.init && this.init();
+        setTimeout(async () => {
+          await this.getGameInfo();
+          // 重置条件
+          this.setAnimationStep(0);
+          this.init && this.init();
+        }, 500);
       } catch {
         this.init && this.init();
       }

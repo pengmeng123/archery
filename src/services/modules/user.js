@@ -1,6 +1,7 @@
 import { WXGAME_EXECUTE } from "@/config/api";
 import http from "@/utils/http";
 import _ from "lodash";
+import { currentUser } from "@/config/user";
 const testParams = {
   ts: 1624159609635,
   platId: 501,
@@ -8,15 +9,9 @@ const testParams = {
   actCode: "27dcf2fdbe3668bb2b44930d20b9ed0d",
   refId: "1675627881",
   rid: "1675627881",
-  nick: "001",
-  icon: "https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKcthg7CBtDdID2MQOjdnlgLaInSrW9gLykhia5WahlGDJB3TLFficTHRycX5EopfyhzMMxTuY3G1pg/132",
   action: "gameInfo",
-  idenid:
-    window.location.search.indexOf("1") > -1
-      ? "oOCyauG-UILHMYW-yW313lCaI0LQ"
-      : "oOCyauHKr5KUAu6hXWRXg_xKpzZA",
-  // idenid: "oOCyauHKr5KUAu6hXWRXg_xKpzZA",
   pid: 501,
+  ...currentUser,
 };
 
 export const getExcute = (data) =>

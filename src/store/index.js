@@ -16,6 +16,7 @@ export default new Vuex.Store({
     gameInfo: {}, //主流程接口信息
     mainInfo: {}, //menu接口信息
     networkSuccess: true, //断网的情况，默认是true
+    resultGameInfo: {}, //中奖结果信息，不能与gameInfo混在一起
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -48,17 +49,31 @@ export default new Vuex.Store({
     SET_NET_WORK_SUCCESS(state, payload) {
       state.networkSuccess = payload;
     },
+    SET_RESULT_GAME_INFO(state, payload) {
+      state.resultGameInfo = payload;
+    },
   },
   actions: {
-    getGameInfo({ commit }) {
+    getGameInfo({ commit, rootState }) {
       return services.user
         .getExcute()
         .then((r) => {
           if (_.get(r, "data.code") === 1000) {
-            commit("SET_GAME_INFO", _.get(r, "data.result"));
+            const count = _.get(r, "data.result.currentGame.countDown");
+            if (count > 15 || _.isEmpty(rootState.gameInfo)) {
+              commit("SET_GAME_INFO", _.get(r, "data.result"));
+            } else if (count === 15) {
+              commit("SET_GAME_INFO", {
+                ...rootState.gameInfo,
+                currentGame: {
+                  ...rootState.gameInfo.currentGame,
+                  countDown: count,
+                },
+              });
+            }
             return r;
           } else {
-            commit("SET_GAME_INFO", {});
+            // commit("SET_GAME_INFO", {});
             return Promise.reject();
           }
         })
@@ -79,11 +94,11 @@ export default new Vuex.Store({
     },
     gameResult(state) {
       //tt和cc分别中靶的环数
-      const gameResultBettingRings = !_.isEmpty(state.gameInfo)
-        ? _.keyBy(_.get(state.gameInfo, "currentGame.result"), "result")
+      const gameResultBettingRings = !_.isEmpty(state.resultGameInfo)
+        ? _.keyBy(_.get(state.resultGameInfo, "currentGame.result"), "result")
         : null;
       // 中了几环 0平局，1-tt，2-cc
-      const result = _.get(state.gameInfo, "currentGame.gameResult");
+      const result = _.get(state.resultGameInfo, "currentGame.gameResult");
       return !_.isNil(result)
         ? {
             result: result,
@@ -93,8 +108,9 @@ export default new Vuex.Store({
             ccRingNumber:
               _.get(gameResultBettingRings, "[2].numberOfRings") || 1,
             ccDirection: _.get(gameResultBettingRings, "[2].direction") || 1,
-            mybet: _.get(state.gameInfo, "mybet") || [], //自己账号的中奖情况[{result:1,account:0},{result:2,account:-50},{result:3,account:100}]
-            playerList: _.get(state.gameInfo, "playerList") || [],
+            mybet: _.get(state.resultGameInfo, "mybet") || [], //自己账号的中奖情况[{result:1,account:0},{result:2,account:-50},{result:3,account:100}]
+            playerList:
+              _.get(state.resultGameInfo, "currentGame.playerList") || [],
           }
         : {};
     },

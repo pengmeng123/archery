@@ -3,6 +3,7 @@ import TxImg from "./images/tx.png";
 import TxBgImg from "./images/tx-bg.png";
 import _ from "lodash";
 import { mapState } from "vuex";
+import { currentUser } from "@/config/user";
 export default {
   name: "AppGamePlayer",
   computed: {
@@ -21,7 +22,7 @@ export default {
         .concat([
           {
             icon: TxImg,
-            name: "我自己的账号",
+            name: _.get(currentUser, "nick"),
             marjor: true,
             className: "selfPlayer",
           },

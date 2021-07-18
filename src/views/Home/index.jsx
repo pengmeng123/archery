@@ -54,6 +54,7 @@ export default {
       setAnimationStep: "SET_ANIMATION_STEP",
       setGameBettingStatus: "SET_GAME_BETTING_STATUS",
       setMainInfo: "SET_MAIN_INFO",
+      setResultGameInfo: "SET_RESULT_GAME_INFO",
     }),
     init() {
       // 判断时间是否在可投注范围内
@@ -91,9 +92,15 @@ export default {
         this.setMainInfo(o);
       });
     },
+    getResultExcute() {
+      return this.$service.user.getExcute().then((r) => {
+        this.setResultGameInfo(_.get(r, "data.result"));
+        return r;
+      });
+    },
     async getResult() {
       try {
-        const r = await this.getGameInfo();
+        const r = await this.getResultExcute();
         const o = _.get(r, "data.result") || {};
         const result = !_.isEmpty(o)
           ? _.keyBy(_.get(o, "currentGame.result"), "result")
@@ -103,7 +110,7 @@ export default {
           this.setAnimationStep(1);
           // 这里延迟2s再次请求，是因为可能第一次拿到的结果不准
           setTimeout(() => {
-            this.getGameInfo();
+            this.getResultExcute();
           }, 2000);
         } else {
           // 如果结果没有拿到就重置页面，防止页面不动了

@@ -4,7 +4,12 @@ import _ from "lodash";
 export default {
   name: "AppStake",
   computed: {
-    ...mapState(["startMatch", "animationStep", "gameInfo"]),
+    ...mapState([
+      "startMatch",
+      "animationStep",
+      "gameInfo",
+      "isGameBettingTime",
+    ]),
     ...mapGetters(["gameResult"]),
     fishTotal() {
       const { gameInfo } = this;
@@ -105,7 +110,10 @@ export default {
               this.handleBetting("ttClick");
             }}
           >
-            <div class={styles.stakeAmountContainer}>
+            <div
+              class={styles.stakeAmountContainer}
+              vShow={this.isGameBettingTime}
+            >
               {this.fishTotal ? (
                 <div class={styles.stakeAmount}>{this.fishTotal}</div>
               ) : null}
@@ -136,7 +144,10 @@ export default {
               this.handleBetting("drawerClick");
             }}
           >
-            <div class={styles.stakeAmountContainer}>
+            <div
+              class={styles.stakeAmountContainer}
+              vShow={this.isGameBettingTime}
+            >
               {this.drawTotal ? (
                 <div class={styles.stakeAmount}>{this.drawTotal}</div>
               ) : null}
@@ -167,7 +178,10 @@ export default {
               this.handleBetting("ccClick");
             }}
           >
-            <div class={styles.stakeAmountContainer}>
+            <div
+              class={styles.stakeAmountContainer}
+              vShow={this.isGameBettingTime}
+            >
               {this.longPersonTotal ? (
                 <div class={styles.stakeAmount}>{this.longPersonTotal}</div>
               ) : null}

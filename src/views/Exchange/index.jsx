@@ -41,7 +41,7 @@ export default {
       isExchange: false,
       isGoldNotEnoughVisible: false,
       isExchangeRecord: false,
-      isExchangePhoneBill: true,
+      isExchangePhoneBill: false,
     };
   },
   methods: {
