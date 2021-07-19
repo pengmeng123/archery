@@ -16,7 +16,7 @@ export default {
             icon: v.icon,
             name: v.nick,
             className: `player${index + 1}`,
-            extraName: `player-${v.nick}`,
+            extraName: `player-${v.uuid}`,
           };
         })
         .concat([
@@ -27,34 +27,6 @@ export default {
             className: "selfPlayer",
           },
         ]);
-      // return [
-      //   {
-      //     icon: TxImg,
-      //     name: "张三1",
-      //     className: "player1",
-      //   },
-      //   {
-      //     icon: TxImg,
-      //     name: "张三2",
-      //     className: "player2",
-      //   },
-      //   {
-      //     icon: TxImg,
-      //     name: "张三3",
-      //     className: "player3",
-      //   },
-      //   {
-      //     icon: TxImg,
-      //     name: "张三4",
-      //     className: "player4",
-      //   },
-      //   {
-      //     icon: TxImg,
-      //     name: "李四",
-      //     marjor: true,
-      //     className: "selfPlayer",
-      //   },
-      // ];
     },
   },
   render() {

@@ -3,6 +3,7 @@ import IconRecord from "@/assets/images/icon-record.png";
 import IconService from "@/assets/images/icon-service.png";
 import Modal from "@/components/Modal";
 import SupportRecord from "@/components/SupportRecord";
+import { mapState } from "vuex";
 import styles from "./dropdown-more.module.less";
 export default {
   name: "DropDownMore",
@@ -12,7 +13,16 @@ export default {
       ruleVisible: false,
     };
   },
+  watch: {
+    startMatch(newVal) {
+      if (newVal) {
+        this.visible = false;
+        this.ruleVisible = false;
+      }
+    },
+  },
   computed: {
+    ...mapState(["startMatch"]),
     menus() {
       return [
         {

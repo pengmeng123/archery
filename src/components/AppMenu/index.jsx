@@ -24,8 +24,17 @@ export default {
   async mounted() {
     await imgsPreloader(animationList);
   },
+  watch: {
+    startMatch(newVal) {
+      if (newVal) {
+        this.isDropDownMore = false;
+        this.fareTaskVisible = false;
+        this.receiveGoldVisible = false;
+      }
+    },
+  },
   computed: {
-    ...mapState(["mainInfo"]),
+    ...mapState(["mainInfo", "startMatch"]),
     menus() {
       return [
         {

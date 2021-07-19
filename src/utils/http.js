@@ -1,6 +1,6 @@
 import axios from "axios";
 import store from "@/store";
-import router from "../router";
+// import router from "../router";
 const BASE_URL = "/";
 const TIMEOUT = 1000 * 15;
 
@@ -46,7 +46,7 @@ http.interceptors.response.use(
     } else {
       // 处理断网的情况
       store.commit("SET_NET_WORK_SUCCESS", false);
-      router.push({ name: "Disconnection" });
+      // router.push({ name: "Disconnection" });
     }
   }
 );

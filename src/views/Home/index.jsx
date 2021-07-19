@@ -27,6 +27,12 @@ export default {
     AppNotStart,
   },
   mixins: [CountDownMixin, BetsMixin, AnimationStepMixin],
+  data() {
+    return {
+      resultTimer1: null,
+      resultTimer2: null,
+    };
+  },
   async mounted() {
     this.onReset();
     await this.getGameInfo();
@@ -84,7 +90,6 @@ export default {
       }
     },
     updateContDown() {
-      console.log("countdow--", this.currentCountDown);
       // 倒计时
       this.runCount(this.currentCountDown);
     },
@@ -103,11 +108,15 @@ export default {
     },
     getResultExcute() {
       return this.$service.user.getExcute().then((r) => {
-        this.setResultGameInfo(_.get(r, "data.result"));
+        if (!_.isNil(_.get(r, "data.result.currentGame.gameResult"))) {
+          this.setResultGameInfo(_.get(r, "data.result"));
+        }
         return r;
       });
     },
     async getResult() {
+      this.resultTimer1 && clearTimeout(this.resultTimer1);
+      this.resultTimer2 && clearTimeout(this.resultTimer2);
       try {
         const r = await this.getResultExcute();
         const o = _.get(r, "data.result") || {};
@@ -118,9 +127,12 @@ export default {
           this.setStartMatchStatus(true);
           this.setAnimationStep(1);
           // 这里延迟2s再次请求，是因为可能第一次拿到的结果不准
-          setTimeout(() => {
+          this.resultTimer1 = setTimeout(() => {
             this.getResultExcute();
-          }, 2000);
+          }, 5000);
+          this.resultTimer2 = setTimeout(() => {
+            this.getResultExcute();
+          }, 10000);
         } else {
           // 如果结果没有拿到就重置页面，防止页面不动了
           this.init();
@@ -140,10 +152,12 @@ export default {
       this.setGameBettingStatus(true);
       this.clearTimer && this.clearTimer();
       this.timerCount && clearTimeout(this.timerCount);
+      this.resultTimer1 && clearTimeout(this.resultTimer1);
+      this.resultTimer2 && clearTimeout(this.resultTimer2);
       this.removeAddEventListenerFun();
     },
   },
-  destroyed() {
+  beforeDestroy() {
     this.onReset();
   },
   render() {

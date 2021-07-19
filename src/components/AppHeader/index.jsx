@@ -3,7 +3,6 @@ import IconTongtong from "./images/icon-tongtong.png";
 import IconChengcheng from "./images/icon-chengcheng.png";
 import IconDrawer from "./images/icon-drawer.png";
 import { mapGetters, mapState } from "vuex";
-import CountDownMixin from "@/mixins/countDownMixin";
 import Modal from "@/components/Modal";
 import ResultRecord from "../ResultRecord";
 import _ from "lodash";
@@ -14,7 +13,6 @@ const PhotoObj = {
 };
 export default {
   name: "AppHeader",
-  mixins: [CountDownMixin],
   data() {
     return {
       players1: [IconTongtong, IconTongtong, IconTongtong, IconTongtong],

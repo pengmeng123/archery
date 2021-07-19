@@ -121,11 +121,11 @@ const BetsMixin = {
       // 定时获取其它玩家列表的投注情况
       const newPlayList = _.get(this.gameInfo, "currentGame.playerList") || [];
       const oldPlayList = [...this.oldPlayList];
-      const oldIds = oldPlayList.map((v) => v.nick);
+      const oldIds = oldPlayList.map((v) => v.uuid);
       newPlayList.forEach((r) => {
         // 当前玩家非首次投注
-        if (oldIds.includes(r.nick)) {
-          const o = _.find(oldPlayList, { nick: r.nick }) || {};
+        if (oldIds.includes(r.uuid)) {
+          const o = _.find(oldPlayList, { uuid: r.uuid }) || {};
           this.runOldPlayListAnimation(o, r);
         } else {
           this.runNewPlayListAnimation(r);
@@ -133,12 +133,12 @@ const BetsMixin = {
       });
       this.oldPlayList = _.uniqBy(
         [...newPlayList, ...this.oldPlayList],
-        "nick"
+        "uuid"
       );
     },
     runNewPlayListAnimation(r) {
       const result = _.get(r, "bet") || [];
-      const ele = `.player-${r.nick}`;
+      const ele = `.player-${r.uuid}`;
       result.forEach((v) => {
         switch (v.result) {
           case 1:
@@ -163,7 +163,7 @@ const BetsMixin = {
     },
     runOldPlayListAnimation(oldObj, newObj) {
       const result = _.get(newObj, "bet") || [];
-      const ele = `.player-${newObj.nick}`;
+      const ele = `.player-${newObj.uuid}`;
       const oldBet = _.get(oldObj, "bet") || [];
       result.forEach((v) => {
         switch (v.result) {
@@ -291,7 +291,7 @@ const BetsMixin = {
         });
         this.playerListResult.forEach((v) => {
           const bets = _.get(v, "bet") || [];
-          const ele = `.player-${v.nick}`;
+          const ele = `.player-${v.uuid}`;
           if (!($(ele) && $(ele).length)) {
             return;
           }
