@@ -4,12 +4,17 @@ import IconDelete from "@/assets/images/icon-delete.png";
 import { phoneReg } from "@/utils/validate";
 import RechargedText from "@/assets/images/recharged.png";
 import IconRecharged from "@/assets/images/icon-recharged.png";
+import _ from "lodash";
 export default {
   name: "PhoneBill",
   props: {
     visible: {
       type: Boolean,
       default: false,
+    },
+    record: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {
@@ -30,11 +35,28 @@ export default {
       this.phone = undefined;
     },
     onSubmit() {
+      const { record } = this;
       if (!phoneReg.test(this.phone)) {
         this.$toast("手机号码有误，请重填");
         return;
       }
-      this.isSuccess = true;
+      const aid = record.id;
+      if (!aid) {
+        return;
+      }
+      this.$service.user
+        .goldExchange({
+          aid,
+          type: record.type,
+          phone: this.phone,
+        })
+        .then((r) => {
+          if (_.get(r, "data.code") === 1000) {
+            this.isSuccess = true;
+          } else {
+            this.$toast(_.get(r, "data.message"));
+          }
+        });
     },
   },
   render() {

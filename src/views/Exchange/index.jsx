@@ -69,10 +69,21 @@ export default {
         return;
       }
       this.currentRecord = v;
-      this.isExchange = true;
+      if (v.type === 1) {
+        this.isExchangePhoneBill = true;
+      } else {
+        this.isExchange = true;
+      }
     },
     goBack() {
       this.$router.push("/");
+    },
+    async onCheckRecord() {
+      try {
+        await this.fetchGameExchange();
+        this.isExchangeRecord = true;
+        // eslint-disable-next-line no-empty
+      } catch {}
     },
   },
   render() {
@@ -105,7 +116,7 @@ export default {
             {awardList.map((v) => (
               <li>
                 <div class={styles.pic}>
-                  <CreditCard type={4} amount={10} />
+                  <CreditCard type={v.type} amount={v.amount} />
                 </div>
                 <div class={styles.awardName}>{v.title}</div>
                 <div class={styles.amount}>
@@ -132,6 +143,7 @@ export default {
             onClose={() => {
               this.isExchange = false;
             }}
+            onCheckRecord={this.onCheckRecord}
           />
         </Modal>
         {/* 金币不足 */}
@@ -145,14 +157,20 @@ export default {
         </Modal>
         {/* 兑换记录 */}
         <Modal className="exchange-record" v-model={this.isExchangeRecord}>
-          <ExchangeRecord data={_.get(this.data, "awardRecordList")} />
+          <ExchangeRecord
+            visible={this.isExchangeRecord}
+            data={_.get(this.data, "awardRecordList")}
+          />
         </Modal>
         {/* 话费兑换 */}
         <Modal
           className="exchange-phone-bill"
           v-model={this.isExchangePhoneBill}
         >
-          <PhoneBill visible={this.isExchangePhoneBill} />
+          <PhoneBill
+            record={this.currentRecord}
+            visible={this.isExchangePhoneBill}
+          />
         </Modal>
       </div>
     );

@@ -1,8 +1,8 @@
 import ExchangeTextImg from "@/assets/images/exchange-text.png";
-import AwardImg from "@/assets/images/award.png";
 import AwardTitle from "@/assets/images/award-title.png";
 import CryFaceImg from "@/assets/images/cry-face.png";
 import CoinsInsufficientTextImg from "@/assets/images/coins-insufficient-text.png";
+import CreditCard from "@/components/CreditCard";
 import styles from "./modal.module.less";
 import _ from "lodash";
 export default {
@@ -24,13 +24,15 @@ export default {
   },
   methods: {
     onSubmit() {
-      const aid = this.record.id;
+      const { record } = this;
+      const aid = record.id;
       if (!aid) {
         return;
       }
       this.$service.user
         .goldExchange({
           aid,
+          type: record.type,
         })
         .then((r) => {
           if (_.get(r, "data.code") === 1000) {
@@ -59,6 +61,10 @@ export default {
       this.$emit("close");
       this.$router.push("/");
     },
+    onCheck() {
+      this.$emit("close");
+      this.$emit("checkRecord");
+    },
   },
   render() {
     const { record } = this;
@@ -72,10 +78,12 @@ export default {
         ) : (
           <img src={ExchangeTextImg} alt="" class={styles.title} />
         )}
-        <img src={AwardImg} alt="" class={styles.awardImg} />
+        <CreditCard type={record.type} amount={record.amount} />
         <div class={styles.desc}>{_.get(record, "title")}</div>
         {this.isSuccess ? (
-          <div class={styles.btnCheck}>去查看</div>
+          <div class={styles.btnCheck} onClick={this.onCheck}>
+            去查看
+          </div>
         ) : (
           <div class={styles.btnContainer}>
             <a

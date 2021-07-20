@@ -45,3 +45,13 @@ export const goldExchange = (data) => {
     .post(WXGAME_EXECUTE, { ...testParams, action: "goldExchange", ...data })
     .then((r) => _.get(r, "data"));
 };
+
+export const acquireTaskOrExchange = (data) => {
+  return http
+    .post(WXGAME_EXECUTE, {
+      ...testParams,
+      action: "acquireTaskOrExchange",
+      ...data,
+    })
+    .then((r) => _.get(r, "data"));
+};

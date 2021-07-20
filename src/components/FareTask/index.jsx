@@ -1,5 +1,6 @@
 import AppPercent from "../AppPercent";
 // import AwardImg from "@/assets/images/award.png";
+import CreditCard from "../CreditCard";
 import Modal from "@/components/Modal";
 import Award from "./award";
 import { mapState } from "vuex";
@@ -23,7 +24,17 @@ export default {
     onReceive() {
       this.isVisible = true;
     },
-    onOpenTask() {},
+    onOpenTask(v) {
+      this.$service.user
+        .acquireTaskOrExchange({
+          aid: v.taskId,
+          isDanger: true,
+          type: v.type,
+        })
+        .then((r) => {
+          console.log(r);
+        });
+    },
     onClose() {
       this.$emit("close");
     },
@@ -39,7 +50,10 @@ export default {
                   <div class={styles.title}>{v.title}</div>
                   <div class={styles.desc}>
                     <AppPercent receive={v.finish} total={v.target} />
-                    <img src={v.awardIcon} class={styles.award} />
+                    <div class={styles.award}>
+                      <CreditCard task={true} type={v.type} amount={v.amount} />
+                    </div>
+                    {/* <img src={v.awardIcon} class={styles.award} /> */}
                   </div>
                 </div>
                 {v.status === -1 ? (
@@ -49,7 +63,9 @@ export default {
                       [styles.btn]: true,
                       [styles.btnToFinish]: true,
                     }}
-                    onClick={this.onOpenTask}
+                    onClick={() => {
+                      this.onOpenTask(v);
+                    }}
                   >
                     开启
                   </a>

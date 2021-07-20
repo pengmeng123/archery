@@ -1,6 +1,8 @@
 import styles from "./index.module.less";
 import iconTagging from "@/assets/images/icon-tagging.png";
 import FareTaskText from "@/assets/images/fare-task-text.png";
+import { mapState } from "vuex";
+import _ from "lodash";
 export default {
   name: "ResultRecord",
   data() {
@@ -45,8 +47,15 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapState(["gameInfo"]),
+    historyGameList() {
+      return _.get(this.gameInfo, "historyGameList") || [];
+    },
+  },
   render() {
-    const { data } = this;
+    // const { data } = this;
+    const data = this.historyGameList;
     return (
       <div class={styles.container}>
         <img src={FareTaskText} alt="" class={styles.title} />
