@@ -1,5 +1,5 @@
 import { mapActions } from "vuex";
-import helper from "@/utils/helper";
+// import helper from "@/utils/helper";
 export default {
   name: "App",
   data() {
