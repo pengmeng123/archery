@@ -1,7 +1,3 @@
-export const preLoadingList = [
-  require("../../static/loading.jpg"),
-  require("../../static/bg.jpg"),
-];
 export const animationList = [
   require("../assets/images/rule-bg.png"),
   require("../assets/images/support-record-bg.png"),
@@ -29,4 +25,9 @@ export const animationList = [
   require("../assets/images/cc/victory-card.png"),
   require("../assets/images/drawer/victory-card.png"),
   require("../assets/images/award-rings-bg.png"),
+];
+export const preLoadingList = [
+  ...animationList,
+  require("../../static/loading.jpg"),
+  require("../../static/bg.jpg"),
 ];
