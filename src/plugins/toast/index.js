@@ -8,7 +8,7 @@ let timer2 = null;
 const ToastConstructor = vue.extend(toastComponent);
 
 // 定义弹出组件的函数 接收2个参数, 要显示的文本 和 显示时间
-function showToast(text, duration = 1500) {
+export const showToast = (text, duration = 1500) => {
   if (document.getElementsByClassName("custom-toast-wrap").length) {
     return;
   }
@@ -33,7 +33,7 @@ function showToast(text, duration = 1500) {
   timer2 = setTimeout(() => {
     toastDom.showWrap = false;
   }, duration);
-}
+};
 
 // 注册为全局组件的函数
 function registryToast() {
