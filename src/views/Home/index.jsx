@@ -36,7 +36,7 @@ export default {
   async mounted() {
     this.onReset();
     await this.getGameInfo();
-    // this.init();
+    this.init();
     // 主页接口信息
     this.getGameMainInfo();
     this.monitorResultAnimation();
@@ -168,6 +168,8 @@ export default {
       <div
         class={{
           [styles.container]: true,
+          [styles.containerAnimation]:
+            this.animationStep >= 3 && this.animationStep < 6,
         }}
       >
         {/*  距离下一局开始时间 */}

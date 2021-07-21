@@ -502,15 +502,19 @@
 @keyframes runBg{
   0% {
     left: 0px;
+    background-color: #a7bbd6;
   }
   33% {
     left: -750px;
+    background-color: #d1dfec;
   }
   66.66% {
     left: -1500px;
+    background-color:#d7e3f1;
   }
   100% {
     left: -2250px;
+    background-color:#d8e6f3;
   }
 }
 @keyframes runFly{
@@ -527,6 +531,20 @@
     left: -1500px;
   }
 }
+@keyframes runBgColor{
+  0% {
+    background-color: #a7bbd6;
+  }
+  33% {
+    background-color: #d1dfec;
+  }
+  66.66% {
+    background-color:#d7e3f1;
+  }
+  100% {
+    background-color:#d8e6f3;
+  }
+}
 .bg {
   width: 3000px;
   height: 1334px;
@@ -537,6 +555,16 @@
   background-size: 100% 100%;
   &.bgAnimation {
     animation: runBg 0.3s steps(1,end) 0.6s both;
+  }
+  .bgColor {
+    width: 100%;
+    height: 100vh;
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: runBgColor 0.3s steps(1,end) 0.6s both;
+    z-index: -1;
   }
 }
 .bgFly {

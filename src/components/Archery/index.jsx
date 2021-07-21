@@ -135,7 +135,12 @@ export default {
             [styles.bgAnimation]: animationStep >= 3 && animationStep < 6,
             homeBg: true,
           }}
-        ></div>
+        >
+          <div
+            vShow={animationStep >= 3 && animationStep < 6}
+            class={styles.bgColor}
+          ></div>
+        </div>
         <div
           vShow={animationStep >= 3 && animationStep < 6}
           class={{

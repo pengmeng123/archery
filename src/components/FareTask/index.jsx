@@ -1,5 +1,4 @@
 import AppPercent from "../AppPercent";
-// import AwardImg from "@/assets/images/award.png";
 import CreditCard from "../CreditCard";
 import Modal from "@/components/Modal";
 import Award from "./award";
@@ -9,9 +8,16 @@ import styles from "./index.module.less";
 
 export default {
   name: "FareTask",
+  props: {
+    visible: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       isVisible: false,
+      currentRecord: {},
     };
   },
   computed: {
@@ -20,23 +26,45 @@ export default {
       return _.get(this.mainInfo, "tasklist") || [];
     },
   },
+  watch: {
+    visible(newVal) {
+      console.log("9--dd");
+      if (newVal) {
+        console.log("9--");
+      }
+    },
+  },
   methods: {
     onReceive() {
       this.isVisible = true;
     },
     onOpenTask(v) {
+      this.currentRecord = v;
       this.$service.user
         .acquireTaskOrExchange({
           aid: v.taskId,
           isDanger: true,
           type: v.type,
         })
-        .then((r) => {
-          console.log(r);
+        .then(() => {
+          this.actionTips(v.status);
         });
     },
     onClose() {
       this.$emit("close");
+    },
+    actionTips(status) {
+      switch (status) {
+        case -1:
+          this.$toast("开启成功");
+          break;
+        case 0:
+          this.isVisible = true;
+          break;
+        case 1:
+          break;
+      }
+      this.$emit("refresh");
     },
   },
   render() {
@@ -50,11 +78,10 @@ export default {
                   <div class={styles.title}>{v.title}</div>
                   <div class={styles.desc}>
                     <AppPercent receive={v.finish} total={v.target} />
-                    <div class={styles.award}>
-                      <CreditCard task={true} type={v.type} amount={v.amount} />
-                    </div>
-                    {/* <img src={v.awardIcon} class={styles.award} /> */}
                   </div>
+                </div>
+                <div class={styles.award}>
+                  <CreditCard task={true} type={v.type} amount={v.amount} />
                 </div>
                 {v.status === -1 ? (
                   <a
@@ -87,9 +114,11 @@ export default {
                     href="javascript:"
                     class={{
                       [styles.btn]: true,
-                      [styles.btnToFinish]: true,
+                      [styles.btnToReceive]: true,
                     }}
-                    onClick={this.onReceive}
+                    onClick={() => {
+                      this.onOpenTask(v);
+                    }}
                   >
                     领取
                   </a>
@@ -110,7 +139,7 @@ export default {
           </ul>
         </div>
         <Modal className="award" v-model={this.isVisible}>
-          <Award />
+          <Award record={this.currentRecord} />
         </Modal>
       </div>
     );

@@ -6,7 +6,7 @@ import DropDownMore from "./dropdown-more";
 import Modal from "@/components/Modal";
 import FareTask from "../FareTask";
 import DailyReceiveGold from "../DailyReceiveGold";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import _ from "lodash";
 import { imgsPreloader } from "@/utils/img-preloader";
 import { animationList } from "@/config/img-preloader-list";
@@ -40,7 +40,6 @@ export default {
         {
           icon: IconReciveGold,
           func: () => {
-            // this.receiveGoldVisible = true;
             this.gameSign();
           },
           eventName: "recevieGold",
@@ -56,7 +55,8 @@ export default {
         },
         {
           icon: IconWelfareTask,
-          func: () => {
+          func: async () => {
+            this.getGameMainInfo();
             this.fareTaskVisible = true;
           },
           eventName: "exchange",
@@ -83,6 +83,9 @@ export default {
     },
   },
   methods: {
+    ...mapMutations({
+      setMainInfo: "SET_MAIN_INFO",
+    }),
     gameSign() {
       this.$service.user.gameSign().then((r) => {
         if (_.get(r, "data.code") === 1000) {
@@ -91,6 +94,12 @@ export default {
         } else {
           this.$toast(_.get(r, "data.message"));
         }
+      });
+    },
+    getGameMainInfo() {
+      return this.$service.user.gameMainInfo().then((r) => {
+        const o = _.get(r, "data.result") || {};
+        this.setMainInfo(o);
       });
     },
   },
@@ -124,7 +133,13 @@ export default {
         </Modal>
         {/* 福利任务 */}
         <Modal className="fareTask" v-model={this.fareTaskVisible}>
-          <FareTask />
+          <FareTask
+            visible={this.fareTaskVisible}
+            onRefresh={this.getGameMainInfo}
+            onClose={() => {
+              this.fareTaskVisible = false;
+            }}
+          />
         </Modal>
       </div>
     );
