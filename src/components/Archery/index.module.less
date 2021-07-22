@@ -118,7 +118,7 @@
 }
 .container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   left: 0;
   top: 0;
@@ -130,7 +130,8 @@
 	overflow: hidden;
   position: absolute;
   left: 0;
-  top: 530px;
+  // top: 530px;
+  bottom: -50px;
   z-index: 2;
   .box {
     width: 3750px;
@@ -154,7 +155,8 @@
 }
 .fly {
   width: 750px;
-  height: 1334px;
+  // height: 1334px;
+  height: 100vh;
   overflow: hidden;
   position: absolute;
   left: 0;
@@ -162,24 +164,25 @@
   z-index: 2;
   .box {
     width: 3000px;
-    height: 1334px;
+    // height: 1334px;
+    height: 100vh;
     position: absolute;
     left: 0px;
     top: 0;
     &.ttFlyTop {
-      background: url(../../assets/images/tt/fly-top.png) no-repeat center top;
+      background: url(../../assets/images/tt/tt/fly-top.png) no-repeat center top;
       background-size: 100% 100%;
     }
     &.ttFlyLeft {
-      background: url(../../assets/images/tt/fly-left.png) no-repeat center top;
+      background: url(../../assets/images/tt/tt/fly-left.png) no-repeat center top;
       background-size: 100% 100%;
     }
     &.ttFlyRight {
-      background: url(../../assets/images/tt/fly-right.png) no-repeat center top;
+      background: url(../../assets/images/tt/tt/fly-right.png) no-repeat center top;
       background-size: 100% 100%;
     }
     &.ttFlyBottom {
-      background: url(../../assets/images/tt/fly-bottom.png) no-repeat center top;
+      background: url(../../assets/images/tt/tt/fly-bottom.png) no-repeat center top;
       background-size: 100% 100%;
     }
     &.ccFlyTop {
@@ -547,47 +550,55 @@
 }
 .bg {
   width: 3000px;
-  height: 1334px;
+  height: 100vh;
   position: absolute;
   left: 0px;
   top: 0;
-  background: url(../../../static/bg.jpg) no-repeat center top;
-  background-size: 100% 100%;
-  &.bgAnimation {
+  z-index: 1;
+  .bgAnimation {
     animation: runBg 0.3s steps(1,end) 0.6s both;
-  }
-  .bgColor {
-    width: 100%;
+    width: 3000px;
     height: 100vh;
-    content: '';
+    // height: 1334px;
     position: absolute;
-    left: 0;
-    top: 0;
-    animation: runBgColor 0.3s steps(1,end) 0.6s both;
-    z-index: -1;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+    background: url(../../../static/bg4.jpg) no-repeat center top;
+    background-size: cover;
   }
+  // .bgColor {
+  //   width: 100%;
+  //   height: 100vh;
+  //   position: absolute;
+  //   left: 0;
+  //   top: 0;
+  //   animation: runBgColor 0.3s steps(1,end) 0.6s both;
+  //   z-index: -1;
+  // }
 }
 .bgFly {
   width: 2250px;
-  height: 1334px;
+  // height: 1334px;
+  height: 100vh;
   position: absolute;
   left: 750px;
   top: 0;
   z-index: 1;
   &.ttBgFlyLeft {
-    background: url(../../assets/images/tt/bg-fly-left.png) no-repeat center top;
+    background: url(../../assets/images/tt/tt/bg-fly-left.png) no-repeat center top;
     background-size: 100% 100%;
   }
   &.ttFlyRight {
-    background: url(../../assets/images/tt/bg-fly-right.png) no-repeat center top;
+    background: url(../../assets/images/tt/tt/bg-fly-right.png) no-repeat center top;
     background-size: 100% 100%;
   }
   &.ttFlyTop {
-    background: url(../../assets/images/tt/bg-fly-top.png) no-repeat center top;
+    background: url(../../assets/images/tt/tt/bg-fly-top.png) no-repeat center top;
     background-size: 100% 100%;
   }
   &.ttFlyBottom {
-    background: url(../../assets/images/tt/bg-fly-bottom.png) no-repeat center top;
+    background: url(../../assets/images/tt/tt/bg-fly-bottom.png) no-repeat center top;
     background-size: 100% 100%;
   }
   &.ccFlyLeft {

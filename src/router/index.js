@@ -4,6 +4,7 @@ import Home from "../views/Home";
 import Exchange from "../views/Exchange";
 import Disconnection from "@/components/Disconnection";
 import Maintenance from "@/components/Maintenance";
+import Empower from "../views/Empower";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: "/maintenance",
     name: "Maintenance",
     component: Maintenance,
+  },
+  {
+    path: "/empower",
+    name: "Empower",
+    component: Empower,
   },
 ];
 

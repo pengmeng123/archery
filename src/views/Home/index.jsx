@@ -37,7 +37,7 @@ export default {
     this.onReset();
     await this.getGameInfo();
     this.init();
-    // 主页接口信息
+    // 主页接口信息;
     this.getGameMainInfo();
     this.monitorResultAnimation();
   },
