@@ -127,12 +127,12 @@ export default {
           this.setStartMatchStatus(true);
           this.setAnimationStep(1);
           // 这里延迟2s再次请求，是因为可能第一次拿到的结果不准
-          this.resultTimer1 = setTimeout(() => {
-            this.getResultExcute();
-          }, 5000);
-          this.resultTimer2 = setTimeout(() => {
-            this.getResultExcute();
-          }, 10000);
+          // this.resultTimer1 = setTimeout(() => {
+          //   this.getResultExcute();
+          // }, 5000);
+          // this.resultTimer2 = setTimeout(() => {
+          //   this.getResultExcute();
+          // }, 10000);
         } else {
           // 如果结果没有拿到就重置页面，防止页面不动了
           this.init();

@@ -5,7 +5,7 @@ export default {
   name: "DailyReceiveGold",
   props: {
     awardGoldNumber: {
-      type: Number,
+      type: [Number, String],
     },
   },
   render() {

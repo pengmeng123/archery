@@ -11,6 +11,15 @@ import DrawerVictoryTextImg from "@/assets/images/drawer/victory-text.png";
 import { mapState, mapGetters } from "vuex";
 import { DIRECTION_STR } from "@/config/common";
 import _ from "lodash";
+import Target1Img from "@/assets/images/tt/target/target1.png";
+import Target2Img from "@/assets/images/tt/target/target2.png";
+import Target3Img from "@/assets/images/tt/target/target3.png";
+import PictureCombination from "../PictureCombination";
+import bg01Img from "@/assets/images/bg/01.jpg";
+import bg02Img from "@/assets/images/bg/02.jpg";
+import bg03Img from "@/assets/images/bg/03.jpg";
+import bg04Img from "@/assets/images/bg/04.jpg";
+const bgPictureData = [bg01Img, bg02Img, bg03Img, bg04Img];
 export default {
   name: "Archery",
   data() {
@@ -103,12 +112,24 @@ export default {
           <div
             class={{
               [styles.box]: true,
-              [styles.ttTargetImg]: times === 0,
-              [styles.ccTargetImg]: times === 1,
+              // [styles.ttTargetImg]: times === 0,
+              // [styles.ccTargetImg]: times === 1,
               [styles.targetAnimation]: animationStep === 2,
               targetBox: true,
             }}
-          ></div>
+          >
+            <ul>
+              <li>
+                <img src={Target1Img} alt="" />
+              </li>
+              <li>
+                <img src={Target2Img} alt="" />
+              </li>
+              <li>
+                <img src={Target3Img} alt="" />
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* 箭飞出去 */}
@@ -132,19 +153,11 @@ export default {
         <div
           class={{
             [styles.bg]: true,
-
+            [styles.bgAnimation]: animationStep >= 3 && animationStep < 6,
             homeBg: true,
           }}
         >
-          <div
-            class={{
-              [styles.bgAnimation]: animationStep >= 3 && animationStep < 6,
-            }}
-          ></div>
-          <div
-            vShow={animationStep >= 3 && animationStep < 6}
-            class={styles.bgColor}
-          ></div>
+          <PictureCombination data={bgPictureData} />
         </div>
         <div
           vShow={animationStep >= 3 && animationStep < 6}

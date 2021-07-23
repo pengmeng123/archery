@@ -29,5 +29,5 @@ export const animationList = [
 export const preLoadingList = [
   ...animationList,
   require("../../static/loading.jpg"),
-  require("../../static/bg.jpg"),
+  require("../../static/bg4.jpg"),
 ];
