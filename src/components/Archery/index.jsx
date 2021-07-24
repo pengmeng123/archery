@@ -15,11 +15,7 @@ import Target1Img from "@/assets/images/tt/target/target1.png";
 import Target2Img from "@/assets/images/tt/target/target2.png";
 import Target3Img from "@/assets/images/tt/target/target3.png";
 import PictureCombination from "../PictureCombination";
-import bg01Img from "@/assets/images/bg/01.jpg";
-import bg02Img from "@/assets/images/bg/02.jpg";
-import bg03Img from "@/assets/images/bg/03.jpg";
-import bg04Img from "@/assets/images/bg/04.jpg";
-const bgPictureData = [bg01Img, bg02Img, bg03Img, bg04Img];
+import { pictureCombinationObj } from "@/config/picture-combination";
 export default {
   name: "Archery",
   data() {
@@ -157,7 +153,7 @@ export default {
             homeBg: true,
           }}
         >
-          <PictureCombination data={bgPictureData} />
+          <PictureCombination data={pictureCombinationObj.bg} />
         </div>
         <div
           vShow={animationStep >= 3 && animationStep < 6}
