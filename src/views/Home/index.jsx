@@ -94,8 +94,17 @@ export default {
       this.runCount(this.currentCountDown);
     },
     async handleHasStartTime() {
-      await this.getGameInfo();
-      this.init();
+      this.onReset();
+      try {
+        const r = await this.getGameInfo();
+        if (!_.isNil(r)) {
+          this.init();
+        } else {
+          this.$toast("网络异常");
+        }
+      } catch {
+        console.log("catch----");
+      }
     },
     handleBettingCancel() {
       this.onGamePlay(1, 2);
@@ -107,9 +116,16 @@ export default {
       });
     },
     getResultExcute() {
-      return this.$service.user.getExcute().then((r) => {
+      return this.$service.user.getExcute().then(async (r) => {
         if (!_.isNil(_.get(r, "data.result.currentGame.gameResult"))) {
           this.setResultGameInfo(_.get(r, "data.result"));
+        } else {
+          // 如果动画的时候发现没有gameresult字段，那就从头开始
+          this.onReset();
+          const r1 = await this.getGameInfo();
+          if (!_.isNil(r1)) {
+            this.init();
+          }
         }
         return r;
       });
@@ -127,12 +143,12 @@ export default {
           this.setStartMatchStatus(true);
           this.setAnimationStep(1);
           // 这里延迟2s再次请求，是因为可能第一次拿到的结果不准
-          // this.resultTimer1 = setTimeout(() => {
-          //   this.getResultExcute();
-          // }, 5000);
-          // this.resultTimer2 = setTimeout(() => {
-          //   this.getResultExcute();
-          // }, 10000);
+          this.resultTimer1 = setTimeout(() => {
+            this.getResultExcute();
+          }, 5000);
+          this.resultTimer2 = setTimeout(() => {
+            this.getResultExcute();
+          }, 10000);
         } else {
           // 如果结果没有拿到就重置页面，防止页面不动了
           this.init();

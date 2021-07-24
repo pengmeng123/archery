@@ -4,6 +4,7 @@ import Modal from "@/components/Modal";
 import Award from "./award";
 import { mapState } from "vuex";
 import _ from "lodash";
+import Empty from "@/components/Empty";
 import styles from "./index.module.less";
 
 export default {
@@ -137,6 +138,15 @@ export default {
               </li>
             ))}
           </ul>
+          {!this.data.length ? (
+            <div
+              style={{
+                paddingTop: "60px",
+              }}
+            >
+              <Empty />
+            </div>
+          ) : null}
         </div>
         <Modal className="award" v-model={this.isVisible}>
           <Award record={this.currentRecord} />

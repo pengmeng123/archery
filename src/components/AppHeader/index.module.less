@@ -10,8 +10,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
   }
   .players {
+    &.playersLeft {
+      position: absolute;
+      left: 0;
+      top: 30px;
+    }
+    &.playersRight {
+      position: absolute;
+      right: 0;
+      top: 29px;
+    }
     ul {
       display: flex;
       padding: 7px 12px 0;
@@ -29,9 +40,17 @@
     }
   }
   .countDown {
+    width: 100px;
+    height: 100px;
     font-size: 55px;
     color: #FD3F2D;
-    // font-family: 'customBold';
     font-weight: bold;
+    position: absolute;
+    left: 50%;
+    top: 3px;
+    margin-left: -48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

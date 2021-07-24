@@ -194,6 +194,9 @@ const BetsMixin = {
       });
     },
     onGamePlay(support = 1, type = 1) {
+      if (this.count <= 0) {
+        return;
+      }
       this.startBetting();
       const params = {
         support,

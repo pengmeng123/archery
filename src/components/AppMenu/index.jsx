@@ -56,7 +56,7 @@ export default {
         {
           icon: IconWelfareTask,
           func: async () => {
-            this.getGameMainInfo();
+            await this.getGameMainInfo();
             this.fareTaskVisible = true;
           },
           eventName: "exchange",
@@ -91,6 +91,7 @@ export default {
         if (_.get(r, "data.code") === 1000) {
           this.awardGoldNumber = _.get(r, "data.result");
           this.receiveGoldVisible = true;
+          this.getGameMainInfo();
         } else {
           this.$toast(_.get(r, "data.message"));
         }

@@ -47,7 +47,12 @@ export default {
     return (
       <div class={styles.container}>
         <div class={styles.header} onClick={this.onCheckRecord}>
-          <div class={styles.players}>
+          <div
+            class={{
+              [styles.players]: true,
+              [styles.playersLeft]: true,
+            }}
+          >
             <ul>
               {players1.map((v) => (
                 <li>
@@ -57,7 +62,12 @@ export default {
             </ul>
           </div>
           <div class={styles.countDown}>{count}</div>
-          <div class={styles.players}>
+          <div
+            class={{
+              [styles.players]: true,
+              [styles.playersRight]: true,
+            }}
+          >
             <ul>
               {players2.map((v) => (
                 <li>
