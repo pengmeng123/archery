@@ -141,9 +141,10 @@ export default {
               flyBox: true,
               [styles.box]: true,
               [styles.flyAnimation]: animationStep === 3,
-              [styles[flyClassName]]: true,
             }}
-          ></div>
+          >
+            <PictureCombination data={pictureCombinationObj[flyClassName]} />
+          </div>
         </div>
         {/* 背景图片 */}
         <div
@@ -160,9 +161,12 @@ export default {
           class={{
             [styles.bgFly]: true,
             [styles.bgAnimation]: animationStep >= 3 && animationStep < 6,
-            [styles[flyClassName]]: true,
           }}
-        ></div>
+        >
+          <PictureCombination
+            data={pictureCombinationObj[`${flyClassName}Bg`]}
+          />
+        </div>
         {/* 靶盘 */}
         <div
           class={styles.targetDisk}
