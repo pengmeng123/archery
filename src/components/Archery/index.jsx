@@ -11,9 +11,12 @@ import DrawerVictoryTextImg from "@/assets/images/drawer/victory-text.png";
 import { mapState, mapGetters } from "vuex";
 import { DIRECTION_STR } from "@/config/common";
 import _ from "lodash";
-import Target1Img from "@/assets/images/tt/target/target1.png";
-import Target2Img from "@/assets/images/tt/target/target2.png";
-import Target3Img from "@/assets/images/tt/target/target3.png";
+import ttTarget1Img from "@/assets/images/tt/target/target1.png";
+import ttTarget2Img from "@/assets/images/tt/target/target2.png";
+import ttTarget3Img from "@/assets/images/tt/target/target3.png";
+import ccTarget1Img from "@/assets/images/cc/target/target1.png";
+import ccTarget2Img from "@/assets/images/cc/target/target2.png";
+import ccTarget3Img from "@/assets/images/cc/target/target3.png";
 import PictureCombination from "../PictureCombination";
 import { pictureCombinationObj } from "@/config/picture-combination";
 export default {
@@ -108,23 +111,35 @@ export default {
           <div
             class={{
               [styles.box]: true,
-              // [styles.ttTargetImg]: times === 0,
-              // [styles.ccTargetImg]: times === 1,
               [styles.targetAnimation]: animationStep === 2,
               targetBox: true,
             }}
           >
-            <ul>
-              <li>
-                <img src={Target1Img} alt="" />
-              </li>
-              <li>
-                <img src={Target2Img} alt="" />
-              </li>
-              <li>
-                <img src={Target3Img} alt="" />
-              </li>
-            </ul>
+            {times === 0 ? (
+              <ul>
+                <li>
+                  <img src={ttTarget1Img} alt="" />
+                </li>
+                <li>
+                  <img src={ttTarget2Img} alt="" />
+                </li>
+                <li>
+                  <img src={ttTarget3Img} alt="" />
+                </li>
+              </ul>
+            ) : (
+              <ul>
+                <li>
+                  <img src={ccTarget1Img} alt="" />
+                </li>
+                <li>
+                  <img src={ccTarget2Img} alt="" />
+                </li>
+                <li>
+                  <img src={ccTarget3Img} alt="" />
+                </li>
+              </ul>
+            )}
           </div>
         </div>
 

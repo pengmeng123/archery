@@ -1,6 +1,5 @@
 import styles from "./index.module.less";
 import GoldImg from "@/assets/images/gold.png";
-import AwardImg from "@/assets/images/award.png";
 import Modal from "@/components/Modal";
 import ExchangeModal from "@/components/Exchange/modal";
 import ExchangeRecord from "@/components/Exchange/record";
@@ -15,33 +14,6 @@ export default {
     return {
       data: [],
       currentRecord: {},
-      awardList: [
-        {
-          awardName: "火车票立减券",
-          pic: AwardImg,
-          amount: 200,
-        },
-        {
-          awardName: "火车票立减券",
-          pic: AwardImg,
-          amount: 200,
-        },
-        {
-          awardName: "火车票立减券",
-          pic: AwardImg,
-          amount: 200,
-        },
-        {
-          awardName: "火车票立减券",
-          pic: AwardImg,
-          amount: 200,
-        },
-        {
-          awardName: "火车票立减券",
-          pic: AwardImg,
-          amount: 200,
-        },
-      ],
       isExchange: false,
       isGoldNotEnoughVisible: false,
       isExchangeRecord: false,
