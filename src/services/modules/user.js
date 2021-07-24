@@ -1,7 +1,9 @@
 import { WXGAME_EXECUTE } from "@/config/api";
 import http from "@/utils/http";
 import _ from "lodash";
-import { currentUser } from "@/config/user";
+import { localStorage } from "@/utils/storage";
+import { TC_ARCHERY_USER_INFO } from "@/config/api";
+
 const testParams = {
   ts: 1624159609635,
   platId: 501,
@@ -11,45 +13,67 @@ const testParams = {
   rid: "1675627881",
   action: "gameInfo",
   pid: 501,
-  ...currentUser,
 };
 
 export const getExcute = (data) =>
   http
-    .post(WXGAME_EXECUTE, { ...testParams, ...data })
+    .post(WXGAME_EXECUTE, {
+      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      ...data,
+    })
     .then((r) => _.get(r, "data"));
 
 export const gamePlay = (data) => {
   return http
-    .post(WXGAME_EXECUTE, { ...testParams, action: "play", ...data })
+    .post(WXGAME_EXECUTE, {
+      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      action: "play",
+      ...data,
+    })
     .then((r) => _.get(r, "data"));
 };
 export const gameMainInfo = (data) => {
   return http
-    .post(WXGAME_EXECUTE, { ...testParams, action: "mainInfo", ...data })
+    .post(WXGAME_EXECUTE, {
+      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      action: "mainInfo",
+      ...data,
+    })
     .then((r) => _.get(r, "data"));
 };
 export const gameSign = (data) => {
   return http
-    .post(WXGAME_EXECUTE, { ...testParams, action: "sign", ...data })
+    .post(WXGAME_EXECUTE, {
+      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      action: "sign",
+      ...data,
+    })
     .then((r) => _.get(r, "data"));
 };
 export const gameExchange = (data) => {
   return http
-    .post(WXGAME_EXECUTE, { ...testParams, action: "mainMallInfo", ...data })
+    .post(WXGAME_EXECUTE, {
+      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      action: "mainMallInfo",
+      ...data,
+    })
     .then((r) => _.get(r, "data"));
 };
 
 export const goldExchange = (data) => {
   return http
-    .post(WXGAME_EXECUTE, { ...testParams, action: "goldExchange", ...data })
+    .post(WXGAME_EXECUTE, {
+      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      action: "goldExchange",
+      ...data,
+    })
     .then((r) => _.get(r, "data"));
 };
 
 export const acquireTaskOrExchange = (data) => {
   return http
     .post(WXGAME_EXECUTE, {
-      ...testParams,
+      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
       action: "acquireTaskOrExchange",
       ...data,
     })

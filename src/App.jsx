@@ -1,9 +1,23 @@
 import { mapActions } from "vuex";
 // import helper from "@/utils/helper";
+import { userObj } from "@/config/user";
+import { localStorage } from "@/utils/storage";
+import { TC_ARCHERY_USER_INFO } from "@/config/api";
 export default {
   name: "App",
   data() {
-    return {};
+    return {
+      loading: true,
+    };
+  },
+  created() {
+    const id = this.$route.query.id;
+    if (id == 1) {
+      localStorage.set(TC_ARCHERY_USER_INFO, userObj[1]);
+    } else {
+      localStorage.set(TC_ARCHERY_USER_INFO, userObj[2]);
+    }
+    this.loading = false;
   },
   mounted() {
     // const newUrl = decodeURIComponent(
@@ -49,6 +63,9 @@ export default {
     },
   },
   render() {
+    if (this.loading) {
+      return null;
+    }
     return (
       <div id="app" style="height:100%">
         <router-view />

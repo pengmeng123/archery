@@ -1,15 +1,16 @@
 import styles from "./index.module.less";
-import TxImg from "./images/tx.png";
 import TxBgImg from "./images/tx-bg.png";
 import _ from "lodash";
 import { mapState } from "vuex";
-import { currentUser } from "@/config/user";
+import { localStorage } from "@/utils/storage";
+import { TC_ARCHERY_USER_INFO } from "@/config/api";
 export default {
   name: "AppGamePlayer",
   computed: {
     ...mapState(["gameInfo"]),
     members() {
       const playerList = _.get(this.gameInfo, "currentGame.playerList") || [];
+      const user = localStorage.get(TC_ARCHERY_USER_INFO) || {};
       return playerList
         .map((v, index) => {
           return {
@@ -19,14 +20,18 @@ export default {
             extraName: `player-${v.uuid}`,
           };
         })
-        .concat([
-          {
-            icon: TxImg,
-            name: _.get(currentUser, "nick"),
-            marjor: true,
-            className: "selfPlayer",
-          },
-        ]);
+        .concat(
+          _.get(user, "nick")
+            ? [
+                {
+                  icon: _.get(user, "icon"),
+                  name: _.get(user, "nick"),
+                  marjor: true,
+                  className: "selfPlayer",
+                },
+              ]
+            : []
+        );
     },
   },
   render() {

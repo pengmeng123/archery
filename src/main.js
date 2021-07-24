@@ -4,7 +4,6 @@ import router from "./router";
 import store from "./store";
 import Bootstrap from "./plugins/Bootstrap";
 import animated from "animate.css";
-
 import VConsole from "@/utils/v-console";
 import "./styles/app.less";
 import Toast from "./plugins/toast";
