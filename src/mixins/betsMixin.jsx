@@ -40,7 +40,7 @@ const BetsMixin = {
     },
   },
   created() {
-    this.$_getGameInfo = _.debounce(this.getGameInfo, 300);
+    this.$_getGameInfo = _.debounce(this.getGameInfo, 100);
   },
   methods: {
     ...mapActions({

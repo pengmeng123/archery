@@ -18,6 +18,7 @@ export default {
         <div
           style={{
             margin: "0 auto",
+            textAlign: "center",
           }}
         >
           <CreditCard type={record.type} amount={record.amount} />

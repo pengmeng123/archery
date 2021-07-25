@@ -60,9 +60,9 @@ export default {
           this.$toast("开启成功");
           break;
         case 0:
-          this.isVisible = true;
           break;
         case 1:
+          this.isVisible = true;
           break;
       }
       this.$emit("refresh");
