@@ -3,6 +3,7 @@ import { mapActions } from "vuex";
 import { userObj } from "@/config/user";
 import { localStorage } from "@/utils/storage";
 import { TC_ARCHERY_USER_INFO } from "@/config/api";
+import _ from "lodash";
 export default {
   name: "App",
   data() {
@@ -12,10 +13,10 @@ export default {
   },
   created() {
     const id = this.$route.query.id;
-    if (id == 1) {
-      localStorage.set(TC_ARCHERY_USER_INFO, userObj[1]);
+    if (!_.isNil(id)) {
+      localStorage.set(TC_ARCHERY_USER_INFO, userObj[id]);
     } else {
-      localStorage.set(TC_ARCHERY_USER_INFO, userObj[2]);
+      localStorage.set(TC_ARCHERY_USER_INFO, userObj[5]);
     }
     this.loading = false;
   },

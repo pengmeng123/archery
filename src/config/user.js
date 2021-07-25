@@ -9,4 +9,19 @@ export const userObj = {
     idenid: "oOCyauHKr5KUAu6hXWRXg_xKpzZA",
     icon: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
   },
+  3: {
+    nick: "003",
+    idenid: "oOCyauDbaM7NavdZV3cIROUp58vc",
+    icon: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/61454401f855cf5ed64747a6ac04bae5.jpg?thumb=1&w=400&h=400&f=webp&q=90",
+  },
+  4: {
+    nick: "004",
+    idenid: "oOCyauCcZyrIW7RzHHXupAln79lA",
+    icon: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/03a9e7e96a09d256ca1badeec186c859.jpg?thumb=1&w=400&h=400&f=webp&q=90",
+  },
+  5: {
+    nick: "005",
+    idenid: "OCyauCcZyrIW7RzHHXupAln79lA",
+    icon: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/34caee2c867bfd8c5e0dc2d8c663e121.jpg?thumb=1&w=400&h=400&f=webp&q=90",
+  },
 };
