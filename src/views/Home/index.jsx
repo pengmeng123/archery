@@ -120,12 +120,12 @@ export default {
         if (!_.isNil(_.get(r, "data.result.currentGame.gameResult"))) {
           this.setResultGameInfo(_.get(r, "data.result"));
         } else {
-          // 如果动画的时候发现没有gameresult字段，那就从头开始
-          this.onReset();
-          const r1 = await this.getGameInfo();
-          if (!_.isNil(r1)) {
-            this.init();
-          }
+          // 如果动画的时候发现没有gameresult字段，那就从头开始（接口有点不稳定还是先不处理了）
+          // this.onReset();
+          // const r1 = await this.getGameInfo();
+          // if (!_.isNil(r1)) {
+          //   this.init();
+          // }
         }
         return r;
       });
