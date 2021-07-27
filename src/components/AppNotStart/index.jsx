@@ -16,7 +16,7 @@ export default {
     endSecond: {
       handler(newVal) {
         if (newVal) {
-          this.runCount(newVal + 1);
+          this.runCount(newVal);
         } else {
           this.$emit("close");
         }

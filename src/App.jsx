@@ -16,7 +16,7 @@ export default {
     if (!_.isNil(id)) {
       localStorage.set(TC_ARCHERY_USER_INFO, userObj[id]);
     } else {
-      localStorage.set(TC_ARCHERY_USER_INFO, userObj[5]);
+      localStorage.set(TC_ARCHERY_USER_INFO, userObj[4]);
     }
     this.loading = false;
   },

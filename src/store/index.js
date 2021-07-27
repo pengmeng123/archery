@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import services from "@/services";
+import router from "../router";
 import _ from "lodash";
 Vue.use(Vuex);
 
@@ -58,7 +59,8 @@ export default new Vuex.Store({
       return services.user
         .getExcute()
         .then((r) => {
-          if (_.get(r, "data.code") === 1000) {
+          const code = _.get(r, "data.code");
+          if (code === 1000) {
             const count = _.get(r, "data.result.currentGame.countDown");
             if (count > 15 || _.isEmpty(rootState.gameInfo)) {
               commit("SET_GAME_INFO", _.get(r, "data.result"));
@@ -72,6 +74,10 @@ export default new Vuex.Store({
               });
             }
             return r;
+          } else if (code === 1006) {
+            router.push({
+              name: "Maintenance",
+            });
           } else {
             // commit("SET_GAME_INFO", {});
             return Promise.reject();

@@ -2,7 +2,8 @@ import goldImg from "@/assets/images/gold.png";
 import { mapState, mapActions, mapGetters } from "vuex";
 import _ from "lodash";
 const $ = window.$;
-const BEETING_COUNT = 14;
+const BEETING_COUNT = 15;
+const NO_BETTING_COUNT = 3;
 const BetsMixin = {
   data() {
     return {
@@ -34,7 +35,7 @@ const BetsMixin = {
   },
   watch: {
     count(newVal) {
-      if (newVal < 2) {
+      if (newVal < NO_BETTING_COUNT) {
         this.clearTimer();
       }
     },
@@ -194,7 +195,7 @@ const BetsMixin = {
       });
     },
     onGamePlay(support = 1, type = 1) {
-      if (this.count <= 0) {
+      if (this.count < NO_BETTING_COUNT) {
         return;
       }
       this.startBetting();
@@ -238,7 +239,7 @@ const BetsMixin = {
     onStartFly(startTarget, endTarget) {
       if (this.count < 2 && this.animationStep === 0) {
         this.clearTimer();
-        this.$toast("禁止游戏投注时间");
+        this.$toast("停止支持时间");
         return;
       }
       var flyer = $(
@@ -335,7 +336,7 @@ const BetsMixin = {
           this.setAnimationStep(0);
           this.init && this.init();
           this.getGameMainInfo && this.getGameMainInfo();
-        }, 500);
+        }, 200);
       } catch {
         this.init && this.init();
         this.getGameMainInfo && this.getGameMainInfo();

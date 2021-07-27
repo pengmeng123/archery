@@ -31,6 +31,7 @@ export default {
     return {
       resultTimer1: null,
       resultTimer2: null,
+      resultTimer3: null,
     };
   },
   async mounted() {
@@ -50,7 +51,12 @@ export default {
       handler(newVal) {
         // 倒计时结束去拿这一局的中奖信息
         if (newVal === 0) {
-          this.getResult();
+          this.setStartMatchStatus(true);
+          this.setAnimationStep(1);
+          this.resultTimer3 && clearTimeout(this.resultTimer3);
+          this.resultTimer3 = setTimeout(() => {
+            this.getResult();
+          }, 1000);
         }
       },
     },
@@ -140,12 +146,10 @@ export default {
           ? _.keyBy(_.get(o, "currentGame.result"), "result")
           : null;
         if (!_.isNil(result)) {
-          this.setStartMatchStatus(true);
-          this.setAnimationStep(1);
-          // 这里延迟2s再次请求，是因为可能第一次拿到的结果不准
           this.resultTimer1 = setTimeout(() => {
             this.getResultExcute();
-          }, 5000);
+          }, 1000);
+          // 这里延迟2s再次请求，是因为可能第一次拿到的结果不准
           this.resultTimer2 = setTimeout(() => {
             this.getResultExcute();
           }, 10000);
@@ -170,7 +174,9 @@ export default {
       this.timerCount && clearTimeout(this.timerCount);
       this.resultTimer1 && clearTimeout(this.resultTimer1);
       this.resultTimer2 && clearTimeout(this.resultTimer2);
+      this.resultTimer3 && clearTimeout(this.resultTimer3);
       this.removeAddEventListenerFun();
+      this.animationStepClearTimer();
     },
   },
   beforeDestroy() {
