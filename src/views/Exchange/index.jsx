@@ -6,7 +6,7 @@ import ExchangeRecord from "@/components/Exchange/record";
 import PhoneBill from "@/components/PhoneBill";
 import CreditCard from "../../components/CreditCard";
 import _ from "lodash";
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   name: "Exchange",
@@ -22,6 +22,10 @@ export default {
   },
   mounted() {
     this.fetchGameExchange();
+    this.fetchGameInfo();
+    if (this.$route.query.record == 1) {
+      this.isExchangeRecord = true;
+    }
   },
   computed: {
     ...mapState(["gameInfo"]),
@@ -30,9 +34,21 @@ export default {
     },
   },
   methods: {
+    ...mapMutations({
+      setGameInfo: "SET_GAME_INFO",
+    }),
+    fetchGameInfo() {
+      return this.$service.user.getExcute().then((r) => {
+        if (_.get(r, "data.code") === 1000) {
+          console.log(_.get(r, "data.result"));
+          this.setGameInfo(_.get(r, "data.result"));
+        }
+      });
+    },
     fetchGameExchange() {
-      this.$service.user.gameExchange().then((r) => {
+      return this.$service.user.gameExchange().then((r) => {
         this.data = _.get(r, "data.result") || [];
+        return r;
       });
     },
     onExchange(v) {

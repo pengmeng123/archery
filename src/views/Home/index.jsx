@@ -36,12 +36,18 @@ export default {
   },
   async mounted() {
     this.onReset();
-    const r = await this.getGameInfo();
-    if (_.get(r, "data.code") === 1000) {
-      this.init();
-      // 主页接口信息;
-      this.getGameMainInfo();
-      this.monitorResultAnimation();
+    try {
+      const r = await this.getGameInfo();
+      if (_.get(r, "data.code") === 1000) {
+        this.init();
+        // 主页接口信息;
+        this.getGameMainInfo();
+        this.monitorResultAnimation();
+      }
+    } catch {
+      this.$router.push({
+        name: "Disconnection",
+      });
     }
   },
   computed: {
@@ -133,7 +139,10 @@ export default {
     },
     getResultExcute() {
       return this.$service.user.getExcute().then(async (r) => {
-        if (!_.isNil(_.get(r, "data.result.currentGame.gameResult"))) {
+        if (
+          !_.isNil(_.get(r, "data.result.currentGame.gameResult")) &&
+          _.get(r, "data.code") === 1000
+        ) {
           this.setResultGameInfo(_.get(r, "data.result"));
         } else {
           // 如果动画的时候发现没有gameresult字段，那就从头开始

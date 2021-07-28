@@ -27,14 +27,6 @@ export default {
       return _.get(this.mainInfo, "tasklist") || [];
     },
   },
-  watch: {
-    visible(newVal) {
-      console.log("9--dd");
-      if (newVal) {
-        console.log("9--");
-      }
-    },
-  },
   methods: {
     onReceive() {
       this.isVisible = true;
@@ -47,8 +39,12 @@ export default {
           isDanger: true,
           type: v.type,
         })
-        .then(() => {
-          this.actionTips(v.status);
+        .then((r) => {
+          if (_.get(r, "data.code") === 1000) {
+            this.actionTips(v.status);
+          } else {
+            this.$toast(_.get(r, "data.message"));
+          }
         });
     },
     onClose() {

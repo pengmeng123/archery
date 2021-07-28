@@ -10,6 +10,11 @@ export default {
       default: () => ({}),
     },
   },
+  methods: {
+    onCheck() {
+      this.$router.push("/exchange?record=1");
+    },
+  },
   render() {
     const { record } = this;
     return (
@@ -17,8 +22,9 @@ export default {
         <img src={AwardTitleImg} class={styles.title} />
         <div
           style={{
-            margin: "0 auto",
-            textAlign: "center",
+            margin: "10px 0 0 0",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
           <CreditCard type={record.type} amount={record.amount} />
@@ -26,7 +32,7 @@ export default {
         <div class={styles.name}>
           {getAwardName(record.type, record.amount)}
         </div>
-        <a href="javascript:" class={styles.btnCheck}>
+        <a href="javascript:" class={styles.btnCheck} onClick={this.onCheck}>
           去查看
         </a>
       </div>
