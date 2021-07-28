@@ -7,14 +7,13 @@
   overflow-y: auto;
   
   li {
-    height: 120px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: #fff;
     margin-bottom: 20px;
     border-radius: 16px;
-    padding: 0 24px;
+    padding: 23px 24px 21px;
     position: relative;
   }
   .title {
@@ -41,13 +40,7 @@
       background: #BABABA;
     }
   }
-  .award {
-    width: 106px;
-    margin-left: 18px;
-    position: absolute;
-    right: 200px;
-    top: -10px;
-  }
+  
   .desc {
     display: flex;
     align-items: center;
@@ -74,5 +67,20 @@
     margin: 0 auto;
     font-size: 36px;
     color: #fff;
+  }
+}
+.award {
+  position: relative;
+  padding-top: 13px;
+  .text {
+    font-size: 24px;
+    color: #FF8813;
+    padding-right: 50px;
+  }
+  .icon {
+    width: 106px;
+    position: absolute;
+    right: 0;
+    top: -42px;
   }
 }

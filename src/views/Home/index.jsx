@@ -202,9 +202,9 @@ export default {
     this.onReset();
   },
   render() {
-    if (this.appLoading) {
-      return this.renderLoading();
-    }
+    // if (this.appLoading) {
+    //   return this.renderLoading();
+    // }
     return (
       <div
         class={{

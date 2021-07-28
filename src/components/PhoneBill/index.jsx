@@ -70,7 +70,11 @@ export default {
         {!this.isSuccess ? (
           <div class={styles.content}>
             <div class={styles.inputContainer}>
-              <input type="text" v-model={this.phone} />
+              <input
+                placeholder="请输入手机号"
+                type="tel"
+                v-model={this.phone}
+              />
               {this.phone ? (
                 <img
                   src={IconDelete}

@@ -6,7 +6,13 @@ import { mapState } from "vuex";
 import _ from "lodash";
 import Empty from "@/components/Empty";
 import styles from "./index.module.less";
-
+const awardNameObj = {
+  0: "火车票",
+  1: "话费劵",
+  2: "国内机票",
+  3: "京东卡",
+  4: "国内酒店",
+};
 export default {
   name: "FareTask",
   props: {
@@ -76,10 +82,16 @@ export default {
                   <div class={styles.desc}>
                     <AppPercent receive={v.finish} total={v.target} />
                   </div>
+                  <div class={styles.award}>
+                    <span class={styles.text}>
+                      奖励:{v.amount}元{awardNameObj[v.type]}满减券
+                    </span>
+                    <div class={styles.icon}>
+                      <CreditCard task={true} type={v.type} amount={v.amount} />
+                    </div>
+                  </div>
                 </div>
-                <div class={styles.award}>
-                  <CreditCard task={true} type={v.type} amount={v.amount} />
-                </div>
+
                 {v.status === -1 ? (
                   <a
                     href="javascript:"
