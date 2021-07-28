@@ -196,6 +196,8 @@ const BetsMixin = {
     },
     onGamePlay(support = 1, type = 1) {
       if (this.count < NO_BETTING_COUNT) {
+        this.clearTimer();
+        this.$toast(`停止${type === 1 ? "支持" : "撤销"}时间`);
         return;
       }
       this.startBetting();

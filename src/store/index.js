@@ -74,7 +74,7 @@ export default new Vuex.Store({
               });
             }
             return r;
-          } else if (code === 1006) {
+          } else if (code === 1006 || code === 1005) {
             router.push({
               name: "Maintenance",
             });

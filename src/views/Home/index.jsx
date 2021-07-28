@@ -57,6 +57,12 @@ export default {
           this.resultTimer3 = setTimeout(() => {
             this.getResult();
           }, 1000);
+          // this.testTimer && clearInterval(this.testTimer);
+          // this.testCount = 0;
+          // this.testTimer = setInterval(() => {
+          //   console.log("testCount--", this.testCount);
+          //   this.testCount++;
+          // }, 1000);
         }
       },
     },
