@@ -79,12 +79,12 @@ export default new Vuex.Store({
               name: "Maintenance",
             });
           } else {
-            // commit("SET_GAME_INFO", {});
-            return Promise.reject();
+            console.log("erejct-code-------", code);
+            return Promise.resolve({});
           }
         })
         .catch(() => {
-          commit("SET_GAME_INFO", {});
+          console.log("catch---");
         })
         .finally(() => {
           commit("SET_APP_LOADING", false);

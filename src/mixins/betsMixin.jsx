@@ -112,9 +112,11 @@ const BetsMixin = {
       this.clearTimer();
       // 5s请求接口获取玩家投注，播放动画
       this.betsTimer = setInterval(() => {
-        this.getGameInfo().then(() => {
-          this.updateContDown && this.updateContDown();
-          this.autoPayListBetting();
+        this.getGameInfo().then((r) => {
+          if (_.get(r, "data.code") === 1000) {
+            this.updateContDown && this.updateContDown();
+            this.autoPayListBetting();
+          }
         });
       }, 3000);
     },

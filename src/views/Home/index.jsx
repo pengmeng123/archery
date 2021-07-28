@@ -36,11 +36,13 @@ export default {
   },
   async mounted() {
     this.onReset();
-    await this.getGameInfo();
-    this.init();
-    // 主页接口信息;
-    this.getGameMainInfo();
-    this.monitorResultAnimation();
+    const r = await this.getGameInfo();
+    if (_.get(r, "data.code") === 1000) {
+      this.init();
+      // 主页接口信息;
+      this.getGameMainInfo();
+      this.monitorResultAnimation();
+    }
   },
   computed: {
     ...mapState(["animationStep", "gameInfo", "count", "appLoading"]),
@@ -109,14 +111,16 @@ export default {
       this.onReset();
       try {
         const r = await this.getGameInfo();
-        if (!_.isNil(r)) {
+        if (!_.isNil(r) && _.get(r, "data.code") === 1000) {
           this.init();
         } else {
-          this.$toast("网络异常");
+          // this.$toast("网络异常");
+          this.$router.push({
+            name: "Disconnection",
+          });
         }
-      } catch {
-        console.log("catch----");
-      }
+        // eslint-disable-next-line no-empty
+      } catch {}
     },
     handleBettingCancel() {
       this.onGamePlay(1, 2);
@@ -135,7 +139,7 @@ export default {
           // 如果动画的时候发现没有gameresult字段，那就从头开始
           this.onReset();
           const r1 = await this.getGameInfo();
-          if (!_.isNil(r1)) {
+          if (!_.isNil(r1) && _.get(r1, "data.code") === 1000) {
             this.init();
           }
         }
