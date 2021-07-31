@@ -1,14 +1,17 @@
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 // import helper from "@/utils/helper";
 import { userObj } from "@/config/user";
 import { localStorage } from "@/utils/storage";
 import { TC_ARCHERY_USER_INFO } from "@/config/api";
+import bgMusic from "@/assets/images/mp3/arrow.mp3";
 import _ from "lodash";
 export default {
   name: "App",
   data() {
     return {
       loading: true,
+      muted: true,
+      sound: bgMusic,
     };
   },
   created() {
@@ -45,6 +48,20 @@ export default {
     // console.log("authUrl---", authUrl);
     // location.replace(authUrl)
   },
+  computed: {
+    ...mapState(["animationStep"]),
+  },
+  watch: {
+    animationStep(newVal) {
+      if (newVal === 4) {
+        setTimeout(() => {
+          this.$refs.audio.muted = !this.isToggle;
+          this.$refs.audio.currentTime = 0;
+          this.$refs.audio.play();
+        }, 400);
+      }
+    },
+  },
   methods: {
     ...mapActions({
       getGameInfo: "getGameInfo",
@@ -60,6 +77,11 @@ export default {
       }
       return theRequest;
     },
+    handlePlayVideo() {
+      this.isToggle = !this.isToggle;
+      this.$refs.audio.muted = true;
+      this.$refs.audio.play();
+    },
   },
   render() {
     if (this.loading) {
@@ -67,6 +89,15 @@ export default {
     }
     return (
       <div id="app" style="height:100%">
+        <div
+          style="width:30px;height:30px;background:red;"
+          onClick={this.handlePlayVideo}
+        >
+          click me
+        </div>
+        <audio controls ref="audio" hidden="true">
+          <source src={this.sound} />
+        </audio>
         <router-view />
       </div>
     );
