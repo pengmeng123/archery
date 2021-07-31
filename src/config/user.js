@@ -24,4 +24,14 @@ export const userObj = {
     idenid: "OCyauCcZyrIW7RzHHXupAln79lA",
     icon: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/34caee2c867bfd8c5e0dc2d8c663e121.jpg?thumb=1&w=400&h=400&f=webp&q=90",
   },
+  6: {
+    nick: "006",
+    idenid: "oOCyauLQ9cGMSZANM03FzPinQH_o",
+    icon: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/34caee2c867bfd8c5e0dc2d8c663e121.jpg?thumb=1&w=400&h=400&f=webp&q=90",
+  },
+  7: {
+    nick: "007",
+    idenid: "o498X0Vpom-uIcJTieLL4K23nhzc",
+    icon: "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/34caee2c867bfd8c5e0dc2d8c663e121.jpg?thumb=1&w=400&h=400&f=webp&q=90",
+  },
 };
