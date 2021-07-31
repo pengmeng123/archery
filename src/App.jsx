@@ -3,15 +3,18 @@ import { mapActions, mapState } from "vuex";
 import { userObj } from "@/config/user";
 import { localStorage } from "@/utils/storage";
 import { TC_ARCHERY_USER_INFO } from "@/config/api";
-import bgMusic from "@/assets/images/mp3/arrow.mp3";
+import bgMusic from "@/assets/images/mp3/bg.mp3";
+import targetMusic from "@/assets/images/mp3/arrow.mp3";
+import MusicMixin from "@/mixins/music";
 import _ from "lodash";
 export default {
   name: "App",
+  mixins: [MusicMixin],
   data() {
     return {
       loading: true,
       muted: true,
-      sound: bgMusic,
+      sound: targetMusic,
     };
   },
   created() {
@@ -54,11 +57,9 @@ export default {
   watch: {
     animationStep(newVal) {
       if (newVal === 4) {
-        setTimeout(() => {
-          this.$refs.audio.muted = !this.isToggle;
-          this.$refs.audio.currentTime = 0;
-          this.$refs.audio.play();
-        }, 400);
+        this.$refs.audio.muted = !this.isToggle;
+        this.$refs.audio.currentTime = 0;
+        this.$refs.audio.play();
       }
     },
   },
@@ -66,17 +67,6 @@ export default {
     ...mapActions({
       getGameInfo: "getGameInfo",
     }),
-    getRequest(url) {
-      let theRequest = new Object();
-      if (url.indexOf("?") != -1) {
-        let str = url.substr(1);
-        let strs = str.split("&");
-        for (var i = 0; i < strs.length; i++) {
-          theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
-        }
-      }
-      return theRequest;
-    },
     handlePlayVideo() {
       this.isToggle = !this.isToggle;
       this.$refs.audio.muted = true;
@@ -91,12 +81,15 @@ export default {
       <div id="app" style="height:100%">
         <div
           style="width:30px;height:30px;background:red;"
-          onClick={this.handlePlayVideo}
+          onClick={this.changeOn}
         >
           click me
         </div>
         <audio controls ref="audio" hidden="true">
           <source src={this.sound} />
+        </audio>
+        <audio preload="auto" controls ref="audioBg" hidden="true" volume={0}>
+          <source src={bgMusic} />
         </audio>
         <router-view />
       </div>
