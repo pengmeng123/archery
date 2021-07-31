@@ -32,16 +32,6 @@ const animationStepMixin = {
         return;
       }
       this.$nextTick(() => {
-        document.addEventListener("visibilitychange", function () {
-          //浏览器切换事件
-
-          if (document.visibilityState == "hidden") {
-            console.log("hidden-------");
-            //状态判断
-          } else {
-            console.log("fs---------");
-          }
-        });
         const playerPhoto = document.querySelector(".playerPhoto");
         const targetBox = document.querySelector(".targetBox");
         const homeBg = document.querySelector(".homeBg");

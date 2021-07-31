@@ -1,10 +1,11 @@
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 // import helper from "@/utils/helper";
 import { userObj } from "@/config/user";
 import { localStorage } from "@/utils/storage";
 import { TC_ARCHERY_USER_INFO } from "@/config/api";
 import bgMusic from "@/assets/images/mp3/bg.mp3";
 import targetMusic from "@/assets/images/mp3/arrow.mp3";
+import applauseMusic from "@/assets/images/mp3/applause.mp3";
 import MusicMixin from "@/mixins/music";
 import _ from "lodash";
 export default {
@@ -14,7 +15,6 @@ export default {
     return {
       loading: true,
       muted: true,
-      sound: targetMusic,
     };
   },
   created() {
@@ -51,27 +51,13 @@ export default {
     // console.log("authUrl---", authUrl);
     // location.replace(authUrl)
   },
-  computed: {
-    ...mapState(["animationStep"]),
-  },
-  watch: {
-    animationStep(newVal) {
-      if (newVal === 4) {
-        this.$refs.audio.muted = !this.isToggle;
-        this.$refs.audio.currentTime = 0;
-        this.$refs.audio.play();
-      }
-    },
+  beforeDestroy() {
+    this.closeMusicTimerout();
   },
   methods: {
     ...mapActions({
       getGameInfo: "getGameInfo",
     }),
-    handlePlayVideo() {
-      this.isToggle = !this.isToggle;
-      this.$refs.audio.muted = true;
-      this.$refs.audio.play();
-    },
   },
   render() {
     if (this.loading) {
@@ -79,18 +65,27 @@ export default {
     }
     return (
       <div id="app" style="height:100%">
-        <div
+        {/* <div
           style="width:30px;height:30px;background:red;"
-          onClick={this.changeOn}
+          onClick={() => {
+            this.audioAutoPlay1(false);
+          }}
         >
-          click me
-        </div>
-        <audio controls ref="audio" hidden="true">
-          <source src={this.sound} />
-        </audio>
+          toggle me
+        </div> */}
+        {/* 背景音乐 */}
         <audio preload="auto" controls ref="audioBg" hidden="true" volume={0}>
           <source src={bgMusic} />
         </audio>
+        {/* 中靶 */}
+        <audio controls ref="audioTarget" hidden="true">
+          <source src={targetMusic} />
+        </audio>
+        {/* 鼓掌 */}
+        <audio controls ref="audioApplause" hidden="true">
+          <source src={applauseMusic} />
+        </audio>
+
         <router-view />
       </div>
     );
