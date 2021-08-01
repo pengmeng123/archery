@@ -11,7 +11,7 @@ export default {
   },
   methods: {
     onCheck() {
-      this.$router.push("/exchange?record=1");
+      this.$router.push("/exchange?openRecord=true");
     },
   },
   render() {

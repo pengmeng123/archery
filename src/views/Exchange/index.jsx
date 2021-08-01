@@ -21,8 +21,10 @@ export default {
       isExchangePhoneBill: false,
     };
   },
-  mounted() {
+  created() {
     localStorage.set(EXCHANGE_DOT, true);
+  },
+  mounted() {
     this.fetchGameExchange();
     this.fetchGameInfo();
     if (this.$route.query.record == 1) {
@@ -42,16 +44,22 @@ export default {
     fetchGameInfo() {
       return this.$service.user.getExcute().then((r) => {
         if (_.get(r, "data.code") === 1000) {
-          console.log(_.get(r, "data.result"));
           this.setGameInfo(_.get(r, "data.result"));
         }
       });
     },
     fetchGameExchange() {
-      return this.$service.user.gameExchange().then((r) => {
-        this.data = _.get(r, "data.result") || [];
-        return r;
-      });
+      return this.$service.user
+        .gameExchange()
+        .then((r) => {
+          this.data = _.get(r, "data.result") || [];
+          return r;
+        })
+        .finally(() => {
+          if (this.$route.query.openRecord) {
+            this.isExchangeRecord = true;
+          }
+        });
     },
     onExchange(v) {
       if (v.cost > this.account) {

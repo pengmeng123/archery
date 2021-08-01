@@ -52,7 +52,14 @@ export default {
               ))}
             </ul>
           </div>
-          <div class={styles.countDown}>{count < 0 ? 0 : count}</div>
+          <div
+            class={{
+              [styles.countDown]: true,
+              // [styles.countDownAnimation]: true,
+            }}
+          >
+            {count < 0 ? 0 : count}
+          </div>
           <div
             class={{
               [styles.players]: true,

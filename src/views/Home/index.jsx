@@ -37,8 +37,8 @@ export default {
   },
   async mounted() {
     try {
-      // await this.fetchRequest();
-      // this.monitorResultAnimation();
+      await this.fetchRequest();
+      this.monitorResultAnimation();
       // eslint-disable-next-line no-empty
     } catch {}
   },
@@ -263,9 +263,9 @@ export default {
     this.onReset();
   },
   render() {
-    // if (this.appLoading) {
-    //   return this.renderLoading();
-    // }
+    if (this.appLoading) {
+      return this.renderLoading();
+    }
     return (
       <div>
         {/* 新手引导 */}

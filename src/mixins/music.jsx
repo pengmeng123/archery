@@ -9,7 +9,7 @@ const Music = {
     };
   },
   computed: {
-    ...mapState(["animationStep"]),
+    ...mapState(["animationStep", "startMatch"]),
   },
   watch: {
     animationStep(newVal) {
@@ -29,12 +29,30 @@ const Music = {
         }, 500);
       }
     },
+    startMatch(newVal) {
+      if (newVal) {
+        this.$refs.audioBg && this.$refs.audioBg.pause();
+      } else {
+        this.endMute();
+      }
+    },
+
+    $route: function (newVal) {
+      if (newVal.name !== "Home") {
+        this.startMute();
+      } else {
+        this.endMute();
+      }
+    },
   },
   methods: {
     closeMusicTimerout() {
       this.musicTimer && clearTimeout(this.musicTimer);
     },
     changeOn(checkedStatus = true) {
+      if (!(this.$route.name === "Home")) {
+        return;
+      }
       if (this.isOff) {
         this.$refs.audioBg.play(); //让音频文件开始播放
       } else {
@@ -69,18 +87,21 @@ const Music = {
   },
   mounted() {
     // 自动播放音乐效果，解决微信自动播放问题
-    // this.$nextTick(() => {
-    //   document.addEventListener("touchstart", this.startMusic, false);
-    //   document.addEventListener("visibilitychange", () => {
-    //     //浏览器切换事件
-    //     if (document.visibilityState == "hidden") {
-    //       this.startMute();
-    //       //状态判断
-    //     } else {
-    //       this.endMute();
-    //     }
-    //   });
-    // });
+    this.$nextTick(() => {
+      try {
+        document.addEventListener("touchstart", this.startMusic, false);
+        document.addEventListener("visibilitychange", () => {
+          //浏览器切换事件
+          if (document.visibilityState == "hidden") {
+            this.startMute();
+            //状态判断
+          } else {
+            this.endMute();
+          }
+        });
+        // eslint-disable-next-line no-empty
+      } catch {}
+    });
   },
 };
 export default Music;

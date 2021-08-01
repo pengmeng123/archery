@@ -22,15 +22,15 @@ export default {
   async mounted() {
     await imgsPreloader(animationList);
   },
-  watch: {
-    startMatch(newVal) {
-      if (newVal) {
-        this.isDropDownMore = false;
-        this.fareTaskVisible = false;
-        this.receiveGoldVisible = false;
-      }
-    },
-  },
+  // watch: {
+  //   startMatch(newVal) {
+  //     if (newVal) {
+  //       this.isDropDownMore = false;
+  //       this.fareTaskVisible = false;
+  //       this.receiveGoldVisible = false;
+  //     }
+  //   },
+  // },
   computed: {
     ...mapState(["mainInfo", "startMatch"]),
     menus() {

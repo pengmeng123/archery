@@ -87,7 +87,7 @@ export default {
           toggle me
         </div> */}
         {/* 背景音乐 */}
-        <audio preload="auto" controls ref="audioBg" hidden="true" volume={0}>
+        <audio preload="auto" controls ref="audioBg" hidden="true" loop>
           <source src={bgMusic} />
         </audio>
         {/* 中靶 */}

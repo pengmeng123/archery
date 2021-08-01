@@ -15,7 +15,7 @@ export default new Vuex.Store({
     times: 0, //是否播放两次
     bettingAmount: 50, //选择的投注面值
     isGameBettingTime: true, //15s前投注时间，超过就为false
-    appLoading: false, //带有进度条loading
+    appLoading: true, //带有进度条loading
     gameInfo: {}, //主流程接口信息
     mainInfo: {}, //menu接口信息
     networkSuccess: true, //断网的情况，默认是true
