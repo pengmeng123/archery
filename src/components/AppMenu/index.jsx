@@ -41,6 +41,14 @@ export default {
           eventName: "recevieGold",
         },
         {
+          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/welfare-task.png",
+          func: async () => {
+            await this.getGameMainInfo();
+            this.fareTaskVisible = true;
+          },
+          eventName: "exchange",
+        },
+        {
           icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/gold-exchange.png",
           func: () => {
             this.$router.push({
@@ -49,14 +57,7 @@ export default {
           },
           eventName: "welfareTask",
         },
-        {
-          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/welfare-task.png",
-          func: async () => {
-            await this.getGameMainInfo();
-            this.fareTaskVisible = true;
-          },
-          eventName: "exchange",
-        },
+
         {
           icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/more.png",
           className: "dropDownMoreContainer",

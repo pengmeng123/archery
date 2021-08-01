@@ -12,6 +12,7 @@ import Archery from "@/components/Archery";
 import AppNotStart from "@/components/AppNotStart";
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
 import AppLoading from "@/components/AppLoading";
+import Guide from "@/components/Guide";
 import _ from "lodash";
 export default {
   name: "Home",
@@ -36,8 +37,8 @@ export default {
   },
   async mounted() {
     try {
-      await this.fetchRequest();
-      this.monitorResultAnimation();
+      // await this.fetchRequest();
+      // this.monitorResultAnimation();
       // eslint-disable-next-line no-empty
     } catch {}
   },
@@ -222,52 +223,56 @@ export default {
     this.onReset();
   },
   render() {
-    if (this.appLoading) {
-      return this.renderLoading();
-    }
+    // if (this.appLoading) {
+    //   return this.renderLoading();
+    // }
     return (
-      <div
-        class={{
-          [styles.container]: true,
-          [styles.containerAnimation]:
-            this.animationStep >= 3 && this.animationStep < 6,
-        }}
-      >
-        {/*  距离下一局开始时间 */}
-        {!this.isGameBettingTime ? (
-          <app-not-start
-            endSecond={Math.abs(this.gameCountDown)}
-            onClose={this.handleHasStartTime}
-          />
-        ) : null}
-        {/* 射箭动画,背景图片也在里面 */}
-        <archery vShow={this.animationStep > 0 && this.animationStep < 6} />
-        {/* 主体内容 */}
-        <div class={styles.content}>
-          <div class={styles.topPart}>
+      <div>
+        {/* 新手引导 */}
+        <Guide />
+        <div
+          class={{
+            [styles.container]: true,
+            [styles.containerAnimation]:
+              this.animationStep >= 3 && this.animationStep < 6,
+          }}
+        >
+          {/*  距离下一局开始时间 */}
+          {!this.isGameBettingTime ? (
+            <app-not-start
+              endSecond={Math.abs(this.gameCountDown)}
+              onClose={this.handleHasStartTime}
+            />
+          ) : null}
+          {/* 射箭动画,背景图片也在里面 */}
+          <archery vShow={this.animationStep > 0 && this.animationStep < 6} />
+          {/* 主体内容 */}
+          <div class={styles.content}>
+            <div class={styles.topPart}>
+              <div
+                class={{
+                  "animate__animated animate__fadeOutUp": this.startMatch,
+                }}
+                style="position:relative;z-index:2"
+              >
+                <app-menu />
+                <app-header />
+              </div>
+              <app-stake
+                onTtClick={this.onTtClick}
+                onDrawerClick={this.onDrawerClick}
+                onCcClick={this.onCcClick}
+              />
+              <app-child />
+            </div>
             <div
               class={{
-                "animate__animated animate__fadeOutUp": this.startMatch,
+                "animate__animated animate__fadeOutDown": this.startMatch,
               }}
-              style="position:relative;z-index:2"
             >
-              <app-menu />
-              <app-header />
+              <app-game-player />
+              <app-footer onCancel={this.handleBettingCancel} />
             </div>
-            <app-stake
-              onTtClick={this.onTtClick}
-              onDrawerClick={this.onDrawerClick}
-              onCcClick={this.onCcClick}
-            />
-            <app-child />
-          </div>
-          <div
-            class={{
-              "animate__animated animate__fadeOutDown": this.startMatch,
-            }}
-          >
-            <app-game-player />
-            <app-footer onCancel={this.handleBettingCancel} />
           </div>
         </div>
       </div>
