@@ -15,13 +15,17 @@ const Music = {
     animationStep(newVal) {
       if (newVal === 4) {
         this.$refs.audioTarget.muted = this.isOff;
-        this.$refs.audioTarget.currentTime = 0;
-        this.$refs.audioTarget.play();
+        if (!this.isOff) {
+          this.$refs.audioTarget.currentTime = 0;
+          this.$refs.audioTarget.play();
+        }
         this.closeMusicTimerout();
         this.musicTimer = setTimeout(() => {
           this.$refs.audioApplause.muted = this.isOff;
-          this.$refs.audioApplause.currentTime = 0;
-          this.$refs.audioApplause.play();
+          if (!this.isOff) {
+            this.$refs.audioApplause.currentTime = 0;
+            this.$refs.audioApplause.play();
+          }
         }, 500);
       }
     },
@@ -66,7 +70,7 @@ const Music = {
   mounted() {
     // 自动播放音乐效果，解决微信自动播放问题
     this.$nextTick(() => {
-      // document.addEventListener("touchstart", this.startMusic, false);
+      document.addEventListener("touchstart", this.startMusic, false);
       document.addEventListener("visibilitychange", () => {
         //浏览器切换事件
         if (document.visibilityState == "hidden") {

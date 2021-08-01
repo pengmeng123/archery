@@ -20,9 +20,10 @@ export default {
     ...mapState(["startMatch", "gameInfo"]),
     ...mapGetters(["count"]),
     getHistoryGameList() {
-      return (_.get(this.gameInfo, "historyGameList") || [])
+      const arr = (_.get(this.gameInfo, "historyGameList") || [])
         .map((v) => v.result)
         .slice(0.8);
+      return _.reverse(arr);
     },
   },
   methods: {
