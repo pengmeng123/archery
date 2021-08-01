@@ -1,5 +1,4 @@
 import styles from "./index.module.less";
-import emptyImg from "@/assets/images/empty.png";
 export default {
   name: "Empty",
   props: {
@@ -14,7 +13,10 @@ export default {
   render() {
     return (
       <div class={styles.container}>
-        <img src={emptyImg} class={styles.img} />
+        <img
+          src="https://file.40017.cn/huochepiao/activity/arrowtest/static/empty.png"
+          class={styles.img}
+        />
         {this.emptyText}
       </div>
     );

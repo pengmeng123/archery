@@ -1,11 +1,4 @@
 import styles from "./index.module.less";
-import TtVictoryCardImg from "@/assets/images/tt/victory-card.png";
-import CcVictoryCardImg from "@/assets/images/cc/victory-card.png";
-import DrawerVictoryCardImg from "@/assets/images/drawer/victory-card.png";
-import apertureImg from "../../../static/aperture.png";
-import TtVictoryTextImg from "@/assets/images/tt/victory-text.png";
-import CcVictoryTextImg from "@/assets/images/cc/victory-text.png";
-import DrawerVictoryTextImg from "@/assets/images/drawer/victory-text.png";
 import { mapState, mapGetters } from "vuex";
 import { DIRECTION_STR } from "@/config/common";
 import _ from "lodash";
@@ -37,18 +30,24 @@ export default {
       switch (result) {
         case 2:
           return {
-            victoryImg: CcVictoryCardImg,
-            victoryTextImg: CcVictoryTextImg,
+            victoryImg:
+              "https://file.40017.cn/huochepiao/activity/arrowtest/static/cc/victory-card.png",
+            victoryTextImg:
+              "https://file.40017.cn/huochepiao/activity/arrowtest/static/cc/victory-text.png",
           };
         case 3:
           return {
-            victoryImg: DrawerVictoryCardImg,
-            victoryTextImg: DrawerVictoryTextImg,
+            victoryImg:
+              "https://file.40017.cn/huochepiao/activity/arrowtest/static/drawer/victory-card.png",
+            victoryTextImg:
+              "https://file.40017.cn/huochepiao/activity/arrowtest/static/drawer/victory-text.png",
           };
         default:
           return {
-            victoryImg: TtVictoryCardImg,
-            victoryTextImg: TtVictoryTextImg,
+            victoryImg:
+              "https://file.40017.cn/huochepiao/activity/arrowtest/static/tt/victory-card.png",
+            victoryTextImg:
+              "https://file.40017.cn/huochepiao/activity/arrowtest/static/tt/victory-text.png",
           };
       }
     },
@@ -268,7 +267,11 @@ export default {
         {/* 最后比赛结果 */}
         <div class={styles.matchResultContainer} vShow={animationStep === 5}>
           <div class={styles.matchResult}>
-            <img src={apertureImg} alt="" class={styles.apertureImg} />
+            <img
+              src="https://file.40017.cn/huochepiao/activity/arrowtest/static/aperture.png"
+              alt=""
+              class={styles.apertureImg}
+            />
             <img src={gameResultImg.victoryImg} alt="" class={styles.cardImg} />
             <div
               class={{

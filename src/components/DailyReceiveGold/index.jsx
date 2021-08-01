@@ -1,6 +1,4 @@
 import styles from "./index.module.less";
-import PrizeImg from "@/assets/images/prize.png";
-import PrizeBgImg from "@/assets/images/prize-bg.png";
 export default {
   name: "DailyReceiveGold",
   props: {
@@ -11,8 +9,14 @@ export default {
   render() {
     return (
       <div class={styles.container}>
-        <img src={PrizeBgImg} class={styles.prizeBg} />
-        <img src={PrizeImg} class={styles.prize} />
+        <img
+          src="https://file.40017.cn/huochepiao/activity/arrowtest/static/prize-bg.png"
+          class={styles.prizeBg}
+        />
+        <img
+          src="https://file.40017.cn/huochepiao/activity/arrowtest/static/prize.png"
+          class={styles.prize}
+        />
         <div class={styles.title}>+{this.awardGoldNumber}金币</div>
         <span class={styles.desc}>恭喜获得，继续加油！</span>
       </div>
