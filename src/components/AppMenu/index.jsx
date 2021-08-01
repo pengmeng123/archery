@@ -1,7 +1,3 @@
-import IconReciveGold from "./images/receive-gold.png";
-import IconGoldExchange from "./images/gold-exchange.png";
-import IconWelfareTask from "./images/welfare-task.png";
-import IconMore from "./images/more.png";
 import DropDownMore from "./dropdown-more";
 import Modal from "@/components/Modal";
 import FareTask from "../FareTask";
@@ -38,14 +34,14 @@ export default {
     menus() {
       return [
         {
-          icon: IconReciveGold,
+          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/receive-gold.png",
           func: () => {
             this.gameSign();
           },
           eventName: "recevieGold",
         },
         {
-          icon: IconGoldExchange,
+          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/gold-exchange.png",
           func: () => {
             this.$router.push({
               name: "Exchange",
@@ -54,7 +50,7 @@ export default {
           eventName: "welfareTask",
         },
         {
-          icon: IconWelfareTask,
+          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/welfare-task.png",
           func: async () => {
             await this.getGameMainInfo();
             this.fareTaskVisible = true;
@@ -62,7 +58,7 @@ export default {
           eventName: "exchange",
         },
         {
-          icon: IconMore,
+          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/more.png",
           className: "dropDownMoreContainer",
           func: () => {
             this.isDropDownMore = !this.isDropDownMore;

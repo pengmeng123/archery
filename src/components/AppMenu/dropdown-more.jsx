@@ -1,6 +1,3 @@
-import IconRule from "@/assets/images/icon-rule.png";
-import IconRecord from "@/assets/images/icon-record.png";
-import IconService from "@/assets/images/icon-service.png";
 import Modal from "@/components/Modal";
 import SupportRecord from "@/components/SupportRecord";
 import { mapState } from "vuex";
@@ -27,21 +24,21 @@ export default {
       return [
         {
           title: "活动规则",
-          icon: IconRule,
+          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-rule.png",
           func: () => {
             this.ruleVisible = !this.ruleVisible;
           },
         },
         {
           title: "游戏记录",
-          icon: IconRecord,
+          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-record.png",
           func: () => {
             this.visible = !this.visible;
           },
         },
         {
           title: "客服中心",
-          icon: IconService,
+          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-service.png",
         },
       ];
     },

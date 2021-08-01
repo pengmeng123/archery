@@ -1,7 +1,3 @@
-import ExchangeTextImg from "@/assets/images/exchange-text.png";
-import AwardTitle from "@/assets/images/award-title.png";
-import CryFaceImg from "@/assets/images/cry-face.png";
-import CoinsInsufficientTextImg from "@/assets/images/coins-insufficient-text.png";
 import CreditCard from "@/components/CreditCard";
 import styles from "./modal.module.less";
 import _ from "lodash";
@@ -48,8 +44,16 @@ export default {
     renderText() {
       return (
         <div class={styles.exchangeModal}>
-          <img src={CoinsInsufficientTextImg} alt="" class={styles.title} />
-          <img src={CryFaceImg} alt="" class={styles.cryFace} />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/coins-insufficient-text.png"
+            alt=""
+            class={styles.title}
+          />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/cry-face.png"
+            alt=""
+            class={styles.cryFace}
+          />
           <div class={styles.desc}>快去玩游戏赢取金币吧！</div>
           <div class={styles.btnCheck} onClick={this.goHome}>
             赚金币
@@ -74,9 +78,17 @@ export default {
     return (
       <div class={styles.exchangeModal}>
         {this.isSuccess ? (
-          <img src={AwardTitle} alt="" class={styles.title} />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/award-title.png"
+            alt=""
+            class={styles.title}
+          />
         ) : (
-          <img src={ExchangeTextImg} alt="" class={styles.title} />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/exchange-text.png"
+            alt=""
+            class={styles.title}
+          />
         )}
         <CreditCard type={record.type} amount={record.amount} />
         <div class={styles.desc}>{_.get(record, "title")}</div>

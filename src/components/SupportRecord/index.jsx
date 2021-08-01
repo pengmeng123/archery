@@ -3,21 +3,11 @@ import { mapState } from "vuex";
 import _ from "lodash";
 import { GAME_NAME } from "@/config/common";
 import styles from "./index.module.less";
-import SupportTextImg from "@/assets/images/support-text.png";
 
 export default {
   name: "SupportRecord",
   data() {
-    return {
-      // data: [
-      //   {
-      //     date: "2021/05/05",
-      //     spNumber: 100,
-      //     projectName: "同同获胜",
-      //     awardName: "200元代金劵",
-      //   },
-      // ],
-    };
+    return {};
   },
   computed: {
     ...mapState(["mainInfo"]),
@@ -29,7 +19,11 @@ export default {
     const { data } = this;
     return (
       <div class={styles.container}>
-        <img src={SupportTextImg} alt="" class={styles.title} />
+        <img
+          src="https://file.40017.cn/huochepiao/activity/arrowtest/static/support-text.png"
+          alt=""
+          class={styles.title}
+        />
         <ul class={styles.nav}>
           <li>时间</li>
           <li>支持</li>

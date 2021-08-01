@@ -1,9 +1,5 @@
 import styles from "./index.module.less";
-import PhoneBillText from "@/assets/images/phone-bill-text.png";
-import IconDelete from "@/assets/images/icon-delete.png";
 import { phoneReg } from "@/utils/validate";
-import RechargedText from "@/assets/images/recharged.png";
-import IconRecharged from "@/assets/images/icon-recharged.png";
 import _ from "lodash";
 export default {
   name: "PhoneBill",
@@ -63,9 +59,17 @@ export default {
     return (
       <div class={styles.container}>
         {this.isSuccess ? (
-          <img src={RechargedText} alt="" class={styles.title} />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/recharged.png"
+            alt=""
+            class={styles.title}
+          />
         ) : (
-          <img src={PhoneBillText} alt="" class={styles.title} />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/phone-bill-text.png"
+            alt=""
+            class={styles.title}
+          />
         )}
         {!this.isSuccess ? (
           <div class={styles.content}>
@@ -77,7 +81,7 @@ export default {
               />
               {this.phone ? (
                 <img
-                  src={IconDelete}
+                  src="https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-delete.png"
                   alt=""
                   class={styles.close}
                   onClick={this.onClear}
@@ -101,7 +105,11 @@ export default {
           </div>
         ) : (
           <div class={styles.recharged}>
-            <img src={IconRecharged} alt="" class={styles.iconCharged} />
+            <img
+              src="https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-recharged.png"
+              alt=""
+              class={styles.iconCharged}
+            />
             <div class={styles.label}>充值手机号：</div>
             <div class={styles.text}>{this.phone}</div>
           </div>

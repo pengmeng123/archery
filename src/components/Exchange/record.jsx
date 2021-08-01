@@ -1,6 +1,5 @@
 import Empty from "@/components/Empty";
 import styles from "./record.module.less";
-import DuihuanText from "@/assets/images/duihuan-text.png";
 export default {
   name: "ExchangeRecord",
   props: {
@@ -41,7 +40,11 @@ export default {
     const { data } = this;
     return (
       <div class={styles.container}>
-        <img src={DuihuanText} alt="" class={styles.title} />
+        <img
+          src="https://file.40017.cn/huochepiao/activity/arrowtest/static/duihuan-text.png"
+          alt=""
+          class={styles.title}
+        />
         <ul class={styles.nav}>
           <li>奖品</li>
           <li>获得时间</li>

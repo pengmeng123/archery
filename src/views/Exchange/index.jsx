@@ -1,5 +1,4 @@
 import styles from "./index.module.less";
-import GoldImg from "@/assets/images/gold.png";
 import Modal from "@/components/Modal";
 import ExchangeModal from "@/components/Exchange/modal";
 import ExchangeRecord from "@/components/Exchange/record";
@@ -82,7 +81,10 @@ export default {
           <div class={styles.goldInfo}>
             <a href="javascript:" class={styles.back} onClick={this.goBack}></a>
             <div class={styles.goldNumber}>
-              <img src={GoldImg} alt="" />
+              <img
+                src="https://file.40017.cn/huochepiao/activity/arrowtest/static/gold.png"
+                alt=""
+              />
               {_.get(this.gameInfo, "account") || 0}
             </div>
           </div>
@@ -108,7 +110,10 @@ export default {
                 </div>
                 <div class={styles.awardName}>{v.title}</div>
                 <div class={styles.amount}>
-                  <img src={GoldImg} alt="" />
+                  <img
+                    src="https://file.40017.cn/huochepiao/activity/arrowtest/static/gold.png"
+                    alt=""
+                  />
                   {v.cost}
                 </div>
                 <a

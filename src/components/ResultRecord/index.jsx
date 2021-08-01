@@ -1,6 +1,4 @@
 import styles from "./index.module.less";
-import iconTagging from "@/assets/images/icon-tagging.png";
-import FareTaskText from "@/assets/images/fare-task-text.png";
 import { mapState } from "vuex";
 import _ from "lodash";
 export default {
@@ -58,7 +56,11 @@ export default {
     const data = this.historyGameList;
     return (
       <div class={styles.container}>
-        <img src={FareTaskText} alt="" class={styles.title} />
+        <img
+          src="https://file.40017.cn/huochepiao/activity/arrowtest/static/fare-task-text.png"
+          alt=""
+          class={styles.title}
+        />
         <ul class={styles.nav}>
           <li>期数</li>
           <li>同同胜</li>
@@ -71,13 +73,28 @@ export default {
               <li class={styles.listItem}>
                 <div class={styles.item}>{v.index}</div>
                 <div class={styles.item}>
-                  {v.result === 1 ? <img src={iconTagging} alt="" /> : null}
+                  {v.result === 1 ? (
+                    <img
+                      src="https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-tagging.png"
+                      alt=""
+                    />
+                  ) : null}
                 </div>
                 <div class={styles.item}>
-                  {v.result === 2 ? <img src={iconTagging} alt="" /> : null}
+                  {v.result === 2 ? (
+                    <img
+                      src="https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-tagging.png"
+                      alt=""
+                    />
+                  ) : null}
                 </div>
                 <div class={styles.item}>
-                  {v.result === 3 ? <img src={iconTagging} alt="" /> : null}
+                  {v.result === 3 ? (
+                    <img
+                      src="https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-tagging.png"
+                      alt=""
+                    />
+                  ) : null}
                 </div>
               </li>
             ))}

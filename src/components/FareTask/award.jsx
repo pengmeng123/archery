@@ -1,5 +1,4 @@
 import styles from "./index.module.less";
-import AwardTitleImg from "@/assets/images/award-title.png";
 import CreditCard from "../CreditCard";
 import { getAwardName } from "@/utils/get-award-name";
 export default {
@@ -19,7 +18,10 @@ export default {
     const { record } = this;
     return (
       <div class={styles.awardContent}>
-        <img src={AwardTitleImg} class={styles.title} />
+        <img
+          src="https://file.40017.cn/huochepiao/activity/arrowtest/static/award-title.png"
+          class={styles.title}
+        />
         <div
           style={{
             margin: "10px 0 0 0",
