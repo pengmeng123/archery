@@ -1,6 +1,4 @@
 import styles from "./index.module.less";
-import TTPlayerImg from "@/assets/images/tt/tt-player.png";
-import CCPlayerImg from "@/assets/images/cc/cc-player.png";
 import TtVictoryCardImg from "@/assets/images/tt/victory-card.png";
 import CcVictoryCardImg from "@/assets/images/cc/victory-card.png";
 import DrawerVictoryCardImg from "@/assets/images/drawer/victory-card.png";
@@ -11,12 +9,7 @@ import DrawerVictoryTextImg from "@/assets/images/drawer/victory-text.png";
 import { mapState, mapGetters } from "vuex";
 import { DIRECTION_STR } from "@/config/common";
 import _ from "lodash";
-import ttTarget1Img from "@/assets/images/tt/target/target1.png";
-import ttTarget2Img from "@/assets/images/tt/target/target2.png";
-import ttTarget3Img from "@/assets/images/tt/target/target3.png";
-import ccTarget1Img from "@/assets/images/cc/target/target1.png";
-import ccTarget2Img from "@/assets/images/cc/target/target2.png";
-import ccTarget3Img from "@/assets/images/cc/target/target3.png";
+
 import PictureCombination from "../PictureCombination";
 import { pictureCombinationObj } from "@/config/picture-combination";
 export default {
@@ -103,8 +96,16 @@ export default {
             [styles.playerAnimation]: animationStep === 1,
           }}
         >
-          <img src={TTPlayerImg} alt="" vShow={times === 0} />
-          <img src={CCPlayerImg} alt="" vShow={times === 1} />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/tt/tt-player.png"
+            alt=""
+            vShow={times === 0}
+          />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/cc/cc-player.png"
+            alt=""
+            vShow={times === 1}
+          />
         </div>
         {/* 拉弓 */}
         <div class={styles.target} vShow={animationStep === 2}>
@@ -118,25 +119,43 @@ export default {
             {times === 0 ? (
               <ul>
                 <li>
-                  <img src={ttTarget1Img} alt="" />
+                  <img
+                    src="https://file.40017.cn/huochepiao/activity/arrowtest/static/tt/target/target1.png"
+                    alt=""
+                  />
                 </li>
                 <li>
-                  <img src={ttTarget2Img} alt="" />
+                  <img
+                    src="https://file.40017.cn/huochepiao/activity/arrowtest/static/tt/target/target2.png"
+                    alt=""
+                  />
                 </li>
                 <li>
-                  <img src={ttTarget3Img} alt="" />
+                  <img
+                    src="https://file.40017.cn/huochepiao/activity/arrowtest/static/tt/target/target3.png"
+                    alt=""
+                  />
                 </li>
               </ul>
             ) : (
               <ul>
                 <li>
-                  <img src={ccTarget1Img} alt="" />
+                  <img
+                    src="https://file.40017.cn/huochepiao/activity/arrowtest/static/cc/target/target1.png"
+                    alt=""
+                  />
                 </li>
                 <li>
-                  <img src={ccTarget2Img} alt="" />
+                  <img
+                    src="https://file.40017.cn/huochepiao/activity/arrowtest/static/cc/target/target2.png"
+                    alt=""
+                  />
                 </li>
                 <li>
-                  <img src={ccTarget3Img} alt="" />
+                  <img
+                    src="https://file.40017.cn/huochepiao/activity/arrowtest/static/cc/target/target3.png"
+                    alt=""
+                  />
                 </li>
               </ul>
             )}

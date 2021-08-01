@@ -1,8 +1,4 @@
 import styles from "./index.module.less";
-import CCSignsImg from "./images/cc-signs.png";
-import TTSignsImg from "./images/tt-signs.png";
-import TongtongImg from "./images/tongtong.png";
-import ChengchengImg from "./images/chengcheng.png";
 import { mapState } from "vuex";
 export default {
   name: "AppChild",
@@ -13,31 +9,37 @@ export default {
     const { startMatch } = this;
     return (
       <div class={styles.container}>
-        {/* <div class={styles.target}>
-          <img src={TargetImg} />
-        </div> */}
-        {/* <div class={styles.position}></div> */}
         <div
           class={{
             [styles.member]: true,
             [styles.memberTT]: true,
             "animate__animated animate__fadeOutLeft": startMatch,
-            // "animate__animated animate__fadeInLeft": !startMatch,
           }}
         >
-          <img src={TTSignsImg} class={styles.signs} />
-          <img src={TongtongImg} class={styles.memberImg} />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/tt-signs.png"
+            class={styles.signs}
+          />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/tongtong.png"
+            class={styles.memberImg}
+          />
         </div>
         <div
           class={{
             [styles.member]: true,
             [styles.memberCC]: true,
             "animate__animated animate__fadeOutRight": startMatch,
-            // "animate__animated animate__fadeInRight": !startMatch,
           }}
         >
-          <img src={CCSignsImg} class={styles.signs} />
-          <img src={ChengchengImg} class={styles.memberImg} />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/cc-signs.png"
+            class={styles.signs}
+          />
+          <img
+            src="https://file.40017.cn/huochepiao/activity/arrowtest/static/chengcheng.png"
+            class={styles.memberImg}
+          />
         </div>
       </div>
     );

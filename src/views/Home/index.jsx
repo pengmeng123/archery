@@ -169,7 +169,8 @@ export default {
           this.setResultGameInfo(_.get(r, "data.result"));
         } else {
           // 出现频繁请求的情况提示
-          this.$toast(_.get(r, "data.message"));
+          _.get(r, "data.message") &&
+            this.$toast(_.get(r, "data.message") || "请求异常");
         }
         return r;
       });
@@ -221,9 +222,9 @@ export default {
     this.onReset();
   },
   render() {
-    // if (this.appLoading) {
-    //   return this.renderLoading();
-    // }
+    if (this.appLoading) {
+      return this.renderLoading();
+    }
     return (
       <div
         class={{
