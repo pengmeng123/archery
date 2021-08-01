@@ -1,27 +1,17 @@
 import styles from "./index.module.less";
-import IconTongtong from "./images/icon-tongtong.png";
-import IconChengcheng from "./images/icon-chengcheng.png";
-import IconDrawer from "./images/icon-drawer.png";
 import { mapGetters, mapState } from "vuex";
 import Modal from "@/components/Modal";
 import ResultRecord from "../ResultRecord";
 import _ from "lodash";
 const PhotoObj = {
-  1: IconTongtong,
-  2: IconChengcheng,
-  3: IconDrawer,
+  1: "https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-tongtong.png",
+  2: "https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-chengcheng.png",
+  3: "https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-drawer.png",
 };
 export default {
   name: "AppHeader",
   data() {
     return {
-      players1: [IconTongtong, IconTongtong, IconTongtong, IconTongtong],
-      players2: [
-        IconChengcheng,
-        IconChengcheng,
-        IconChengcheng,
-        IconChengcheng,
-      ],
       timer: null,
       isResultRecord: false,
     };

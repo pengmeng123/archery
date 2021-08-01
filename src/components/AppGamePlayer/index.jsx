@@ -1,5 +1,4 @@
 import styles from "./index.module.less";
-import TxBgImg from "./images/tx-bg.png";
 import _ from "lodash";
 import { mapState } from "vuex";
 import { localStorage } from "@/utils/storage";
@@ -50,7 +49,12 @@ export default {
             >
               <div class={styles.tx}>
                 <img src={v.icon} class={styles.txImg} />
-                {v.marjor ? <img src={TxBgImg} class={styles.txBg} /> : null}
+                {v.marjor ? (
+                  <img
+                    src="https://file.40017.cn/huochepiao/activity/arrowtest/static/tx-bg.png"
+                    class={styles.txBg}
+                  />
+                ) : null}
               </div>
               <div class={styles.name}>{v.name}</div>
             </li>
