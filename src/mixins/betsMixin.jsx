@@ -9,6 +9,8 @@ const BetsMixin = {
     return {
       betsTimer: null,
       oldPlayList: [],
+      b1Timer: null,
+      b2Timer: null,
     };
   },
   computed: {
@@ -107,6 +109,8 @@ const BetsMixin = {
     },
     clearTimer() {
       this.betsTimer && clearInterval(this.betsTimer);
+      this.b1Timer && clearTimeout(this.b1Timer);
+      this.b2Timer && clearTimeout(this.b2Timer);
     },
     autoBetting() {
       this.clearTimer();
@@ -332,19 +336,11 @@ const BetsMixin = {
       if (!ele) {
         return Promise.resolve();
       }
-      try {
-        await this.runResultAnimation(ele);
-        setTimeout(async () => {
-          await this.getGameInfo();
-          // 重置条件
-          this.setAnimationStep(0);
-          this.init && this.init();
-          this.getGameMainInfo && this.getGameMainInfo();
-        }, 200);
-      } catch {
-        this.init && this.init();
-        this.getGameMainInfo && this.getGameMainInfo();
-      }
+      await this.runResultAnimation(ele);
+      this.b1Timer && clearTimeout(this.b1Timer);
+      this.b1Timer = setTimeout(() => {
+        this.fetchRequest();
+      }, 200);
     },
     onTtClick() {
       this.onGamePlay(1);

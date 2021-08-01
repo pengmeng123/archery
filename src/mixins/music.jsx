@@ -66,7 +66,7 @@ const Music = {
   mounted() {
     // 自动播放音乐效果，解决微信自动播放问题
     this.$nextTick(() => {
-      document.addEventListener("touchstart", this.startMusic, false);
+      // document.addEventListener("touchstart", this.startMusic, false);
       document.addEventListener("visibilitychange", () => {
         //浏览器切换事件
         if (document.visibilityState == "hidden") {

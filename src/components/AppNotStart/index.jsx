@@ -35,7 +35,9 @@ export default {
         }, 1000);
       } else {
         this.second = 0;
-        this.$emit("close");
+        setTimeout(() => {
+          this.$emit("close");
+        }, 500);
       }
     },
   },

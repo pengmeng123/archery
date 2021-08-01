@@ -8,7 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     startMatch: false, //是否开始动画
-    count: 0, //倒计时
+    count: -1, //倒计时
     animationStep: 0, //动画步骤
     times: 0, //是否播放两次
     bettingAmount: 50, //选择的投注面值
@@ -62,8 +62,30 @@ export default new Vuex.Store({
           const code = _.get(r, "data.code");
           if (code === 1000) {
             const count = _.get(r, "data.result.currentGame.countDown");
+            const result = _.get(r, "data.result") || {};
+            const playerList = _.get(result, "currentGame.playerList") || [];
+            let newCurrentGame = {};
+            if (!playerList.length && count > 24) {
+              newCurrentGame = {
+                ...result.currentGame,
+                playerList: (
+                  _.get(rootState.gameInfo, "currentGame.playerList") || []
+                ).map((v) => {
+                  return {
+                    ...v,
+                    bet: [],
+                  };
+                }),
+              };
+            } else {
+              newCurrentGame = { ...result.currentGame };
+            }
+
             if (count > 15 || _.isEmpty(rootState.gameInfo)) {
-              commit("SET_GAME_INFO", _.get(r, "data.result"));
+              commit("SET_GAME_INFO", {
+                ...result,
+                currentGame: { ...newCurrentGame },
+              });
             } else {
               commit("SET_GAME_INFO", {
                 ...rootState.gameInfo,
@@ -79,7 +101,6 @@ export default new Vuex.Store({
               name: "Maintenance",
             });
           } else {
-            console.log("erejct-code-------", code);
             return Promise.resolve({});
           }
         })

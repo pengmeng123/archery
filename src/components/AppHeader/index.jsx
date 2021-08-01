@@ -61,7 +61,7 @@ export default {
               ))}
             </ul>
           </div>
-          <div class={styles.countDown}>{count}</div>
+          <div class={styles.countDown}>{count < 0 ? 0 : count}</div>
           <div
             class={{
               [styles.players]: true,
