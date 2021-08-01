@@ -1,12 +1,5 @@
 module.exports = {
   productionSourceMap: false,
-  // chainWebpack: (config) => {
-  //   const imagesRule = config.module.rule("images");
-  //   imagesRule
-  //     .use("url-loader")
-  //     .loader("url-loader")
-  //     .tap((options) => Object.assign(options, { limit: 6144 }));
-  // },
   chainWebpack: (config) => {
     config.optimization.minimize(true); // 开启压缩js代码
     config.optimization.splitChunks({

@@ -1,4 +1,3 @@
-import disconnectionImg from "@/assets/images/disconnection.png";
 import styles from "./index.module.less";
 export default {
   name: "Disconnection",
@@ -10,7 +9,11 @@ export default {
   render() {
     return (
       <div class={styles.container}>
-        <img class={styles.icon} src={disconnectionImg} alt="" />
+        <img
+          class={styles.icon}
+          src="https://file.40017.cn/huochepiao/activity/arrowtest/static/disconnection.png"
+          alt=""
+        />
         <div class={styles.title}>十分抱歉，网络已断开...</div>
         <a href="javascript:" class={styles.btn} onClick={this.onRefresh}>
           点我刷新

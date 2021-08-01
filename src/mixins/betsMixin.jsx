@@ -1,4 +1,3 @@
-import goldImg from "@/assets/images/gold.png";
 import { mapState, mapActions, mapGetters } from "vuex";
 import _ from "lodash";
 const $ = window.$;
@@ -251,7 +250,7 @@ const BetsMixin = {
         return;
       }
       var flyer = $(
-        `<img src=${goldImg} style="width:30px;height:30px;position:relative;z-index:5" />`
+        `<img src="https://file.40017.cn/huochepiao/activity/arrowtest/static/gold.png" style="width:30px;height:30px;position:relative;z-index:5" />`
       ).clone(); //动态创建抛物体对象并克隆
       const endTargetOffset = endTarget.offset();
       flyer.load(() => {
