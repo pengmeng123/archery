@@ -1,4 +1,4 @@
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 // import helper from "@/utils/helper";
 import { userObj } from "@/config/user";
 import { localStorage } from "@/utils/storage";
@@ -7,6 +7,7 @@ import bgMusic from "@/assets/images/mp3/bg.mp3";
 import targetMusic from "@/assets/images/mp3/arrow.mp3";
 import applauseMusic from "@/assets/images/mp3/applause.mp3";
 import MusicMixin from "@/mixins/music";
+import { GUIDE_STEP } from "@/config/api";
 import _ from "lodash";
 export default {
   name: "App",
@@ -23,6 +24,8 @@ export default {
       localStorage.set(TC_ARCHERY_USER_INFO, userObj[id]);
     }
     this.loading = false;
+
+    this.getGuideStepInfo();
   },
   mounted() {
     // const newUrl = decodeURIComponent(
@@ -55,9 +58,19 @@ export default {
     this.closeMusicTimerout();
   },
   methods: {
+    ...mapMutations({
+      setGuideStep: "SET_GUIDE_STEP",
+    }),
     ...mapActions({
       getGameInfo: "getGameInfo",
     }),
+    getGuideStepInfo() {
+      // 引导流
+      const step = localStorage.get(GUIDE_STEP);
+      if (step === 0) {
+        this.setGuideStep(5);
+      }
+    },
   },
   render() {
     if (this.loading) {

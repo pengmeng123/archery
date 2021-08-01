@@ -3,6 +3,8 @@ import Vuex from "vuex";
 import services from "@/services";
 import router from "../router";
 import _ from "lodash";
+import { localStorage } from "@/utils/storage";
+import { GUIDE_STEP } from "@/config/api";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -13,11 +15,13 @@ export default new Vuex.Store({
     times: 0, //是否播放两次
     bettingAmount: 50, //选择的投注面值
     isGameBettingTime: true, //15s前投注时间，超过就为false
-    appLoading: true, //带有进度条loading
+    appLoading: false, //带有进度条loading
     gameInfo: {}, //主流程接口信息
     mainInfo: {}, //menu接口信息
     networkSuccess: true, //断网的情况，默认是true
     resultGameInfo: {}, //中奖结果信息，不能与gameInfo混在一起
+    attemptPlay: localStorage.get(GUIDE_STEP) !== -1, //试玩
+    guideStep: localStorage.get(GUIDE_STEP) || 1, //引导流
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -52,6 +56,13 @@ export default new Vuex.Store({
     },
     SET_RESULT_GAME_INFO(state, payload) {
       state.resultGameInfo = payload;
+    },
+    SET_ATTEMPLT_PLAY(state, payload) {
+      state.attemptPlay = payload;
+    },
+    SET_GUIDE_STEP(state, payload) {
+      state.guideStep = payload;
+      localStorage.set(GUIDE_STEP, payload);
     },
   },
   actions: {

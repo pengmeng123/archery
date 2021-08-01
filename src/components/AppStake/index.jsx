@@ -1,5 +1,7 @@
 import styles from "./index.module.less";
 import { mapState, mapGetters } from "vuex";
+import bettingText1 from "../../assets/images/guide/betting-text1.png";
+import bettingText2 from "../../assets/images/guide/betting-text2.png";
 import _ from "lodash";
 export default {
   name: "AppStake",
@@ -72,7 +74,7 @@ export default {
     },
   },
   render() {
-    const { startMatch, animationStep, gameInfo } = this;
+    const { startMatch, animationStep } = this;
     const result = _.get(this.gameResult, "result");
 
     return (
@@ -128,11 +130,14 @@ export default {
                 </div>
               ) : null}
             </div>
-            {_.get(gameInfo, "currentGame.fish.odds") ? (
+            {/* {_.get(gameInfo, "currentGame.fish.odds") ? (
               <div class={styles.text}>
                 X{_.get(gameInfo, "currentGame.fish.odds")}
               </div>
-            ) : null}
+            ) : null} */}
+            <div class={styles.text}>
+              <img src={bettingText1} alt="" class={styles.bettingText1} />
+            </div>
           </div>
           <div
             id="btnCenterDrawer"
@@ -162,11 +167,14 @@ export default {
                 </div>
               ) : null}
             </div>
-            {_.get(gameInfo, "currentGame.draw.odds") ? (
+            {/* {_.get(gameInfo, "currentGame.draw.odds") ? (
               <div class={styles.text}>
                 X{_.get(gameInfo, "currentGame.draw.odds")}
               </div>
-            ) : null}
+            ) : null} */}
+            <div class={styles.text}>
+              <img src={bettingText2} alt="" class={styles.bettingText2} />
+            </div>
           </div>
           <div
             id="btnCCVictory"
@@ -196,11 +204,9 @@ export default {
                 </div>
               ) : null}
             </div>
-            {_.get(gameInfo, "currentGame.draw.odds") ? (
-              <div class={styles.text}>
-                X{_.get(gameInfo, "currentGame.draw.odds")}
-              </div>
-            ) : null}
+            <div class={styles.text}>
+              <img src={bettingText1} alt="" class={styles.bettingText1} />
+            </div>
           </div>
         </div>
       </div>

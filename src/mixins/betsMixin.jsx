@@ -1,4 +1,4 @@
-import { mapState, mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapGetters, mapMutations } from "vuex";
 import _ from "lodash";
 const $ = window.$;
 const BEETING_COUNT = 15;
@@ -19,6 +19,7 @@ const BetsMixin = {
       "animationStep",
       "bettingAmount",
       "gameInfo",
+      "attemptPlay",
     ]),
     ...mapGetters(["gameResult"]),
     currentCountDown() {
@@ -45,6 +46,9 @@ const BetsMixin = {
     this.$_getGameInfo = _.debounce(this.getGameInfo, 100);
   },
   methods: {
+    ...mapMutations({
+      setGuideStep: "SET_GUIDE_STEP",
+    }),
     ...mapActions({
       getGameInfo: "getGameInfo",
     }),
@@ -340,6 +344,9 @@ const BetsMixin = {
       this.b1Timer = setTimeout(() => {
         this.fetchRequest();
       }, 200);
+      if (this.attemptPlay) {
+        this.setGuideStep(5);
+      }
     },
     onTtClick() {
       this.onGamePlay(1);

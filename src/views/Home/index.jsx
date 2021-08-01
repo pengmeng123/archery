@@ -43,15 +43,21 @@ export default {
     } catch {}
   },
   computed: {
-    ...mapState(["animationStep", "gameInfo", "count", "appLoading"]),
+    ...mapState([
+      "animationStep",
+      "gameInfo",
+      "count",
+      "appLoading",
+      "attemptPlay",
+      "guideStep",
+    ]),
     ...mapGetters(["isGameBettingTime"]),
   },
   watch: {
     count: {
       handler(newVal) {
         // 倒计时结束去拿这一局的中奖信息
-        if (newVal === 0) {
-          console.log("watch-count----");
+        if (newVal === 0 && !this.attemptPlay) {
           this.setStartMatchStatus(true);
           this.setAnimationStep(1);
           this.resultTimer3 && clearTimeout(this.resultTimer3);
@@ -177,6 +183,9 @@ export default {
       });
     },
     async getResult() {
+      if (this.attemptPlay) {
+        return;
+      }
       this.resultTimer1 && clearTimeout(this.resultTimer1);
       this.resultTimer2 && clearTimeout(this.resultTimer2);
       try {
@@ -217,6 +226,37 @@ export default {
       this.resultTimer3 && clearTimeout(this.resultTimer3);
       this.removeAddEventListenerFun();
       this.animationStepClearTimer();
+      this.setResultGameInfo({});
+    },
+    onGoAttemptPlay() {
+      this.setResultGameInfo({
+        account: 0,
+        currentGame: {
+          gameResult: 1,
+          result: [
+            {
+              result: 1,
+              direction: 1,
+              numberOfRings: 10,
+            },
+            {
+              result: 2,
+              direction: 2,
+              numberOfRings: 8,
+            },
+          ],
+        },
+        mybet: [
+          { result: 1, account: -50 },
+          { result: 2, account: 0 },
+          { result: 3, account: 0 },
+        ],
+      });
+      this.monitorResultAnimation();
+      // 动画监听
+      this.startMonitorAnimation();
+      this.setStartMatchStatus(true);
+      this.setAnimationStep(1);
     },
   },
   beforeDestroy() {
@@ -229,7 +269,9 @@ export default {
     return (
       <div>
         {/* 新手引导 */}
-        <Guide />
+        {this.attemptPlay && this.guideStep >= 1 && !this.startMatch ? (
+          <Guide onGoAttemptPlay={this.onGoAttemptPlay} />
+        ) : null}
         <div
           class={{
             [styles.container]: true,

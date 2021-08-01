@@ -6,6 +6,8 @@ import PhoneBill from "@/components/PhoneBill";
 import CreditCard from "../../components/CreditCard";
 import _ from "lodash";
 import { mapState, mapMutations } from "vuex";
+import { localStorage } from "@/utils/storage";
+import { EXCHANGE_DOT } from "@/config/api";
 
 export default {
   name: "Exchange",
@@ -20,6 +22,7 @@ export default {
     };
   },
   mounted() {
+    localStorage.set(EXCHANGE_DOT, true);
     this.fetchGameExchange();
     this.fetchGameInfo();
     if (this.$route.query.record == 1) {

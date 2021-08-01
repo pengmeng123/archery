@@ -6,6 +6,8 @@ import { mapState, mapMutations } from "vuex";
 import _ from "lodash";
 import { imgsPreloader } from "@/utils/img-preloader";
 import { animationList } from "@/config/img-preloader-list";
+import { localStorage } from "@/utils/storage";
+import { EXCHANGE_DOT } from "@/config/api";
 import styles from "./index.module.less";
 export default {
   name: "AppMenu",
@@ -46,7 +48,7 @@ export default {
             await this.getGameMainInfo();
             this.fareTaskVisible = true;
           },
-          eventName: "exchange",
+          eventName: "welfareTask",
         },
         {
           icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/gold-exchange.png",
@@ -55,7 +57,13 @@ export default {
               name: "Exchange",
             });
           },
-          eventName: "welfareTask",
+          eventName: "exchange",
+          dot: () => {
+            if (localStorage.get(EXCHANGE_DOT)) {
+              return null;
+            }
+            return <em class={styles.dot}></em>;
+          },
         },
 
         {
@@ -111,7 +119,7 @@ export default {
             <div
               class={{
                 [styles.groupItem]: true,
-                [styles.eventName]: true,
+                [styles[v.eventName]]: true,
               }}
             >
               <img
@@ -122,6 +130,7 @@ export default {
               {v.component ? (
                 <div class={styles[v.className]}>{v.component()}</div>
               ) : null}
+              {v.dot && v.dot()}
             </div>
           ))}
         </div>
