@@ -41,8 +41,10 @@ export default {
         await this.fetchRequest();
         this.monitorResultAnimation();
       } else {
-        await this.getGameInfo();
-        this.setAppLoading(false);
+        this.onReset();
+        this.getGameInfo().finally(() => {
+          this.setAppLoading(false);
+        });
       }
 
       // eslint-disable-next-line no-empty

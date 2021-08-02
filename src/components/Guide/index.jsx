@@ -10,7 +10,10 @@ import { mapState, mapMutations } from "vuex";
 export default {
   name: "Guide",
   data() {
-    return {};
+    return {
+      timer: null,
+      second: 0,
+    };
   },
   computed: {
     ...mapState(["guideStep"]),
@@ -20,6 +23,20 @@ export default {
       setGuideStep: "SET_GUIDE_STEP",
       setAttemptPlay: "SET_ATTEMPLT_PLAY",
     }),
+    runCount(t) {
+      this.timer && clearTimeout(this.timer);
+      if (t > 0) {
+        this.second = t;
+        t--;
+        this.timer = setTimeout(() => {
+          this.runCount(t);
+        }, 1000);
+      } else {
+        this.timer && clearTimeout(this.timer);
+        this.second = 0;
+        this.goPlay();
+      }
+    },
     goStep(step) {
       this.setGuideStep(step);
     },
@@ -85,11 +102,27 @@ export default {
         {guideStep === 4 ? (
           <div class={styles.mask}>
             <div class={styles.step4}>
-              <a class={styles.btnConfirm} onClick={this.goPlay}></a>
+              <a
+                class={styles.btnConfirm}
+                onClick={() => {
+                  this.goStep(5);
+                  this.runCount(5);
+                }}
+              ></a>
             </div>
           </div>
         ) : null}
         {guideStep === 5 ? (
+          <div class={styles.mask}>
+            <div class={styles.countDown}>
+              <div class={styles.box}>请稍后，进入游戏还有</div>
+              <div class={styles.text}>
+                <span class={styles.number}>{this.second}</span>秒
+              </div>
+            </div>
+          </div>
+        ) : null}
+        {guideStep === 6 ? (
           <div class={styles.mask}>
             <div class={styles.step5}>
               <img

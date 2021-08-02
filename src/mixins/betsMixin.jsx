@@ -341,8 +341,11 @@ const BetsMixin = {
       }
       await this.runResultAnimation(ele);
       this.b1Timer && clearTimeout(this.b1Timer);
+      this.b2Timer && clearTimeout(this.b2Timer);
       if (this.attemptPlay) {
-        this.setGuideStep(5);
+        this.b2Timer = setTimeout(() => {
+          this.setGuideStep(6);
+        }, 300);
       } else {
         this.b1Timer = setTimeout(() => {
           this.fetchRequest();
