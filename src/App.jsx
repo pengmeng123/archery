@@ -4,7 +4,7 @@ import { userObj } from "@/config/user";
 import { localStorage } from "@/utils/storage";
 import { TC_ARCHERY_USER_INFO } from "@/config/api";
 import bgMusic from "@/assets/images/mp3/bg.mp3";
-import targetMusic from "@/assets/images/mp3/arrow.mp3";
+import targetMusic from "@/assets/images/guide/arrow.mp3";
 import applauseMusic from "@/assets/images/mp3/applause.mp3";
 import MusicMixin from "@/mixins/music";
 import { GUIDE_STEP } from "@/config/api";
@@ -60,6 +60,7 @@ export default {
   methods: {
     ...mapMutations({
       setGuideStep: "SET_GUIDE_STEP",
+      setAttemptPlay: "SET_ATTEMPLT_PLAY",
     }),
     ...mapActions({
       getGameInfo: "getGameInfo",
@@ -70,6 +71,9 @@ export default {
       if (step === 0) {
         this.setGuideStep(5);
       }
+      // 判断当前是否是新人引导流
+      const status = localStorage.get(GUIDE_STEP) !== -1;
+      this.setAttemptPlay(status);
     },
   },
   render() {
@@ -78,14 +82,6 @@ export default {
     }
     return (
       <div id="app" style="height:100%">
-        {/* <div
-          style="width:30px;height:30px;background:red;"
-          onClick={() => {
-            this.audioAutoPlay1(false);
-          }}
-        >
-          toggle me
-        </div> */}
         {/* 背景音乐 */}
         <audio preload="auto" controls ref="audioBg" hidden="true" loop>
           <source src={bgMusic} />

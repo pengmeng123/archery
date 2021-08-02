@@ -37,8 +37,14 @@ export default {
   },
   async mounted() {
     try {
-      await this.fetchRequest();
-      this.monitorResultAnimation();
+      if (!this.attemptPlay) {
+        await this.fetchRequest();
+        this.monitorResultAnimation();
+      } else {
+        await this.getGameInfo();
+        this.setAppLoading(false);
+      }
+
       // eslint-disable-next-line no-empty
     } catch {}
   },
@@ -87,6 +93,7 @@ export default {
       setResultGameInfo: "SET_RESULT_GAME_INFO",
       setTimes: "SET_TIMES",
       setGameInfo: "SET_GAME_INFO",
+      setAppLoading: "SET_APP_LOADING",
     }),
     fetchRequest() {
       return new Promise((resolve, reject) => {
@@ -247,7 +254,7 @@ export default {
           ],
         },
         mybet: [
-          { result: 1, account: -50 },
+          { result: 1, account: 50 },
           { result: 2, account: 0 },
           { result: 3, account: 0 },
         ],

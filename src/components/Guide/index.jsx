@@ -2,8 +2,10 @@ import styles from "./index.module.less";
 import step1BgImg from "@/assets/images/guide/step1-bg.png";
 import handleBottomImg from "@/assets/images/guide/hand-bottom.png";
 import bettingTextImg from "@/assets/images/guide/betting-text.png";
-import step5BgImg from "@/assets/images/guide/step5-bg.png";
 import handTopImg from "@/assets/images/guide/hand-top.png";
+import selectGoldTextImg from "@/assets/images/guide/select-gold-text.png";
+import bettingText1Img from "@/assets/images/guide/betting-text1.png";
+import step5TextImg from "@/assets/images/guide/step5-text.png";
 import { mapState, mapMutations } from "vuex";
 export default {
   name: "Guide",
@@ -16,6 +18,7 @@ export default {
   methods: {
     ...mapMutations({
       setGuideStep: "SET_GUIDE_STEP",
+      setAttemptPlay: "SET_ATTEMPLT_PLAY",
     }),
     goStep(step) {
       this.setGuideStep(step);
@@ -45,6 +48,11 @@ export default {
         {guideStep === 2 ? (
           <div class={styles.mask}>
             <div class={styles.step2}>
+              <img
+                src={selectGoldTextImg}
+                alt=""
+                class={styles.selectGoldTextImg}
+              />
               <img src={handleBottomImg} alt="" class={styles.handBottom} />
               <a
                 class={styles.btnSelect}
@@ -60,6 +68,11 @@ export default {
             <div class={styles.step3}>
               <img class={styles.bettingTextImg} src={bettingTextImg} alt="" />
               <img src={handTopImg} alt="" class={styles.handTopImg} />
+              <img
+                src={bettingText1Img}
+                alt=""
+                class={styles.bettingText1Img}
+              />
               <a
                 class={styles.btnSelect}
                 onClick={() => {
@@ -77,17 +90,26 @@ export default {
           </div>
         ) : null}
         {guideStep === 5 ? (
-          <div class={styles.step5}>
-            <img class={styles.step5BgImg} src={step5BgImg} alt="" />
-            <a
-              class={styles.btnSelect}
-              onClick={() => {
-                this.goStep(-1);
-                this.$router.push({
-                  name: "Exchange",
-                });
-              }}
-            ></a>
+          <div class={styles.mask}>
+            <div class={styles.step5}>
+              <img
+                src="https://file.40017.cn/huochepiao/activity/arrowtest/static/gold-exchange.png"
+                alt=""
+                class={styles.icon}
+              />
+              <div
+                onClick={() => {
+                  this.goStep(-1);
+                  this.setAttemptPlay(false);
+                  this.$router.push({
+                    name: "Exchange",
+                  });
+                }}
+              >
+                <img src={handTopImg} alt="" class={styles.handTopImg} />
+                <img src={step5TextImg} alt="" class={styles.step5TextImg} />
+              </div>
+            </div>
           </div>
         ) : null}
       </div>

@@ -20,7 +20,7 @@ export default new Vuex.Store({
     mainInfo: {}, //menu接口信息
     networkSuccess: true, //断网的情况，默认是true
     resultGameInfo: {}, //中奖结果信息，不能与gameInfo混在一起
-    attemptPlay: localStorage.get(GUIDE_STEP) !== -1, //试玩
+    attemptPlay: localStorage.get(GUIDE_STEP) !== -1, //试玩 true 是，false 不是
     guideStep: localStorage.get(GUIDE_STEP) || 1, //引导流
   },
   mutations: {

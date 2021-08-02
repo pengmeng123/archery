@@ -4,11 +4,10 @@ import FareTask from "../FareTask";
 import DailyReceiveGold from "../DailyReceiveGold";
 import { mapState, mapMutations } from "vuex";
 import _ from "lodash";
-import { imgsPreloader } from "@/utils/img-preloader";
-import { animationList } from "@/config/img-preloader-list";
 import { localStorage } from "@/utils/storage";
-import { EXCHANGE_DOT } from "@/config/api";
+import { FARETASK_DOT } from "@/config/api";
 import styles from "./index.module.less";
+const $ = window.$;
 export default {
   name: "AppMenu",
   data() {
@@ -17,20 +16,19 @@ export default {
       fareTaskVisible: false,
       receiveGoldVisible: false,
       awardGoldNumber: 0,
+      isFareTaskDot: false,
     };
   },
-  async mounted() {
-    await imgsPreloader(animationList);
+  mounted() {
+    this.isFareTaskDot = localStorage.get(FARETASK_DOT);
+    this.$nextTick(() => {
+      $("body").click(() => {
+        console.log("---");
+        this.isDropDownMore = false;
+      });
+    });
   },
-  // watch: {
-  //   startMatch(newVal) {
-  //     if (newVal) {
-  //       this.isDropDownMore = false;
-  //       this.fareTaskVisible = false;
-  //       this.receiveGoldVisible = false;
-  //     }
-  //   },
-  // },
+
   computed: {
     ...mapState(["mainInfo", "startMatch"]),
     menus() {
@@ -41,14 +39,28 @@ export default {
             this.gameSign();
           },
           eventName: "recevieGold",
+          dot: () => {
+            if (_.get(this.mainInfo, "signStaus") === 1) {
+              return null;
+            }
+            return <em class={styles.dot}></em>;
+          },
         },
         {
           icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/welfare-task.png",
           func: async () => {
             await this.getGameMainInfo();
             this.fareTaskVisible = true;
+            localStorage.set(FARETASK_DOT, true);
+            this.isFareTaskDot = true;
           },
           eventName: "welfareTask",
+          dot: () => {
+            if (this.isFareTaskDot) {
+              return null;
+            }
+            return <em class={styles.dot}></em>;
+          },
         },
         {
           icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/gold-exchange.png",
@@ -58,18 +70,13 @@ export default {
             });
           },
           eventName: "exchange",
-          dot: () => {
-            if (localStorage.get(EXCHANGE_DOT)) {
-              return null;
-            }
-            return <em class={styles.dot}></em>;
-          },
         },
 
         {
           icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/more.png",
           className: "dropDownMoreContainer",
-          func: () => {
+          func: (e) => {
+            e.stopPropagation();
             this.isDropDownMore = !this.isDropDownMore;
           },
           eventName: "more",
