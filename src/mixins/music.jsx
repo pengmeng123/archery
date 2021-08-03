@@ -1,4 +1,5 @@
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapGetters } from "vuex";
+import _ from "lodash";
 const Music = {
   data() {
     return {
@@ -8,22 +9,31 @@ const Music = {
     };
   },
   computed: {
-    ...mapState(["animationStep", "startMatch", "isOff"]),
+    ...mapState(["animationStep", "startMatch", "isOff", "times"]),
+    ...mapGetters(["gameResult"]),
   },
   watch: {
     animationStep(newVal) {
       if (newVal === 4) {
-        document.getElementById("audioTarget").muted = this.isOff;
+        const audioTarget = document.getElementById("audioTarget");
+        const audioApplause = document.getElementById("audioApplause");
+        audioTarget.muted = this.isOff;
         if (!this.isOff) {
-          document.getElementById("audioTarget").currentTime = 0;
-          document.getElementById("audioTarget").play();
+          audioTarget.currentTime = 0;
+          audioTarget.play();
         }
         this.closeMusicTimerout();
         this.musicTimer = setTimeout(() => {
-          document.getElementById("audioApplause").muted = this.isOff;
-          if (!this.isOff) {
-            document.getElementById("audioApplause").currentTime = 0;
-            document.getElementById("audioApplause").play();
+          audioApplause.muted = this.isOff;
+          const ttRingNumber = _.get(this.gameResult, "ttRingNumber");
+          const ccRingNumber = _.get(this.gameResult, "ccRingNumber");
+          if (
+            !this.isOff &&
+            ((ttRingNumber >= 7 && this.times === 0) ||
+              (ccRingNumber >= 7 && this.times === 1))
+          ) {
+            audioApplause.currentTime = 0;
+            audioApplause.play();
           }
         }, 500);
       }

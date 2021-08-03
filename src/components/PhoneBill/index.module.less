@@ -73,3 +73,32 @@
     font-size: 48px;
   }
 }
+.input {
+  &::-webkit-input-placeholder { color:#DFA377; }
+}
+.btnContainer {
+  width: 512px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  position: relative;
+  top: 230px;
+  a {
+    display: block;
+    width: 232px;
+    height: 88px;
+    border-radius: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    &.btnCancel {
+      background: #fff;
+      color: #FF8813;
+    }
+    &.btnConfirm {
+      background: #FF8813;
+      color: #fff;
+    }
+  }
+}

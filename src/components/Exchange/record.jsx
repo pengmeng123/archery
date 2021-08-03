@@ -9,20 +9,7 @@ export default {
     },
   },
   data() {
-    return {
-      // data: [
-      //   {
-      //     name: "5元火车票代金券",
-      //     date: "2021/05/05 10:10:10",
-      //     status: 1,
-      //   },
-      //   {
-      //     name: "5元火车票代金券",
-      //     date: "2021/05/05 10:10:10",
-      //     status: 1,
-      //   },
-      // ],
-    };
+    return {};
   },
   methods: {
     renderStatus(v) {
@@ -30,9 +17,28 @@ export default {
         case 0:
           return "发放中";
         case 1:
-          return "发放成功";
+          // return "发放成功";
+          return (
+            <a
+              class={styles.btnCheck}
+              onClick={() => {
+                this.goCheck(v);
+              }}
+            >
+              去查看
+            </a>
+          );
         case 2:
           return "发放失败";
+      }
+    },
+    goCheck(v) {
+      if (v.id == 2722) {
+        if (v.phone) {
+          this.$toast(`您充值手机号是：${v.phone}`);
+        }
+      } else {
+        this.$toast("待跳转劵中心链接");
       }
     },
   },

@@ -27,9 +27,6 @@ export default {
   mounted() {
     this.fetchGameExchange();
     this.fetchGameInfo();
-    if (this.$route.query.record == 1) {
-      this.isExchangeRecord = true;
-    }
   },
   computed: {
     ...mapState(["gameInfo"]),
@@ -103,7 +100,7 @@ export default {
             href="javascript:"
             class={styles.record}
             onClick={() => {
-              this.isExchangeRecord = true;
+              this.onCheckRecord();
             }}
           >
             兑换记录{">"}
@@ -174,6 +171,9 @@ export default {
           <PhoneBill
             record={this.currentRecord}
             visible={this.isExchangePhoneBill}
+            onClose={() => {
+              this.isExchangePhoneBill = false;
+            }}
           />
         </Modal>
       </div>

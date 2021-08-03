@@ -16,19 +16,23 @@ export default {
   data() {
     return {
       phone: undefined,
-      isSuccess: false,
+      flag: 1,
+      loading: false,
     };
   },
   watch: {
     visible(newVal) {
       if (!newVal) {
-        this.isSuccess = false;
+        this.flag = 1;
       }
     },
   },
   methods: {
     onClear() {
       this.phone = undefined;
+    },
+    close() {
+      this.$emit("close");
     },
     onSubmit() {
       const { record } = this;
@@ -40,6 +44,7 @@ export default {
       if (!aid) {
         return;
       }
+      this.loading = true;
       this.$service.user
         .goldExchange({
           aid,
@@ -48,17 +53,20 @@ export default {
         })
         .then((r) => {
           if (_.get(r, "data.code") === 1000) {
-            this.isSuccess = true;
+            this.flag = 3;
           } else {
             this.$toast(_.get(r, "data.message"));
           }
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
   },
   render() {
     return (
       <div class={styles.container}>
-        {this.isSuccess ? (
+        {this.flag === 3 ? (
           <img
             src="https://file.40017.cn/huochepiao/activity/arrowtest/static/recharged.png"
             alt=""
@@ -71,10 +79,11 @@ export default {
             class={styles.title}
           />
         )}
-        {!this.isSuccess ? (
+        {this.flag === 1 ? (
           <div class={styles.content}>
             <div class={styles.inputContainer}>
               <input
+                class={styles.input}
                 placeholder="请输入手机号"
                 type="tel"
                 v-model={this.phone}
@@ -95,15 +104,63 @@ export default {
                 [styles.btnLight]: !!this.phone,
               }}
               onClick={() => {
-                if (this.phone) {
-                  this.onSubmit();
+                if (!phoneReg.test(this.phone)) {
+                  this.$toast("手机号码有误，请重填");
+                  return;
                 }
+                this.flag = 2;
               }}
             >
               充值
             </a>
           </div>
-        ) : (
+        ) : null}
+
+        {this.flag === 2 ? (
+          <div class={styles.content}>
+            <div class={styles.inputContainer}>
+              <input
+                style={{
+                  textAlign: "center",
+                  textIndent: "0px",
+                }}
+                class={styles.input}
+                placeholder="请输入手机号"
+                type="tel"
+                v-model={this.phone}
+                readOnly
+              />
+            </div>
+            <div class={styles.btnContainer}>
+              <a
+                href="javascript:"
+                class={{
+                  [styles.btnCancel]: true,
+                }}
+                onClick={() => {
+                  this.close();
+                }}
+              >
+                取消
+              </a>
+              <a
+                href="javascript:"
+                class={{
+                  [styles.btnConfirm]: true,
+                }}
+                onClick={() => {
+                  if (this.phone && !this.loading) {
+                    this.onSubmit();
+                  }
+                }}
+              >
+                确认
+              </a>
+            </div>
+          </div>
+        ) : null}
+
+        {this.flag === 3 ? (
           <div class={styles.recharged}>
             <img
               src="https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-recharged.png"
@@ -113,7 +170,7 @@ export default {
             <div class={styles.label}>充值手机号：</div>
             <div class={styles.text}>{this.phone}</div>
           </div>
-        )}
+        ) : null}
       </div>
     );
   },
