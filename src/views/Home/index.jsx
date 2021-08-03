@@ -114,7 +114,9 @@ export default {
                   name: "Disconnection",
                 });
               } else {
-                this.$toast(_.get(r, "data.message"));
+                this.$toast(
+                  `${_.get(r, "data.message")}-code--${_.get(r, "data.code")}`
+                );
               }
               reject();
             }
@@ -186,7 +188,9 @@ export default {
         } else {
           // 出现频繁请求的情况提示
           _.get(r, "data.message") &&
-            this.$toast(_.get(r, "data.message") || "请求异常");
+            this.$toast(
+              `${_.get(r, "data.message")}-code--${_.get(r, "data.code")}`
+            );
         }
         return r;
       });
