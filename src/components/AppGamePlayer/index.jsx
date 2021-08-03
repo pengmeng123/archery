@@ -3,6 +3,7 @@ import _ from "lodash";
 import { mapState } from "vuex";
 import { localStorage } from "@/utils/storage";
 import { TC_ARCHERY_USER_INFO } from "@/config/api";
+import txEmptyImg from "@/assets/images/guide/tx-empty.png";
 export default {
   name: "AppGamePlayer",
   computed: {
@@ -10,14 +11,23 @@ export default {
     members() {
       const playerList = _.get(this.gameInfo, "currentGame.playerList") || [];
       const user = localStorage.get(TC_ARCHERY_USER_INFO) || {};
-      return playerList
-        .map((v, index) => {
-          return {
-            icon: v.icon,
-            name: v.nick,
-            className: `player${index + 1}`,
-            extraName: `player-${v.uuid}`,
-          };
+      return [0, 1, 2, 3]
+        .map((f, index) => {
+          if (_.get(playerList, `${[index]}.uuid`)) {
+            const v = _.get(playerList, `${[index]}`);
+            return {
+              icon: v.icon,
+              name: v.nick,
+              className: `player${index + 1}`,
+              extraName: `player-${v.uuid}`,
+            };
+          } else {
+            return {
+              icon: txEmptyImg,
+              name: "虚位以待",
+              className: `player${index + 1}`,
+            };
+          }
         })
         .concat(
           _.get(user, "nick")
