@@ -6,6 +6,7 @@ import { mapState, mapMutations } from "vuex";
 import _ from "lodash";
 import { localStorage } from "@/utils/storage";
 import { FARETASK_DOT } from "@/config/api";
+import iconWelFare from "@/assets/images/guide/icon-welfare.png";
 import styles from "./index.module.less";
 const $ = window.$;
 export default {
@@ -23,7 +24,6 @@ export default {
     this.isFareTaskDot = localStorage.get(FARETASK_DOT);
     this.$nextTick(() => {
       $("body").click(() => {
-        console.log("---");
         this.isDropDownMore = false;
       });
     });
@@ -47,7 +47,7 @@ export default {
           },
         },
         {
-          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/welfare-task.png",
+          icon: iconWelFare,
           func: async () => {
             await this.getGameMainInfo();
             this.fareTaskVisible = true;

@@ -22,6 +22,7 @@ export default new Vuex.Store({
     resultGameInfo: {}, //中奖结果信息，不能与gameInfo混在一起
     attemptPlay: localStorage.get(GUIDE_STEP) !== -1, //试玩 true 是，false 不是
     guideStep: localStorage.get(GUIDE_STEP) || 1, //引导流
+    isOff: true, //游戏音效
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -63,6 +64,9 @@ export default new Vuex.Store({
     SET_GUIDE_STEP(state, payload) {
       state.guideStep = payload;
       localStorage.set(GUIDE_STEP, payload);
+    },
+    SET_INVOICE(state, payload) {
+      state.isOff = payload;
     },
   },
   actions: {

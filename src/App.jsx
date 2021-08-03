@@ -4,7 +4,7 @@ import { userObj } from "@/config/user";
 import { localStorage } from "@/utils/storage";
 import { TC_ARCHERY_USER_INFO } from "@/config/api";
 import bgMusic from "@/assets/images/mp3/bg.mp3";
-import targetMusic from "@/assets/images/guide/arrow.mp3";
+import targetMusic from "@/assets/images/mp3/arrow.mp3";
 import applauseMusic from "@/assets/images/mp3/applause.mp3";
 import MusicMixin from "@/mixins/music";
 import { GUIDE_STEP } from "@/config/api";
@@ -16,6 +16,7 @@ export default {
     return {
       loading: true,
       muted: true,
+      isAppPage: true,
     };
   },
   created() {
@@ -83,15 +84,22 @@ export default {
     return (
       <div id="app" style="height:100%">
         {/* 背景音乐 */}
-        <audio preload="auto" controls ref="audioBg" hidden="true" loop>
+        <audio
+          id="audioBg"
+          preload="auto"
+          controls
+          ref="audioBg"
+          hidden="true"
+          loop
+        >
           <source src={bgMusic} />
         </audio>
         {/* 中靶 */}
-        <audio controls ref="audioTarget" hidden="true">
+        <audio id="audioTarget" controls ref="audioTarget" hidden="true">
           <source src={targetMusic} />
         </audio>
         {/* 鼓掌 */}
-        <audio controls ref="audioApplause" hidden="true">
+        <audio id="audioApplause" controls ref="audioApplause" hidden="true">
           <source src={applauseMusic} />
         </audio>
 

@@ -15,10 +15,10 @@ export default {
     ...mapGetters(["gameResult"]),
     fishTotal() {
       const { gameInfo } = this;
-      return (
-        (_.get(gameInfo, "currentGame.fish.account") || 0) +
-        (this.fishPlayListMount || 0)
-      );
+      const amount =
+        (_.get(gameInfo, "currentGame.fish.account") || 0) -
+        Math.abs(this.fishPlayListMount || 0);
+      return amount > 0 ? amount : 0;
     },
     fishPlayListMount() {
       const { gameInfo } = this;
@@ -33,10 +33,10 @@ export default {
     },
     longPersonTotal() {
       const { gameInfo } = this;
-      return (
-        (_.get(gameInfo, "currentGame.longPerson.account") || 0) +
-        (this.longPlayListMount || 0)
-      );
+      const amount =
+        (_.get(gameInfo, "currentGame.longPerson.account") || 0) -
+        Math.abs(this.longPlayListMount || 0);
+      return amount > 0 ? amount : 0;
     },
     longPlayListMount() {
       const { gameInfo } = this;
@@ -51,10 +51,10 @@ export default {
     },
     drawTotal() {
       const { gameInfo } = this;
-      return (
-        (_.get(gameInfo, "currentGame.draw.account") || 0) +
-        (this.drawPlayListMount || 0)
-      );
+      const amount =
+        (_.get(gameInfo, "currentGame.draw.account") || 0) -
+        Math.abs(this.drawPlayListMount || 0);
+      return amount > 0 ? amount : 0;
     },
     drawPlayListMount() {
       const { gameInfo } = this;
