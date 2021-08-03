@@ -69,7 +69,7 @@ export default {
     getGuideStepInfo() {
       // 引导流
       const step = localStorage.get(GUIDE_STEP);
-      if (step === 0 || step === 5) {
+      if (step === 0 || step === 4 || step === 5) {
         this.setGuideStep(6);
       }
       // 判断当前是否是新人引导流

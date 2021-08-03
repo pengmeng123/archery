@@ -94,25 +94,14 @@ export default {
                 class={styles.btnSelect}
                 onClick={() => {
                   this.goStep(4);
-                }}
-              ></a>
-            </div>
-          </div>
-        ) : null}
-        {guideStep === 4 ? (
-          <div class={styles.mask}>
-            <div class={styles.step4}>
-              <a
-                class={styles.btnConfirm}
-                onClick={() => {
-                  this.goStep(5);
                   this.runCount(5);
                 }}
               ></a>
             </div>
           </div>
         ) : null}
-        {guideStep === 5 ? (
+
+        {guideStep === 4 ? (
           <div class={styles.mask}>
             <div class={styles.countDown}>
               <div class={styles.box}>请稍后，进入游戏还有</div>
@@ -122,6 +111,20 @@ export default {
             </div>
           </div>
         ) : null}
+
+        {guideStep === 5 ? (
+          <div class={styles.mask}>
+            <div class={styles.step4}>
+              <a
+                class={styles.btnConfirm}
+                onClick={() => {
+                  this.goStep(6);
+                }}
+              ></a>
+            </div>
+          </div>
+        ) : null}
+
         {guideStep === 6 ? (
           <div class={styles.mask}>
             <div class={styles.step5}>

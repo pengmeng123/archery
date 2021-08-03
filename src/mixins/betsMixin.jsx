@@ -42,9 +42,6 @@ const BetsMixin = {
       }
     },
   },
-  created() {
-    this.$_getGameInfo = _.debounce(this.getGameInfo, 100);
-  },
   methods: {
     ...mapMutations({
       setGuideStep: "SET_GUIDE_STEP",
@@ -218,9 +215,9 @@ const BetsMixin = {
       };
       this.$service.user.gamePlay(params).then((r) => {
         const code = _.get(r, "data.code");
-        this.$_getGameInfo && this.$_getGameInfo();
         if (code === 1000) {
           type == 1 && this.manualBettingAnimation(support);
+          this.getGameInfo();
         } else {
           this.$toast(_.get(r, "data.message"));
         }
@@ -344,7 +341,7 @@ const BetsMixin = {
       this.b2Timer && clearTimeout(this.b2Timer);
       if (this.attemptPlay) {
         this.b2Timer = setTimeout(() => {
-          this.setGuideStep(6);
+          this.setGuideStep(5);
         }, 300);
       } else {
         this.b1Timer = setTimeout(() => {

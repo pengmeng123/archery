@@ -40,7 +40,10 @@ export default {
           },
           eventName: "recevieGold",
           dot: () => {
-            if (_.get(this.mainInfo, "signStaus") === 1) {
+            if (
+              !_.get(this.mainInfo, "signStaus") ||
+              _.get(this.mainInfo, "signStaus") === 2
+            ) {
               return null;
             }
             return <em class={styles.dot}></em>;
