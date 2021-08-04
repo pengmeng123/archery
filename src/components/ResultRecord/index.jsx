@@ -4,46 +4,7 @@ import _ from "lodash";
 export default {
   name: "ResultRecord",
   data() {
-    return {
-      data: [
-        {
-          index: "001",
-          result: 1,
-        },
-        {
-          index: "002",
-          result: 3,
-        },
-        {
-          index: "003",
-          result: 2,
-        },
-        {
-          index: "004",
-          result: 1,
-        },
-        {
-          index: "005",
-          result: 3,
-        },
-        {
-          index: "006",
-          result: 1,
-        },
-        {
-          index: "007",
-          result: 3,
-        },
-        {
-          index: "008",
-          result: 1,
-        },
-        {
-          index: "009",
-          result: 3,
-        },
-      ],
-    };
+    return {};
   },
   computed: {
     ...mapState(["gameInfo"]),
@@ -52,7 +13,6 @@ export default {
     },
   },
   render() {
-    // const { data } = this;
     const data = this.historyGameList;
     return (
       <div class={styles.container}>

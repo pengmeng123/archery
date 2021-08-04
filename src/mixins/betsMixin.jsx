@@ -10,6 +10,7 @@ const BetsMixin = {
       oldPlayList: [],
       b1Timer: null,
       b2Timer: null,
+      b3Timer: null,
     };
   },
   computed: {
@@ -45,6 +46,7 @@ const BetsMixin = {
   methods: {
     ...mapMutations({
       setGuideStep: "SET_GUIDE_STEP",
+      setResultAwardNumberStatus: "SET_RESULT_AWARDTEXT_STATUS",
     }),
     ...mapActions({
       getGameInfo: "getGameInfo",
@@ -285,16 +287,34 @@ const BetsMixin = {
             case 1:
               if (_.get(r, "account") > 0) {
                 this.onStartFly($("#btnTTVictory"), $(".selfPlayer"));
+                setTimeout(() => {
+                  this.onStartFly($("#btnTTVictory"), $(".selfPlayer"));
+                }, 50);
+                setTimeout(() => {
+                  this.onStartFly($("#btnTTVictory"), $(".selfPlayer"));
+                }, 100);
               }
               break;
             case 2:
               if (_.get(r, "account") > 0) {
                 this.onStartFly($("#btnCCVictory"), $(".selfPlayer"));
+                setTimeout(() => {
+                  this.onStartFly($("#btnCCVictory"), $(".selfPlayer"));
+                }, 50);
+                setTimeout(() => {
+                  this.onStartFly($("#btnCCVictory"), $(".selfPlayer"));
+                }, 100);
               }
               break;
             case 3:
               if (_.get(r, "account") > 0) {
                 this.onStartFly($("#btnCenterDrawer"), $(".selfPlayer"));
+                setTimeout(() => {
+                  this.onStartFly($("#btnCenterDrawer"), $(".selfPlayer"));
+                }, 50);
+                setTimeout(() => {
+                  this.onStartFly($("#btnCenterDrawer"), $(".selfPlayer"));
+                }, 100);
               }
               break;
             default:
@@ -311,17 +331,17 @@ const BetsMixin = {
             switch (r.result) {
               case 1:
                 if (_.get(r, "account") > 0) {
-                  this.onStartFly(element, $(ele));
+                  this.runPlayerListStartFly(element, $(ele));
                 }
                 break;
               case 2:
                 if (_.get(r, "account") > 0) {
-                  this.onStartFly(element, $(ele));
+                  this.runPlayerListStartFly(element, $(ele));
                 }
                 break;
               case 3:
                 if (_.get(r, "account") > 0) {
-                  this.onStartFly(element, $(ele));
+                  this.runPlayerListStartFly(element, $(ele));
                 }
                 break;
               default:
@@ -332,13 +352,26 @@ const BetsMixin = {
         resolve();
       });
     },
+    runPlayerListStartFly(element, ele) {
+      this.onStartFly(element, ele);
+      setTimeout(() => {
+        this.onStartFly(element, ele);
+      }, 50);
+      setTimeout(() => {
+        this.onStartFly(element, ele);
+      }, 100);
+    },
     async onGetResultAnimation(ele) {
       if (!ele) {
         return Promise.resolve();
       }
       await this.runResultAnimation(ele);
+      this.setResultAwardNumberStatus(true);
+
       this.b1Timer && clearTimeout(this.b1Timer);
       this.b2Timer && clearTimeout(this.b2Timer);
+      this.b3Timer && clearTimeout(this.b3Timer);
+
       if (this.attemptPlay) {
         this.b2Timer = setTimeout(() => {
           this.setGuideStep(5);
@@ -348,6 +381,9 @@ const BetsMixin = {
           this.fetchRequest();
         }, 200);
       }
+      this.b3Timer = setTimeout(() => {
+        this.setResultAwardNumberStatus(false);
+      }, 3000);
     },
     onTtClick() {
       this.onGamePlay(1);

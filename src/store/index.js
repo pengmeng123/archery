@@ -23,6 +23,7 @@ export default new Vuex.Store({
     attemptPlay: localStorage.get(GUIDE_STEP) !== -1, //试玩 true 是，false 不是
     guideStep: localStorage.get(GUIDE_STEP) || 1, //引导流
     isOff: true, //游戏音效
+    resultAwardNumberStatus: false, //中奖的文字动画
   },
   mutations: {
     SET_START_MATCH_STATUS(state, status) {
@@ -67,6 +68,9 @@ export default new Vuex.Store({
     },
     SET_INVOICE(state, payload) {
       state.isOff = payload;
+    },
+    SET_RESULT_AWARDTEXT_STATUS(state, payload) {
+      state.resultAwardNumberStatus = payload;
     },
   },
   actions: {

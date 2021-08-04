@@ -96,6 +96,7 @@ export default {
       setTimes: "SET_TIMES",
       setGameInfo: "SET_GAME_INFO",
       setAppLoading: "SET_APP_LOADING",
+      setResultAwardNumberStatus: "SET_RESULT_AWARDTEXT_STATUS",
     }),
     fetchRequest() {
       return new Promise((resolve, reject) => {

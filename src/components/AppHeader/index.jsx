@@ -23,8 +23,9 @@ export default {
     getHistoryGameList() {
       const arr = (_.get(this.gameInfo, "historyGameList") || [])
         .map((v) => v.result)
-        .slice(0.8);
-      return _.reverse(arr);
+        .slice(0, 8);
+      arr.reverse();
+      return arr;
     },
   },
   methods: {

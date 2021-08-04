@@ -7,7 +7,7 @@ import txEmptyImg from "@/assets/images/guide/tx-empty.png";
 export default {
   name: "AppGamePlayer",
   computed: {
-    ...mapState(["gameInfo"]),
+    ...mapState(["gameInfo", "resultAwardNumberStatus"]),
     members() {
       const playerList = _.get(this.gameInfo, "currentGame.playerList") || [];
       const user = localStorage.get(TC_ARCHERY_USER_INFO) || {};
@@ -58,6 +58,15 @@ export default {
               }}
             >
               <div class={styles.tx}>
+                <div
+                  vShow={this.resultAwardNumberStatus}
+                  class={{
+                    [styles.resultAwardText]: true,
+                    [styles.fadeOutUp]: true,
+                  }}
+                >
+                  +8888
+                </div>
                 <img src={v.icon} class={styles.txImg} />
                 {v.marjor ? (
                   <img
