@@ -3,6 +3,7 @@ import Modal from "@/components/Modal";
 import ExchangeModal from "@/components/Exchange/modal";
 import ExchangeRecord from "@/components/Exchange/record";
 import PhoneBill from "@/components/PhoneBill";
+import PhoneCheck from "@/components/PhoneBill/check";
 import CreditCard from "../../components/CreditCard";
 import _ from "lodash";
 import { mapState, mapMutations } from "vuex";
@@ -19,9 +20,12 @@ export default {
       isGoldNotEnoughVisible: false,
       isExchangeRecord: false,
       isExchangePhoneBill: false,
+      checkPhoneVisible: false,
+      phone: undefined,
     };
   },
   created() {
+    // 红点
     localStorage.set(EXCHANGE_DOT, true);
   },
   mounted() {
@@ -79,6 +83,10 @@ export default {
         this.isExchangeRecord = true;
         // eslint-disable-next-line no-empty
       } catch {}
+    },
+    onCheckPhone(phone) {
+      this.phone = phone;
+      this.checkPhoneVisible = true;
     },
   },
   render() {
@@ -161,6 +169,7 @@ export default {
           <ExchangeRecord
             visible={this.isExchangeRecord}
             data={_.get(this.data, "awardRecordList")}
+            onCheckPhone={this.onCheckPhone}
           />
         </Modal>
         {/* 话费兑换 */}
@@ -175,6 +184,10 @@ export default {
               this.isExchangePhoneBill = false;
             }}
           />
+        </Modal>
+        {/* 查看已充值手机号 */}
+        <Modal className="exchange-phone-bill" v-model={this.checkPhoneVisible}>
+          <PhoneCheck phone={this.phone} />
         </Modal>
       </div>
     );

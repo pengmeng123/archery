@@ -104,7 +104,7 @@ export default {
         {guideStep === 4 ? (
           <div class={styles.mask}>
             <div class={styles.countDown}>
-              <div class={styles.box}>请稍后，进入游戏还有</div>
+              <div class={styles.box}>比赛即将开始</div>
               <div class={styles.text}>
                 <span class={styles.number}>{this.second}</span>秒
               </div>

@@ -206,7 +206,8 @@ const BetsMixin = {
     onGamePlay(support = 1, type = 1) {
       if (this.count < NO_BETTING_COUNT) {
         this.clearTimer();
-        this.$toast(`停止${type === 1 ? "支持" : "撤销"}时间`);
+        this.count >= 0 &&
+          this.$toast(`即将开始，暂停${type === 1 ? "支持" : "撤销"}`);
         return;
       }
       this.startBetting();
@@ -250,7 +251,7 @@ const BetsMixin = {
     onStartFly(startTarget, endTarget) {
       if (this.count < 2 && this.animationStep === 0) {
         this.clearTimer();
-        this.$toast("停止支持时间");
+        this.$toast("即将开始，暂停支持");
         return;
       }
       var flyer = $(
@@ -395,6 +396,7 @@ const BetsMixin = {
       this.onGamePlay(3);
     },
     onCcClick() {
+      console.log("cout--", this.count);
       this.onGamePlay(2);
     },
   },

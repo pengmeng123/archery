@@ -35,7 +35,7 @@ export default {
     goCheck(v) {
       if (v.id == 2722) {
         if (v.phone) {
-          this.$toast(`您充值手机号是：${v.phone}`);
+          this.$emit("checkPhone", v.phone);
         }
       } else {
         this.$toast("待跳转劵中心链接");
