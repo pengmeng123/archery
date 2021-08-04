@@ -1,22 +1,37 @@
+import { isNil } from "lodash";
+const disabled = typeof window === "undefined" || !window.localStorage;
 let localStorage = (function () {
   var storage = window.localStorage;
   return {
-    get: function (key) {
-      var data = storage.getItem(key);
-      if (!data) {
-        return false;
+    get: function (key, defaultValue = null) {
+      if (disabled) {
+        return defaultValue;
       }
-      return JSON.parse(data);
+      var data = storage.getItem(key);
+      if (isNil(data)) {
+        return defaultValue;
+      }
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        return defaultValue;
+      }
     },
     set: function (key, value) {
+      if (disabled) {
+        return null;
+      }
       if (typeof value === "string") {
-        storage.setItem(key, value);
+        return storage.setItem(key, value);
       }
       var stringData = JSON.stringify(value);
-      storage.setItem(key, stringData);
+      return storage.setItem(key, stringData);
     },
     remove: function (key) {
-      storage.removeItem(key);
+      if (disabled) {
+        return;
+      }
+      return storage.removeItem(key);
     },
   };
 })();

@@ -36,7 +36,7 @@ var helper = {
    * @return {string} string/json
    */
   getUrlArg: function (name) {
-    return this.getArgByUrl(location.href, name);
+    return this.getArgByUrl(decodeURIComponent(location.href), name);
   },
 
   /**
@@ -71,7 +71,7 @@ var helper = {
    */
   getShareUrl: function (searchArg) {
     var protocol = location.protocol,
-      host = "wx.17u.cn",
+      host = "archery.ly.com",
       url = protocol + "//" + host + location.pathname;
     url += location.search;
 

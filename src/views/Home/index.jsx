@@ -240,7 +240,6 @@ export default {
       this.resultTimer3 && clearTimeout(this.resultTimer3);
       this.removeAddEventListenerFun();
       this.animationStepClearTimer();
-      this.setResultGameInfo({});
     },
     onGoAttemptPlay() {
       this.setResultGameInfo({
@@ -275,6 +274,8 @@ export default {
   },
   beforeDestroy() {
     this.onReset();
+    // 为了头像上面的金币返浆动画这里不放入onReset里面
+    this.setResultGameInfo({});
   },
   render() {
     if (this.appLoading) {

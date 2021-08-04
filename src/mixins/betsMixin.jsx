@@ -47,6 +47,7 @@ const BetsMixin = {
     ...mapMutations({
       setGuideStep: "SET_GUIDE_STEP",
       setResultAwardNumberStatus: "SET_RESULT_AWARDTEXT_STATUS",
+      setResultGameInfo: "SET_RESULT_GAME_INFO",
     }),
     ...mapActions({
       getGameInfo: "getGameInfo",
@@ -365,6 +366,7 @@ const BetsMixin = {
       if (!ele) {
         return Promise.resolve();
       }
+
       await this.runResultAnimation(ele);
       this.setResultAwardNumberStatus(true);
 
@@ -383,6 +385,7 @@ const BetsMixin = {
       }
       this.b3Timer = setTimeout(() => {
         this.setResultAwardNumberStatus(false);
+        this.setResultGameInfo({});
       }, 3000);
     },
     onTtClick() {
