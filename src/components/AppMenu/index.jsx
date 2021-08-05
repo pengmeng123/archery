@@ -1,7 +1,4 @@
 import DropDownMore from "./dropdown-more";
-import Modal from "@/components/Modal";
-import FareTask from "../FareTask";
-import DailyReceiveGold from "../DailyReceiveGold";
 import { mapState, mapMutations } from "vuex";
 import _ from "lodash";
 import { localStorage } from "@/utils/storage";
@@ -53,7 +50,7 @@ export default {
           icon: iconWelFare,
           func: async () => {
             await this.getGameMainInfo();
-            this.fareTaskVisible = true;
+            this.$emit("openFareTask");
             localStorage.set(FARETASK_DOT, true);
             this.isFareTaskDot = true;
           },
@@ -90,6 +87,12 @@ export default {
                 onClose={() => {
                   this.isDropDownMore = false;
                 }}
+                onOpenRule={() => {
+                  this.$emit("openRule");
+                }}
+                onOpenGameRecord={() => {
+                  this.$emit("openGameRecord");
+                }}
               />
             );
           },
@@ -105,7 +108,7 @@ export default {
       this.$service.user.gameSign().then((r) => {
         if (_.get(r, "data.code") === 1000) {
           this.awardGoldNumber = _.get(r, "data.result");
-          this.receiveGoldVisible = true;
+          this.$emit("openSignModal", this.awardGoldNumber);
           this.getGameMainInfo();
         } else {
           this.$toast(_.get(r, "data.message"));
@@ -144,20 +147,6 @@ export default {
             </div>
           ))}
         </div>
-        {/* 每日领金币 */}
-        <Modal className="dailyReceiveGold" v-model={this.receiveGoldVisible}>
-          <DailyReceiveGold awardGoldNumber={this.awardGoldNumber} />
-        </Modal>
-        {/* 福利任务 */}
-        <Modal className="fareTask" v-model={this.fareTaskVisible}>
-          <FareTask
-            visible={this.fareTaskVisible}
-            onRefresh={this.getGameMainInfo}
-            onClose={() => {
-              this.fareTaskVisible = false;
-            }}
-          />
-        </Modal>
       </div>
     );
   },

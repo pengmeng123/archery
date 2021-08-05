@@ -13,6 +13,10 @@ import AppNotStart from "@/components/AppNotStart";
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
 import AppLoading from "@/components/AppLoading";
 import Guide from "@/components/Guide";
+import DailyReceiveGold from "@/components/DailyReceiveGold";
+import FareTask from "@/components/FareTask";
+import Modal from "@/components/Modal";
+import SupportRecord from "@/components/SupportRecord";
 import _ from "lodash";
 export default {
   name: "Home",
@@ -33,6 +37,11 @@ export default {
       resultTimer1: null,
       resultTimer2: null,
       resultTimer3: null,
+      fareTaskVisible: false,
+      receiveGoldVisible: false,
+      awardGoldNumber: 0,
+      bettingRecordVisible: false,
+      ruleVisible: false,
     };
   },
   async mounted() {
@@ -271,6 +280,19 @@ export default {
       this.setStartMatchStatus(true);
       this.setAnimationStep(1);
     },
+    onOpenSignModal(golds) {
+      this.awardGoldNumber = golds;
+      this.receiveGoldVisible = true;
+    },
+    onOpenFareTask() {
+      this.fareTaskVisible = true;
+    },
+    onOpenRule() {
+      this.ruleVisible = true;
+    },
+    onOpenGameRecord() {
+      this.bettingRecordVisible = true;
+    },
   },
   beforeDestroy() {
     this.onReset();
@@ -312,7 +334,12 @@ export default {
                 }}
                 style="position:relative;z-index:2"
               >
-                <app-menu />
+                <app-menu
+                  onOpenSignModal={this.onOpenSignModal}
+                  onOpenFareTask={this.onOpenFareTask}
+                  onOpenRule={this.onOpenRule}
+                  onOpenGameRecord={this.onOpenGameRecord}
+                />
                 <app-header />
               </div>
               <app-stake
@@ -332,6 +359,30 @@ export default {
             </div>
           </div>
         </div>
+        {/* 每日领金币 */}
+        <Modal className="dailyReceiveGold" v-model={this.receiveGoldVisible}>
+          <DailyReceiveGold awardGoldNumber={this.awardGoldNumber} />
+        </Modal>
+        {/* 福利任务 */}
+        <Modal className="fareTask" v-model={this.fareTaskVisible}>
+          <FareTask
+            visible={this.fareTaskVisible}
+            onRefresh={this.getGameMainInfo}
+            onClose={() => {
+              this.fareTaskVisible = false;
+            }}
+          />
+        </Modal>
+        {/* 支持记录 */}
+        <Modal v-model={this.bettingRecordVisible}>
+          <SupportRecord />
+        </Modal>
+        {/* 活动规则 */}
+        <Modal className="ruleBg" v-model={this.ruleVisible}>
+          <div class={styles.ruleContent}>
+            活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则
+          </div>
+        </Modal>
       </div>
     );
   },

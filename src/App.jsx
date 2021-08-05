@@ -30,6 +30,26 @@ export default {
       this.getGuideStepInfo();
     }
   },
+  // onLoad() {
+  //   console.log("load----");
+  //   try {
+  //     // eslint-disable-next-line no-undef
+  //     console.log("wx--", wx);
+  //     // eslint-disable-next-line no-undef
+  //     wx.hideShareMenu({
+  //       menus: ["shareAppMessage", "shareTimeline"],
+  //     });
+  //     // eslint-disable-next-line no-empty
+  //   } catch {}
+  // },
+  // onShareAppMessage: function () {
+  //   console.log("9----");
+  //   try {
+  //     // eslint-disable-next-line no-undef
+  //     wx.hideShareMenu();
+  //     // eslint-disable-next-line no-empty
+  //   } catch {}
+  // },
   mounted() {
     if (this.$route.query.authorization) {
       const user = localStorage.get(TC_ARCHERY_USER_INFO) || {};

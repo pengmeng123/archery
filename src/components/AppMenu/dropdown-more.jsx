@@ -1,5 +1,3 @@
-import Modal from "@/components/Modal";
-import SupportRecord from "@/components/SupportRecord";
 import { mapState } from "vuex";
 import iconMusicClose from "@/assets/images/guide/music-close.png";
 import iconMusicOpen from "@/assets/images/guide/music-open.png";
@@ -25,7 +23,7 @@ export default {
           icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-rule.png",
           func: (e) => {
             e.stopPropagation();
-            this.ruleVisible = !this.ruleVisible;
+            this.$emit("openRule");
           },
         },
         {
@@ -33,7 +31,7 @@ export default {
           icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-record.png",
           func: (e) => {
             e.stopPropagation();
-            this.visible = !this.visible;
+            this.$emit("openGameRecord");
           },
         },
         {
@@ -77,16 +75,6 @@ export default {
             ))}
           </ul>
         </div>
-        {/* 支持记录 */}
-        <Modal v-model={this.visible}>
-          <SupportRecord />
-        </Modal>
-        {/* 活动规则 */}
-        <Modal className="ruleBg" v-model={this.ruleVisible}>
-          <div class={styles.ruleContent}>
-            活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则活动规则
-          </div>
-        </Modal>
       </div>
     );
   },
