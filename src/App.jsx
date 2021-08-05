@@ -2,12 +2,11 @@ import { mapActions, mapMutations } from "vuex";
 import helper from "@/utils/helper";
 import { userObj } from "@/config/user";
 import { localStorage } from "@/utils/storage";
-import { TC_ARCHERY_USER_INFO } from "@/config/api";
+import { TC_ARCHERY_USER_INFO, GUIDE_STEP } from "@/config/api";
 import bgMusic from "@/assets/images/mp3/bg.mp3";
 import targetMusic from "@/assets/images/mp3/arrow.mp3";
 import applauseMusic from "@/assets/images/mp3/applause.mp3";
 import MusicMixin from "@/mixins/music";
-import { GUIDE_STEP } from "@/config/api";
 import Loading from "@/components/Loading";
 import _ from "lodash";
 export default {
@@ -21,6 +20,11 @@ export default {
     };
   },
   created() {
+    // 带有这个参数就清除缓存
+    if (this.$route.query.clearStorage) {
+      localStorage.remove(TC_ARCHERY_USER_INFO);
+      localStorage.remove(GUIDE_STEP);
+    }
     if (!this.$route.query.authorization) {
       const id = this.$route.query.id;
       if (!_.isNil(id)) {
@@ -79,9 +83,6 @@ export default {
         "https://file.40017.cn/huochepiao/activity/20200521supplies/img/defaultImg-fs8.png";
       const openid = helper.getUrlArg("openid") || helper.getUrlArg("code");
       if (openid) {
-        console.log("nick---", nick);
-        console.log("headering--", headimg);
-        console.log("openid--", openid);
         localStorage.set(TC_ARCHERY_USER_INFO, {
           nick,
           idenid: openid,
@@ -91,7 +92,6 @@ export default {
       } else {
         // 如果拿到url参与
         const authUrl = helper.getLocalAuthUrl([], true);
-        console.log(decodeURIComponent(authUrl));
         location.replace(authUrl);
       }
     },

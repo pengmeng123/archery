@@ -118,16 +118,6 @@ export default {
               this.getGameMainInfo();
               resolve();
             } else {
-              if (!_.get(r, "data.code")) {
-                this.onReset();
-                this.$router.push({
-                  name: "Disconnection",
-                });
-              } else {
-                this.$toast(
-                  `${_.get(r, "data.message")}-code--${_.get(r, "data.code")}`
-                );
-              }
               reject();
             }
           })

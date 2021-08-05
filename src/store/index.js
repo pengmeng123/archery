@@ -114,17 +114,12 @@ export default new Vuex.Store({
                 },
               });
             }
-            return r;
           } else if (code === 1006 || code === 1005) {
             router.push({
               name: "Maintenance",
             });
-          } else {
-            return Promise.resolve({});
           }
-        })
-        .catch(() => {
-          console.log("catch---");
+          return r;
         })
         .finally(() => {
           commit("SET_APP_LOADING", false);

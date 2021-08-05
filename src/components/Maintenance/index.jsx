@@ -9,7 +9,7 @@ export default {
           src="https://file.40017.cn/huochepiao/activity/arrowtest/static/maintenance.png"
           alt=""
         />
-        <div class={styles.title}>十分抱歉，系统维护中...</div>
+        <div class={styles.title}>十分抱歉 系统升级中</div>
       </div>
     );
   },

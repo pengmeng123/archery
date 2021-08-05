@@ -14,7 +14,7 @@ export default {
           src="https://file.40017.cn/huochepiao/activity/arrowtest/static/disconnection.png"
           alt=""
         />
-        <div class={styles.title}>十分抱歉，网络已断开...</div>
+        <div class={styles.title}>活动火爆，请稍后</div>
         <a href="javascript:" class={styles.btn} onClick={this.onRefresh}>
           点我刷新
         </a>
