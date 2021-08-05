@@ -121,6 +121,9 @@ export default new Vuex.Store({
           }
           return r;
         })
+        .catch((err) => {
+          return err;
+        })
         .finally(() => {
           commit("SET_APP_LOADING", false);
         });

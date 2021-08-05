@@ -84,7 +84,7 @@ export default {
           <div class={styles.mask}>
             <div class={styles.step3}>
               <img class={styles.bettingTextImg} src={bettingTextImg} alt="" />
-              <img src={handTopImg} alt="" class={styles.handTopImg} />
+              <div class={styles.hand}></div>
               <img
                 src={bettingText1Img}
                 alt=""

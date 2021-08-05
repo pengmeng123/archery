@@ -118,6 +118,9 @@ export default {
               this.getGameMainInfo();
               resolve();
             } else {
+              if (!_.get(r, "data.code")) {
+                _.get(r, "error") && this.$toast(_.get(r, "error"));
+              }
               reject();
             }
           })
@@ -185,13 +188,14 @@ export default {
           _.get(r, "data.code") === 1000
         ) {
           this.setResultGameInfo(_.get(r, "data.result"));
-        } else {
-          // 出现频繁请求的情况提示
-          _.get(r, "data.message") &&
-            this.$toast(
-              `${_.get(r, "data.message")}-code--${_.get(r, "data.code")}`
-            );
         }
+        // else {
+        //   // 出现频繁请求的情况提示
+        //   _.get(r, "data.message") &&
+        //     this.$toast(
+        //       `${_.get(r, "data.message")}-code--${_.get(r, "data.code")}`
+        //     );
+        // }
         return r;
       });
     },
