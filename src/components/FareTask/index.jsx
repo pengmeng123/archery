@@ -157,7 +157,12 @@ export default {
           ) : null}
         </div>
         <Modal className="award" v-model={this.isVisible}>
-          <Award record={this.currentRecord} />
+          <Award
+            record={this.currentRecord}
+            onClose={() => {
+              this.isVisible = false;
+            }}
+          />
         </Modal>
       </div>
     );

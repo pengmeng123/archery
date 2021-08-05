@@ -38,7 +38,8 @@ export default {
           this.$emit("checkPhone", v.phone);
         }
       } else {
-        this.$toast("待跳转劵中心链接");
+        // this.$toast("待跳转劵中心链接");
+        window.location.href = "https://wx.17u.cn/pub/MyCard?ifhttps=true";
       }
     },
   },

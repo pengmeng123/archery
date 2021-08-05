@@ -11,7 +11,7 @@ export default {
   },
   methods: {
     onCheck() {
-      this.$router.push("/exchange?openRecord=true");
+      this.$emit("close");
     },
   },
   render() {
@@ -35,7 +35,7 @@ export default {
           {getAwardName(record.type, record.amount)}
         </div>
         <a href="javascript:" class={styles.btnCheck} onClick={this.onCheck}>
-          去查看
+          确定
         </a>
       </div>
     );

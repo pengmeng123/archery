@@ -39,6 +39,8 @@ export default {
           icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-service.png",
           func: (e) => {
             e.stopPropagation();
+            window.location.href =
+              "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx3827070276e49e30&redirect_uri=https%3a%2f%2fwx.17u.cn%2fwxinfo%2fWxMember%2fRedirectBind%3furl%3dhttps%253A%252F%252Fwx.17u.cn%252Fselfservice%252F%2523%252F%26hasCode%3dfalse&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
           },
         },
         {
