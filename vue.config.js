@@ -1,3 +1,6 @@
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
 module.exports = {
   productionSourceMap: false,
   chainWebpack: (config) => {
@@ -6,6 +9,10 @@ module.exports = {
       // 开启代码分割
       chunks: "all",
     });
+    config.plugin("webpack-bundle-analyzer").use(BundleAnalyzerPlugin);
+    if (process.env.NODE_ENV === "production") {
+      config.plugin("loadshReplace").use(new LodashModuleReplacementPlugin());
+    }
   },
   devServer: {
     disableHostCheck: true,
