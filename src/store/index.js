@@ -13,7 +13,7 @@ export default new Vuex.Store({
     count: -1, //倒计时
     animationStep: 0, //动画步骤
     times: 0, //是否播放两次
-    bettingAmount: 50, //选择的投注面值
+    bettingAmount: 100, //选择的投注面值
     isGameBettingTime: true, //15s前投注时间，超过就为false
     appLoading: true, //带有进度条loading
     gameInfo: {}, //主流程接口信息

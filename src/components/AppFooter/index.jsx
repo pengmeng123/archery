@@ -8,19 +8,19 @@ export default {
       activeIndex: 0,
       data: [
         {
-          amount: 50,
-          className: "amount50",
-        },
-        {
           amount: 100,
           className: "amount100",
+        },
+        {
+          amount: 1000,
+          className: "amount1000",
           style: {
             margin: "0 5px",
           },
         },
         {
-          amount: 1000,
-          className: "amount1000",
+          amount: 10000,
+          className: "amount10000",
         },
       ],
     };
