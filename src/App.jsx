@@ -3,9 +3,6 @@ import helper from "@/utils/helper";
 import { userObj } from "@/config/user";
 import { localStorage } from "@/utils/storage";
 import { TC_ARCHERY_USER_INFO, GUIDE_STEP } from "@/config/api";
-import bgMusic from "@/assets/images/mp3/bg.mp3";
-import targetMusic from "@/assets/images/mp3/arrow.mp3";
-import applauseMusic from "@/assets/images/mp3/applause.mp3";
 import MusicMixin from "@/mixins/music";
 import Loading from "@/components/Loading";
 import _ from "lodash";
@@ -135,15 +132,15 @@ export default {
           hidden="true"
           loop
         >
-          <source src={bgMusic} />
+          <source src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/bg.mp3" />
         </audio>
         {/* 中靶 */}
         <audio id="audioTarget" controls ref="audioTarget" hidden="true">
-          <source src={targetMusic} />
+          <source src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/arrow.mp3" />
         </audio>
         {/* 鼓掌 */}
         <audio id="audioApplause" controls ref="audioApplause" hidden="true">
-          <source src={applauseMusic} />
+          <source src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/applause.mp3" />
         </audio>
 
         <router-view />

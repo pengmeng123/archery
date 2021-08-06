@@ -1,11 +1,4 @@
 import styles from "./index.module.less";
-import step1BgImg from "@/assets/images/guide/step1-bg.png";
-import handleBottomImg from "@/assets/images/guide/hand-bottom.png";
-import bettingTextImg from "@/assets/images/guide/betting-text.png";
-import handTopImg from "@/assets/images/guide/hand-top.png";
-import selectGoldTextImg from "@/assets/images/guide/select-gold-text.png";
-import bettingText1Img from "@/assets/images/guide/betting-text1.png";
-import step5TextImg from "@/assets/images/guide/step5-text.png";
 import { mapState, mapMutations } from "vuex";
 export default {
   name: "Guide",
@@ -52,7 +45,10 @@ export default {
         {guideStep === 1 ? (
           <div class={styles.mask}>
             <div class={styles.step1}>
-              <img src={step1BgImg} alt="" />
+              <img
+                src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/step1-bg.png"
+                alt=""
+              />
               <a
                 class={styles.btnStep}
                 onClick={() => {
@@ -66,11 +62,15 @@ export default {
           <div class={styles.mask}>
             <div class={styles.step2}>
               <img
-                src={selectGoldTextImg}
+                src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/select-gold-text.png"
                 alt=""
                 class={styles.selectGoldTextImg}
               />
-              <img src={handleBottomImg} alt="" class={styles.handBottom} />
+              <img
+                src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/hand-bottom.png"
+                alt=""
+                class={styles.handBottom}
+              />
               <a
                 class={styles.btnSelect}
                 onClick={() => {
@@ -83,10 +83,14 @@ export default {
         {guideStep === 3 ? (
           <div class={styles.mask}>
             <div class={styles.step3}>
-              <img class={styles.bettingTextImg} src={bettingTextImg} alt="" />
+              <img
+                class={styles.bettingTextImg}
+                src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/betting-text.png"
+                alt=""
+              />
               <div class={styles.hand}></div>
               <img
-                src={bettingText1Img}
+                src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/betting-text1.png"
                 alt=""
                 class={styles.bettingText1Img}
               />
@@ -142,8 +146,16 @@ export default {
                   });
                 }}
               >
-                <img src={handTopImg} alt="" class={styles.handTopImg} />
-                <img src={step5TextImg} alt="" class={styles.step5TextImg} />
+                <img
+                  src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/hand-top.png"
+                  alt=""
+                  class={styles.handTopImg}
+                />
+                <img
+                  src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/step5-text.png"
+                  alt=""
+                  class={styles.step5TextImg}
+                />
               </div>
             </div>
           </div>
