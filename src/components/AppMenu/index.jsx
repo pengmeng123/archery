@@ -3,6 +3,7 @@ import { mapState, mapMutations } from "vuex";
 import _ from "lodash";
 import { localStorage } from "@/utils/storage";
 import { FARETASK_DOT } from "@/config/api";
+import receiveGoldImg from "@/assets/images/guide/receive-gold.png";
 import styles from "./index.module.less";
 const $ = window.$;
 export default {
@@ -30,7 +31,7 @@ export default {
     menus() {
       return [
         {
-          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/receive-gold.png",
+          icon: receiveGoldImg,
           func: () => {
             this.gameSign();
           },
