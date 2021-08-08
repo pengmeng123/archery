@@ -1,7 +1,5 @@
 import styles from "./index.module.less";
 import { mapState, mapGetters } from "vuex";
-import bettingText1 from "../../assets/images/guide/betting-text1.png";
-import bettingText2 from "../../assets/images/guide/betting-text2.png";
 import _ from "lodash";
 export default {
   name: "AppStake",
@@ -136,7 +134,11 @@ export default {
               </div>
             ) : null} */}
             <div class={styles.text}>
-              <img src={bettingText1} alt="" class={styles.bettingText1} />
+              <img
+                src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/betting-text1.png"
+                alt=""
+                class={styles.bettingText1}
+              />
             </div>
           </div>
           <div
@@ -173,7 +175,11 @@ export default {
               </div>
             ) : null} */}
             <div class={styles.text}>
-              <img src={bettingText2} alt="" class={styles.bettingText2} />
+              <img
+                src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/betting-text2.png"
+                alt=""
+                class={styles.bettingText2}
+              />
             </div>
           </div>
           <div
@@ -205,7 +211,11 @@ export default {
               ) : null}
             </div>
             <div class={styles.text}>
-              <img src={bettingText1} alt="" class={styles.bettingText1} />
+              <img
+                src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/betting-text1.png"
+                alt=""
+                class={styles.bettingText1}
+              />
             </div>
           </div>
         </div>

@@ -2,7 +2,6 @@ import styles from "./index.module.less";
 import { mapGetters, mapState } from "vuex";
 import Modal from "@/components/Modal";
 import ResultRecord from "../ResultRecord";
-import triangleImg from "@/assets/images/guide/triangle.png";
 import _ from "lodash";
 const PhotoObj = {
   1: "https://file.40017.cn/huochepiao/activity/arrowtest/static/icon-tongtong.png",
@@ -74,7 +73,10 @@ export default {
                 </li>
               ))}
             </ul>
-            <img src={triangleImg} class={styles.triangleImg} />
+            <img
+              src="https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/triangle.png"
+              class={styles.triangleImg}
+            />
           </div>
         </div>
         <Modal v-model={this.isResultRecord}>
