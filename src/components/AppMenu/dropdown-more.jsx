@@ -1,6 +1,4 @@
 import { mapState } from "vuex";
-import iconMusicClose from "@/assets/images/guide/music-close.png";
-import iconMusicOpen from "@/assets/images/guide/music-open.png";
 import MusicMixin from "@/mixins/music";
 import styles from "./dropdown-more.module.less";
 export default {
@@ -45,7 +43,9 @@ export default {
         },
         {
           title: this.isOff ? "开启音效" : "游戏静音",
-          icon: this.isOff ? iconMusicOpen : iconMusicClose,
+          icon: this.isOff
+            ? "https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/music-open.png"
+            : "https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/music-close.png",
           func: (e) => {
             e.stopPropagation();
             this.changeOn && this.changeOn();

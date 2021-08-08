@@ -3,7 +3,6 @@ import { mapState, mapMutations } from "vuex";
 import _ from "lodash";
 import { localStorage } from "@/utils/storage";
 import { FARETASK_DOT } from "@/config/api";
-import iconWelFare from "@/assets/images/guide/icon-welfare.png";
 import styles from "./index.module.less";
 const $ = window.$;
 export default {
@@ -47,7 +46,7 @@ export default {
           },
         },
         {
-          icon: iconWelFare,
+          icon: "https://file.40017.cn/huochepiao/activity/arrowtest/static/0806/icon-welfare.png",
           func: async () => {
             await this.getGameMainInfo();
             this.$emit("openFareTask");

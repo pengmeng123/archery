@@ -367,10 +367,8 @@ const BetsMixin = {
       if (!ele) {
         return Promise.resolve();
       }
-      console.log(111);
       await this.runResultAnimation(ele);
       this.setResultAwardNumberStatus(true);
-      console.log(2222);
 
       this.b1Timer && clearTimeout(this.b1Timer);
       this.b2Timer && clearTimeout(this.b2Timer);
@@ -379,7 +377,7 @@ const BetsMixin = {
       if (this.attemptPlay) {
         this.b2Timer = setTimeout(() => {
           this.setGuideStep(5);
-        }, 300);
+        }, 600);
       } else {
         this.b1Timer = setTimeout(() => {
           this.fetchRequest();
