@@ -1,13 +1,16 @@
 
  @keyframes fadeOutUp{
-   0%{opacity:1}
+   0%{opacity:1;
+    transform:translate3d(0,0%,0);}
+   30% {
+     opacity: 1;
+   }
    100%{
      opacity:0;
-     transform:translate3d(0,-120%,0);
-     transform:translate3d(0,-120%,0)
+     transform:translate3d(0,-140%,0);
     }
   }
- .fadeOutUp{animation:fadeOutUp 2s forwards}
+ .fadeOutUp{animation:fadeOutUp 1.5s forwards}
 
 .group {
   height: 182px;
@@ -80,7 +83,7 @@
       text-align: center;
       position: absolute;
       left: 50%;
-      top: 55px;
+      top: 35px;
       margin-left: -75px;
       z-index: 10;
     }
@@ -94,7 +97,7 @@
       position: relative;
     }
     .resultAwardText {
-      top: 40px;
+      top: 20px;
     }
     .txBg {
       width: 140px;

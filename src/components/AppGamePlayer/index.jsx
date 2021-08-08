@@ -76,10 +76,6 @@ export default {
     renderList() {
       const { members } = this;
       return members.map((v) => {
-        console.log(
-          _.get(this.winGolds, `${v.uuid}.golds`),
-          _.get(this.winGolds, `${v.uuid}`)
-        );
         const golds = _.get(this.winGolds, `${v.uuid}.golds`) || 0;
         return (
           <li
