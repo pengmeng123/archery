@@ -146,12 +146,10 @@ export default new Vuex.Store({
       return !_.isNil(result)
         ? {
             result: result,
-            ttRingNumber:
-              _.get(gameResultBettingRings, "[1].numberOfRings") || 1,
-            ttDirection: _.get(gameResultBettingRings, "[1].direction") || 1,
-            ccRingNumber:
-              _.get(gameResultBettingRings, "[2].numberOfRings") || 1,
-            ccDirection: _.get(gameResultBettingRings, "[2].direction") || 1,
+            ttRingNumber: _.get(gameResultBettingRings, "[1].numberOfRings"),
+            ttDirection: _.get(gameResultBettingRings, "[1].direction"),
+            ccRingNumber: _.get(gameResultBettingRings, "[2].numberOfRings"),
+            ccDirection: _.get(gameResultBettingRings, "[2].direction"),
             mybet: _.get(state.resultGameInfo, "mybet") || [], //自己账号的中奖情况[{result:1,account:0},{result:2,account:-50},{result:3,account:100}]
             playerList:
               _.get(state.resultGameInfo, "currentGame.playerList") || [],
