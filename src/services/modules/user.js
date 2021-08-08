@@ -15,10 +15,14 @@ const testParams = {
   pid: 501,
 };
 
+const getUserInfo = () => {
+  return localStorage.get(TC_ARCHERY_USER_INFO) || {};
+};
+
 export const getExcute = (data) =>
   http
     .post(WXGAME_EXECUTE, {
-      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      ...{ ...testParams, ...getUserInfo() },
       ...data,
     })
     .then((r) => _.get(r, "data"));
@@ -26,7 +30,7 @@ export const getExcute = (data) =>
 export const gamePlay = (data) => {
   return http
     .post(WXGAME_EXECUTE, {
-      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      ...{ ...testParams, ...getUserInfo() },
       action: "play",
       ...data,
     })
@@ -35,7 +39,7 @@ export const gamePlay = (data) => {
 export const gameMainInfo = (data) => {
   return http
     .post(WXGAME_EXECUTE, {
-      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      ...{ ...testParams, ...getUserInfo() },
       action: "mainInfo",
       ...data,
     })
@@ -44,7 +48,7 @@ export const gameMainInfo = (data) => {
 export const gameSign = (data) => {
   return http
     .post(WXGAME_EXECUTE, {
-      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      ...{ ...testParams, ...getUserInfo() },
       action: "sign",
       ...data,
     })
@@ -53,7 +57,7 @@ export const gameSign = (data) => {
 export const gameExchange = (data) => {
   return http
     .post(WXGAME_EXECUTE, {
-      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      ...{ ...testParams, ...getUserInfo() },
       action: "mainMallInfo",
       ...data,
     })
@@ -63,7 +67,7 @@ export const gameExchange = (data) => {
 export const goldExchange = (data) => {
   return http
     .post(WXGAME_EXECUTE, {
-      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      ...{ ...testParams, ...getUserInfo() },
       action: "goldExchange",
       ...data,
     })
@@ -73,7 +77,7 @@ export const goldExchange = (data) => {
 export const acquireTaskOrExchange = (data) => {
   return http
     .post(WXGAME_EXECUTE, {
-      ...{ ...testParams, ...(localStorage.get(TC_ARCHERY_USER_INFO) || {}) },
+      ...{ ...testParams, ...getUserInfo() },
       action: "acquireTaskOrExchange",
       ...data,
     })

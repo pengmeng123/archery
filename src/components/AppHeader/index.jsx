@@ -23,7 +23,6 @@ export default {
       const arr = (_.get(this.gameInfo, "historyGameList") || [])
         .map((v) => v.result)
         .slice(0, 8);
-      arr.reverse();
       return arr;
     },
   },
@@ -34,8 +33,8 @@ export default {
   },
   render() {
     const { count } = this;
-    const players1 = this.getHistoryGameList.slice(0, 4);
-    const players2 = this.getHistoryGameList.slice(4, 8);
+    const players2 = this.getHistoryGameList.slice(0, 4).reverse();
+    const players1 = this.getHistoryGameList.slice(4, 8).reverse();
     return (
       <div class={styles.container}>
         <div class={styles.header} onClick={this.onCheckRecord}>
